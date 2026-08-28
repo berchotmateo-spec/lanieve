@@ -6,6 +6,11 @@ Mar del Plata. Pizza al molde desde 1949.
 La carta y las promos son las reales del local, relevadas en persona el 26/08/2026
 de los televisores del salón, el pizarrón de la vereda y las vitrinas del mostrador.
 
+**En vivo:** https://berchotmateo-spec.github.io/lanieve/
+
+> Se publica con GitHub Pages desde la carpeta `docs/` de la rama `main`
+> (*Settings → Pages → Source: Deploy from a branch → main / docs*).
+
 ## Qué hace
 
 - Carta completa con precios: pizzas enteras y por porción, empanadas, fainá,
@@ -24,8 +29,8 @@ Sin dependencias, sin build, sin framework. HTML, CSS y JavaScript a mano.
 | | |
 |---|---|
 | `index.html` | El sitio entero en un archivo, con el logo y las fotos embebidas como data URI. Se abre con doble clic. |
-| `publicar/` | La misma página lista para un hosting: el HTML baja a ~64 KB y las imágenes van sueltas, así el celular pinta la página sin esperarlas. **Generada** — no editar a mano. |
-| `hacer-publicar.ps1` | Arma `publicar/` a partir de `index.html`. Correr después de cada cambio. |
+| `docs/` | La misma página lista para publicar: el HTML baja a ~64 KB y las imágenes van sueltas, así el celular pinta la página sin esperarlas. Es lo que sirve GitHub Pages. **Generada** — no editar a mano. |
+| `hacer-publicar.ps1` | Arma `docs/` a partir de `index.html`. Correr después de cada cambio. |
 | `hacer-og.ps1` | Genera la imagen de vista previa para compartir y el ícono. |
 | `publicar-cabecera.html` | El `<head>` de la versión publicada: título, descripción, Open Graph y la ficha JSON-LD para Google. |
 | `index-v1-pizarron.html`, `index-v2-azul.html` | Versiones anteriores del diseño. |

@@ -1,12 +1,12 @@
 # ============================================================
-#  Genera publicar\og.jpg y publicar\icono.png
+#  Genera docs\og.jpg y docs\icono.png
 #  ------------------------------------------------------------
 #  og.jpg (1200x630) es la tarjeta que aparece cuando alguien
 #  comparte el link por WhatsApp, Facebook o Instagram.
 #  icono.png (180x180) es el icono de la pestaña del navegador
 #  y de la pantalla de inicio del celular.
 #
-#  Lee publicar\fachada.jpg y publicar\logo.png, asi que correr
+#  Lee docs\fachada.jpg y docs\logo.png, asi que correr
 #  esto DESPUES de que esas dos existan.
 #
 #      powershell -File hacer-og.ps1
@@ -15,7 +15,7 @@
 Add-Type -AssemblyName System.Drawing
 
 $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
-$dir  = Join-Path $raiz "publicar"
+$dir  = Join-Path $raiz "docs"
 
 $W = 1200
 $H = 630

@@ -23,10 +23,10 @@ con sus datos reales, para cerrar la venta.
   ejemplo). Se guarda por si hace falta comparar.
 - `index-v1-pizarron.html` — versión más vieja (diseño de pizarrón, tipografía
   Archivo Black, bordes rectos).
-- `publicar\` — la versión lista para subir a un hosting (HTML liviano + imágenes
+- `docs\` — la versión lista para subir a un hosting (HTML liviano + imágenes
   sueltas). **Es generada**: no editarla a mano, sale de `hacer-publicar.ps1`.
 - `hacer-publicar.ps1`, `hacer-og.ps1`, `publicar-cabecera.html` — lo que arma esa
-  carpeta. Ver "Publicar en un hosting real".
+  carpeta. Ver "Publicar".
 - Publicado como Artifact privado en:
   https://claude.ai/code/artifact/9d1a3f34-a771-42c4-b9ad-691b2b431930
   Favicon del Artifact: 🍕 (mantenerlo igual en cada republicación).
@@ -160,10 +160,10 @@ tipo de entrega. Detalles de implementación:
 - Cartel "Abierto ahora / Cerrado" calculado con el reloj del visitante contra el
   horario 08:00–01:00, refrescado cada minuto.
 
-## Publicar en un hosting real
+## Publicar
 
 `index.html` (un solo archivo, con todo embebido) es la versión del **Artifact**.
-Para un hosting sirve la carpeta **`publicar\`**, que se genera con:
+Lo que se publica en la web es la carpeta **`docs\`**, que se genera con:
 
 ```bash
 powershell -File hacer-publicar.ps1
@@ -175,17 +175,34 @@ reemplaza las 5 primeras líneas de `index.html` por `publicar-cabecera.html`
 —que trae el título largo, la descripción, las etiquetas Open Graph y la ficha
 JSON-LD de Google— y escribe `robots.txt` y `sitemap.xml`.
 
-**Correrlo después de cada cambio en `index.html`.** Si al final imprime un número
-distinto de 0 en "data URI que quedaron", alguna imagen del HTML no coincide con la
-de `publicar\` y hay que revisar.
+**Correrlo después de cada cambio en `index.html`, y commitear `docs\`**: GitHub
+Pages sirve los archivos tal cual están commiteados, no compila nada. Si el script
+imprime un número distinto de 0 en "data URI que quedaron", alguna imagen del HTML
+no coincide con la de `docs\` y hay que revisar.
 
-La URL está **cableada como `https://lanieve-mdp.netlify.app`** en
-`publicar-cabecera.html` y en `hacer-publicar.ps1` (variable `$sitio`). Si el sitio
-termina en otro dominio hay que cambiarla en los dos lados: `og:image` **necesita**
-una URL absoluta, porque WhatsApp y Google no resuelven rutas relativas.
+### Por qué se llama `docs` y no `docs`
+
+Es la única concesión al inglés del proyecto, y es forzada: GitHub Pages solo sabe
+servir desde la raíz del repo o desde una carpeta llamada exactamente `/docs`.
+Se configura en *Settings → Pages → Source: Deploy from a branch → main / docs*.
+
+El `.nojekyll` de adentro apaga el procesador Jekyll de Pages, que no hace falta
+y solo agrega demoras.
+
+### Rutas y URLs
+
+- Las rutas de las imágenes dentro del HTML son **relativas** (`logo.png`, no
+  `/logo.png`) a propósito: Pages publica los proyectos en una **subcarpeta**
+  (`/lanieve/`), así que una ruta absoluta apuntaría a la raíz del dominio y daría
+  404. Con relativas el sitio anda igual en la raíz que en una subcarpeta.
+- Las de `og:image`, `canonical`, el sitemap y la ficha JSON-LD **tienen que ser
+  absolutas**, porque WhatsApp y Google no resuelven relativas. Están cableadas
+  como `https://berchotmateo-spec.github.io/lanieve` en `publicar-cabecera.html` y
+  en `hacer-publicar.ps1` (variable `$sitio`). **Si cambia el dominio, cambiarlas en
+  los dos lados.**
 
 `og.jpg` (1200×630) es la tarjeta que aparece al compartir el link; se genera aparte
-con el script de la sección "Fotos".
+con `hacer-og.ps1`.
 
 ## Fotos
 
@@ -209,7 +226,7 @@ PowerShell + `System.Drawing`:
   cartel, el toldo y el frente), le pone dos degradados oscuros encima para que se
   lea el texto, y encima el logo, "La Nieve", "Pizza al molde desde 1949" y la
   dirección, con una raya amarilla al pie. Está en `hacer-og.ps1` y lee las imágenes
-  ya procesadas de `publicar\`, así que se puede volver a correr cuando haga falta.
+  ya procesadas de `docs\`, así que se puede volver a correr cuando haga falta.
 
 ## Cómo probarlo localmente
 

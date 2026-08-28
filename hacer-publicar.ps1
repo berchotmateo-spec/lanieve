@@ -1,10 +1,10 @@
 # ============================================================
-#  Arma la carpeta publicar\ a partir de index.html
+#  Arma la carpeta docs\ a partir de index.html
 #  ------------------------------------------------------------
 #  index.html es la version de un solo archivo (la del Artifact):
 #  lleva el logo y las dos fotos embebidas como data URI.
 #
-#  Para hosting eso es peor: el navegador no puede pintar nada
+#  Para GitHub Pages eso es peor: el navegador no puede pintar nada
 #  hasta bajar los 730 KB enteros. Asi que aca las imagenes se
 #  sacan a archivos sueltos, y el HTML queda en ~65 KB.
 #
@@ -13,12 +13,12 @@
 # ============================================================
 
 $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
-$dest = Join-Path $raiz "publicar"
-$sitio = "https://lanieve-mdp.netlify.app"
+$dest = Join-Path $raiz "docs"
+$sitio = "https://berchotmateo-spec.github.io/lanieve"
 
 $html = [System.IO.File]::ReadAllText((Join-Path $raiz "index.html"), [System.Text.Encoding]::UTF8)
 
-# Las mismas imagenes que estan embebidas viven tambien sueltas en publicar\.
+# Las mismas imagenes que estan embebidas viven tambien sueltas en docs\.
 # Reconstruimos su data URI para poder cambiarla por el nombre de archivo.
 function Get-Uri([string]$archivo, [string]$tipo) {
   $bytes = [System.IO.File]::ReadAllBytes((Join-Path $dest $archivo))
@@ -66,7 +66,7 @@ $sitemap = @"
 "@
 [System.IO.File]::WriteAllText((Join-Path $dest "sitemap.xml"), $sitemap, $utf8)
 
-Write-Output "Listo. Contenido de publicar\:"
+Write-Output "Listo. Contenido de docs\:"
 Get-ChildItem $dest | Sort-Object Name | Select-Object Name, @{n = "KB"; e = { [math]::Round($_.Length / 1KB, 1) } }
 $quedan = ([regex]::Matches($salida, "data:image/")).Count
 Write-Output ("data URI que quedaron en el HTML: {0} (tiene que ser 0)" -f $quedan)
