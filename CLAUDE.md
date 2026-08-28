@@ -131,6 +131,23 @@ notaban de plantilla y siguen descartadas.
   del logo. **No** poner texto amarillo sobre blanco: no contrasta.
 - El punto verde de "Abierto ahora" se deja verde a propósito: es un semáforo, no
   parte de la marca.
+- **La nevada** es el chiste visual con el nombre del local. Va **a rachas, no
+  continua**: una tanda cada 10 segundos que cae y se termina sola, así sorprende
+  en vez de distraer. Es un `<canvas id="nieve">` fijo, `pointer-events:none`, en
+  `z-index:50` — por delante del contenido y por detrás de la barra de navegación
+  (60) y la del pedido (70).
+  Los copos van en **gris azulado** (`124,144,176`), la única nota fría de la
+  paleta: sobre blanco la nieve blanca no se ve, y la nieve es fría igual que el
+  punto verde es un semáforo. Da ~2,5:1 de contraste, suficiente en movimiento.
+  Se regula con cuatro constantes arriba del bloque: `CADA_NEVADA`, `COPOS`,
+  `COLOR_COPO` y `FUERZA_COPO` (opacidad mínima y cuánto suma al azar).
+  El bucle **se apaga solo** cuando cae el último copo, así entre nevada y nevada
+  no queda nada consumiendo batería; no arranca si el visitante pidió
+  `prefers-reduced-motion`, ni si la pestaña está tapada.
+
+  > Ojo al probarla: el navegador integrado **no corre `requestAnimationFrame`**
+  > (0 cuadros por segundo), así que ahí la animación no se ve moverse aunque el
+  > código esté bien. Hay que mirarla en un navegador de verdad.
 - Tipografías (Google Fonts): **Plus Jakarta Sans** para todo (400–800) y
   **DM Mono** solo para etiquetas chicas, horarios y teléfonos.
 - Formas: **bordes bien redondeados** (16–28px, botones tipo píldora), sombras

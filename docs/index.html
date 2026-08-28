@@ -576,6 +576,12 @@ body.con-pedido{padding-bottom:130px}
 .txt-btn.gris{color:var(--tinta-3);font-weight:600}
 .ml-auto{margin-left:auto}
 
+/* ---------------- nevada ---------------- */
+/* El guiño al nombre del local. Va fija sobre la página, por delante del
+   contenido pero por detrás de la barra de navegación y la del pedido, y
+   nunca se come un clic. */
+#nieve{position:fixed;inset:0;z-index:50;pointer-events:none}
+
 /* ---------------- animación de entrada ---------------- */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.3,1)}
 .rv.visible{opacity:1;transform:none}
@@ -583,6 +589,7 @@ body.con-pedido{padding-bottom:130px}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none;transition:none}
   .estado i::after{animation:none}
+  #nieve{display:none}
 }
 
 /* ---------------- responsive ---------------- */
@@ -908,6 +915,9 @@ body.con-pedido{padding-bottom:130px}
     </div>
   </div>
 </footer>
+
+<!-- ══════════════════ NEVADA ══════════════════ -->
+<canvas id="nieve" aria-hidden="true"></canvas>
 
 <!-- ══════════════════ BARRA DE PEDIDO ══════════════════ -->
 <div class="pedido" id="barra" role="region" aria-label="Tu pedido">
@@ -1476,6 +1486,98 @@ if("IntersectionObserver" in window){
 } else {
   $$(".rv").forEach(el => el.classList.add("visible"));
 }
+
+/* ---------- nevada: el guiño al nombre del local ---------- */
+/* Cada CADA_NEVADA arranca una tanda de COPOS que cae y se termina sola.
+   Es a rachas y no continua a propósito: así sorprende en vez de distraer.
+   Sobre fondo blanco la nieve blanca no se ve, así que los copos van en un
+   gris azulado tenue. Es la única nota fría de una paleta cálida, igual que
+   el punto verde de "Abierto ahora": la nieve es fría, no es la marca. */
+const CADA_NEVADA = 10000;        // milisegundos entre una nevada y la siguiente
+const COPOS       = 34;           // cuántos copos trae cada nevada
+const COLOR_COPO  = "124,144,176";// gris azulado; sobre blanco da ~2,5:1 de contraste
+const FUERZA_COPO = [.50, .40];   // opacidad: mínima y cuánto más puede sumar al azar
+
+(function(){
+  const lienzo = $("#nieve");
+  const quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!lienzo || !lienzo.getContext || quieto) return;
+
+  const ctx = lienzo.getContext("2d");
+  let copos = [], corriendo = false, ultimo = 0;
+
+  /* Se dibuja en píxeles del dispositivo para que no se vea borroso en
+     pantallas retina, pero las cuentas van en píxeles de CSS. */
+  function medir(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    lienzo.width  = Math.round(innerWidth  * dpr);
+    lienzo.height = Math.round(innerHeight * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  medir();
+  addEventListener("resize", medir);
+
+  function copo(){
+    return {
+      x: Math.random() * innerWidth,
+      y: -12 - Math.random() * 60,
+      r: 1.8 + Math.random() * 3.2,
+      cae: 85 + Math.random() * 85,       // píxeles por segundo
+      vaiven: 10 + Math.random() * 26,    // cuánto se balancea al costado
+      fase: Math.random() * Math.PI * 2,
+      giro: .5 + Math.random() * .8,
+      alfa: FUERZA_COPO[0] + Math.random() * FUERZA_COPO[1]
+    };
+  }
+
+  function cuadro(t){
+    const dt = ultimo ? Math.min((t - ultimo) / 1000, .05) : 0;
+    ultimo = t;
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+    copos = copos.filter(c => {
+      c.y += c.cae * dt;
+      c.fase += c.giro * dt;
+      // entra de a poco en los primeros píxeles, así no aparece de golpe
+      const entrada = Math.max(0, Math.min(1, (c.y + 12) / 55));
+      ctx.beginPath();
+      ctx.arc(c.x + Math.sin(c.fase) * c.vaiven, c.y, c.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(" + COLOR_COPO + "," + (c.alfa * entrada).toFixed(3) + ")";
+      ctx.fill();
+      return c.y < innerHeight + 14;
+    });
+
+    // cuando cayó el último copo el bucle se apaga: entre nevada y nevada
+    // no queda nada consumiendo batería
+    if(copos.length) requestAnimationFrame(cuadro);
+    else { corriendo = false; ultimo = 0; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+
+  function animar(){
+    if(corriendo) return;
+    corriendo = true;
+    ultimo = 0;
+    requestAnimationFrame(cuadro);
+  }
+
+  /* Los copos no salen todos juntos: se sueltan de a uno para que la
+     nevada entre de a poco en vez de caer como un telón. */
+  function nevar(){
+    // Si la pestaña está tapada no se ve nada, y si quedaron copos de la
+    // nevada anterior es que el navegador no está dando cuadros (pasa con
+    // requestAnimationFrame frenado): en los dos casos, mejor no acumular.
+    if(document.hidden || copos.length > COPOS) return;
+    let puestos = 0;
+    const suelta = setInterval(() => {
+      copos.push(copo());
+      animar();
+      if(++puestos >= COPOS) clearInterval(suelta);
+    }, 85);
+  }
+
+  setTimeout(nevar, 1500);
+  setInterval(nevar, CADA_NEVADA);
+})();
 
 /* ---------- arranque ---------- */
 estadoLocal();
