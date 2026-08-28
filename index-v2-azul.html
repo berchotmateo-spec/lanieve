@@ -1,0 +1,1349 @@
+<title>Pizzería La Nieve</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   PIZZERÍA LA NIEVE — Mar del Plata
+   Rediseño 2026: superficies claras, tarjetas redondeadas,
+   azul de cartel como color de marca. Fondo siempre claro.
+   ============================================================ */
+
+:root{
+  --blanco:#FFFFFF;
+  --superficie:#F5F8FE;
+  --tinta:#0B1220;
+  --tinta-2:#5A6B84;
+  --tinta-3:#8494AC;
+  --azul:#1B44A8;
+  --azul-600:#16388C;
+  --azul-50:#EEF3FF;
+  --azul-100:#DBE5FB;
+  --linea:#E5EBF7;
+  --linea-2:#D3DDF1;
+  --acento:#F0742B;
+  --verde:#12A05C;
+  --noche:#0A1533;
+
+  --r-xl:28px;
+  --r-lg:22px;
+  --r:16px;
+
+  --s1:0 1px 2px rgba(11,18,32,.05);
+  --s2:0 2px 4px rgba(11,18,32,.04), 0 14px 30px -16px rgba(20,44,110,.30);
+  --s3:0 30px 60px -30px rgba(20,44,110,.55);
+}
+
+/* La página va SIEMPRE clara, sin importar el tema del navegador de
+   quien la mire. Por eso no hay bloque de tema oscuro. */
+html{background:var(--blanco);color-scheme:light;scroll-behavior:smooth}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--blanco);
+  color:var(--tinta);
+  font-family:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(38px,6.2vw,72px);letter-spacing:-.04em}
+h2{font-size:clamp(29px,4.2vw,47px)}
+h3{font-size:clamp(20px,2.2vw,25px);letter-spacing:-.02em;line-height:1.2}
+h4{font-size:17px;letter-spacing:-.015em;line-height:1.3;font-weight:700}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+button{font-family:inherit}
+svg{display:block}
+
+.env{width:min(1160px,100% - 40px);margin-inline:auto}
+section[id]{scroll-margin-top:100px}
+
+/* ---------------- utilidades ---------------- */
+.mono{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:"DM Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--azul);background:var(--azul-50);
+  border-radius:999px;padding:8px 14px;
+}
+
+.cab{text-align:center;max-width:660px;margin:0 auto clamp(34px,4.4vw,56px)}
+.cab h2{margin:18px 0 0}
+.cab p{margin-top:16px;color:var(--tinta-2);font-size:17.5px}
+
+section{padding:clamp(62px,8.5vw,110px) 0}
+.alt{background:var(--superficie)}
+
+/* ---------------- botones ---------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  height:52px;padding:0 26px;border-radius:999px;border:1px solid transparent;
+  background:var(--azul);color:#fff;
+  font-size:15.5px;font-weight:700;letter-spacing:-.01em;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 10px 22px -12px rgba(27,68,168,.85);
+  transition:background .18s, transform .18s, box-shadow .18s;
+}
+.btn:hover{background:var(--azul-600);transform:translateY(-1px);box-shadow:0 16px 28px -14px rgba(27,68,168,.9)}
+.btn:active{transform:translateY(0)}
+.btn-lin{background:#fff;color:var(--tinta);border-color:var(--linea-2);box-shadow:var(--s1)}
+.btn-lin:hover{background:#fff;border-color:var(--azul);color:var(--azul)}
+.btn-sm{height:44px;padding:0 20px;font-size:14.5px}
+.acciones{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------------- aviso de vista previa ---------------- */
+.aviso{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;
+  background:var(--azul);color:#fff;
+  padding:11px 20px;font-size:13.5px;line-height:1.4;text-align:center;
+}
+.aviso button{
+  background:rgba(255,255,255,.16);border:0;color:#fff;
+  border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600;cursor:pointer;
+}
+.aviso button:hover{background:rgba(255,255,255,.28)}
+
+/* ---------------- barra de navegación ---------------- */
+.nav-wrap{position:sticky;top:12px;z-index:60;margin:12px 0 -88px}
+.nav{
+  display:flex;align-items:center;gap:14px;
+  height:64px;padding:0 10px 0 22px;
+  background:rgba(255,255,255,.88);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border:1px solid var(--linea);border-radius:999px;
+  box-shadow:var(--s2);
+}
+.marca{
+  font-size:19px;font-weight:800;letter-spacing:-.045em;
+  display:flex;align-items:center;gap:9px;flex-shrink:0;
+}
+.marca .punto{width:9px;height:9px;border-radius:50%;background:var(--azul);flex-shrink:0}
+.marca span{color:var(--azul)}
+.nav-links{display:flex;gap:2px;margin-left:8px}
+.nav-links a{
+  padding:9px 14px;border-radius:999px;
+  font-size:14.5px;font-weight:600;color:var(--tinta-2);
+  transition:color .16s, background .16s;
+}
+.nav-links a:hover{color:var(--tinta);background:var(--azul-50)}
+.nav-links a.act{color:var(--azul);background:var(--azul-50)}
+.nav-fin{display:flex;align-items:center;gap:10px;margin-left:auto}
+
+.estado{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--tinta-2);
+  padding:0 4px;white-space:nowrap;
+}
+.estado i{
+  width:8px;height:8px;border-radius:50%;background:var(--verde);
+  flex-shrink:0;position:relative;
+}
+.estado.cerrado i{background:var(--tinta-3)}
+.estado i::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:var(--verde);animation:latido 2.4s ease-out infinite;
+}
+.estado.cerrado i::after{animation:none;opacity:0}
+@keyframes latido{0%{transform:scale(1);opacity:.7}70%{transform:scale(3.2);opacity:0}100%{opacity:0}}
+
+.ham{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--linea-2);background:#fff;cursor:pointer;
+  display:none;place-items:center;
+}
+.ham:hover{border-color:var(--azul)}
+.ham b{display:block;width:17px;height:1.8px;background:var(--tinta);border-radius:2px;margin:3.4px auto}
+
+/* menú de pantalla completa */
+.overlay{
+  position:fixed;inset:0;z-index:90;background:var(--noche);
+  display:grid;place-items:center;
+  opacity:0;visibility:hidden;transition:opacity .3s, visibility .3s;
+}
+.overlay.abierto{opacity:1;visibility:visible}
+.overlay nav{text-align:center}
+.overlay nav a{
+  display:block;padding:6px;color:#fff;opacity:.5;
+  font-size:clamp(32px,7vw,56px);font-weight:800;letter-spacing:-.035em;line-height:1.15;
+  transition:opacity .2s;
+}
+.overlay nav a:hover{opacity:1}
+.overlay .cerrar{
+  position:absolute;top:22px;right:22px;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:0;color:#fff;
+  font-size:26px;line-height:1;cursor:pointer;
+}
+.overlay .cerrar:hover{background:rgba(255,255,255,.2)}
+.overlay .pie-ov{
+  position:absolute;bottom:26px;left:0;right:0;text-align:center;
+  color:rgba(255,255,255,.45);font-size:13.5px;
+}
+
+/* ---------------- portada ---------------- */
+.portada{
+  position:relative;overflow:hidden;
+  padding:clamp(124px,15vw,172px) 0 clamp(56px,7vw,84px);
+  background:
+    radial-gradient(900px 460px at 78% -8%, #DCE6FF 0%, rgba(220,230,255,0) 62%),
+    radial-gradient(760px 420px at 6% 8%, #EAF0FF 0%, rgba(234,240,255,0) 60%),
+    linear-gradient(180deg,#F4F7FE 0%, #FFFFFF 92%);
+}
+.portada::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--linea) 1px, transparent 1px),
+                   linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(700px 380px at 50% 18%, #000 0%, transparent 78%);
+  mask-image:radial-gradient(700px 380px at 50% 18%, #000 0%, transparent 78%);
+  opacity:.55;
+}
+.portada .env{position:relative;z-index:1;text-align:center}
+.portada .eyebrow{background:rgba(255,255,255,.85);border:1px solid var(--linea-2);box-shadow:var(--s1)}
+.portada h1{margin:22px auto 0;max-width:14ch}
+.portada h1 em{font-style:normal;color:var(--azul)}
+.bajada{
+  margin:22px auto 0;max-width:56ch;
+  font-size:clamp(17px,1.7vw,19.5px);color:var(--tinta-2);
+}
+.portada .acciones{justify-content:center;margin-top:32px}
+
+.tarjetas{
+  display:grid;gap:14px;margin:clamp(44px,5.5vw,64px) 0 0;
+  grid-template-columns:repeat(3,1fr);text-align:left;
+}
+.tar{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:22px;box-shadow:var(--s1);
+  display:flex;gap:15px;align-items:flex-start;
+}
+.tar .ic{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:var(--azul-50);color:var(--azul);
+  display:grid;place-items:center;
+}
+.tar dt{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-3);font-weight:600}
+.tar dd{margin:3px 0 0;font-size:16.5px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.tar dd small{display:block;font-size:13.5px;font-weight:500;color:var(--tinta-2);letter-spacing:0;margin-top:3px}
+
+/* ---------------- ventajas ---------------- */
+.ventajas{padding-top:clamp(50px,6vw,74px)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.vent{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:26px 24px 28px;box-shadow:var(--s1);
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.vent:hover{transform:translateY(-3px);box-shadow:var(--s2);border-color:var(--linea-2)}
+.vent .ic{
+  width:46px;height:46px;border-radius:14px;
+  background:var(--azul);color:#fff;display:grid;place-items:center;margin-bottom:18px;
+}
+.vent h4{font-size:18px;margin-bottom:8px}
+.vent p{font-size:15px;color:var(--tinta-2);line-height:1.55}
+
+/* ---------------- carta ---------------- */
+.barra-carta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.tabs{
+  display:flex;gap:6px;overflow-x:auto;padding:5px;
+  background:var(--superficie);border-radius:999px;scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  border:0;background:transparent;cursor:pointer;white-space:nowrap;
+  padding:11px 20px;border-radius:999px;
+  font-size:14.5px;font-weight:700;color:var(--tinta-2);
+  transition:background .18s, color .18s, box-shadow .18s;
+}
+.tab:hover{color:var(--tinta)}
+.tab[aria-selected="true"]{background:#fff;color:var(--azul);box-shadow:var(--s1)}
+
+.buscador{position:relative;flex:1;min-width:230px;max-width:340px;margin-left:auto}
+.buscador svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--tinta-3)}
+.buscador input{
+  width:100%;height:50px;padding:0 16px 0 44px;
+  border:1px solid var(--linea-2);border-radius:999px;background:#fff;
+  font-family:inherit;font-size:15px;color:var(--tinta);
+  transition:border-color .18s, box-shadow .18s;
+}
+.buscador input::placeholder{color:var(--tinta-3)}
+.buscador input:focus{outline:0;border-color:var(--azul);box-shadow:0 0 0 4px var(--azul-50)}
+
+.grupo{margin-bottom:34px}
+.grupo:last-child{margin-bottom:0}
+.grupo-tit{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.grupo-tit h3{font-size:15px;font-weight:700;letter-spacing:0;white-space:nowrap}
+.grupo-tit .raya{height:1px;background:var(--linea);flex:1}
+.grupo-tit .cuenta{font-size:12.5px;color:var(--tinta-3);font-weight:600;white-space:nowrap}
+
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prod{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:20px 20px 16px;display:flex;flex-direction:column;
+  transition:transform .18s, box-shadow .18s, border-color .18s;
+}
+.prod:hover{transform:translateY(-2px);box-shadow:var(--s2);border-color:var(--linea-2)}
+.prod.en-pedido{border-color:var(--azul);box-shadow:0 0 0 3px var(--azul-50)}
+.prod h4{margin-bottom:6px}
+.prod .det{font-size:14.5px;color:var(--tinta-2);line-height:1.5}
+.prod .fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
+.prod .precio{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+
+.mas{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  border:0;background:var(--azul);color:#fff;cursor:pointer;
+  display:grid;place-items:center;
+  box-shadow:0 8px 18px -10px rgba(27,68,168,.9);
+  transition:background .18s, transform .18s;
+}
+.mas:hover{background:var(--azul-600);transform:scale(1.06)}
+.mas:active{transform:scale(.94)}
+
+.stepper{
+  display:flex;align-items:center;gap:2px;
+  background:var(--azul);border-radius:999px;padding:4px;
+  box-shadow:0 8px 18px -10px rgba(27,68,168,.9);
+}
+.stepper button{
+  width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.15);color:#fff;font-size:18px;line-height:1;
+  display:grid;place-items:center;transition:background .16s;
+}
+.stepper button:hover{background:rgba(255,255,255,.32)}
+.stepper .n{min-width:26px;text-align:center;color:#fff;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+
+.vacio{
+  text-align:center;padding:56px 20px;color:var(--tinta-2);
+  border:1px dashed var(--linea-2);border-radius:var(--r-lg);background:var(--superficie);
+}
+.vacio b{display:block;color:var(--tinta);font-size:18px;margin-bottom:6px}
+
+/* ---------------- combos ---------------- */
+.combos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.combo{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-xl);
+  padding:30px 28px;box-shadow:var(--s1);
+  display:flex;flex-direction:column;
+  transition:transform .2s, box-shadow .2s;
+}
+.combo:hover{transform:translateY(-3px);box-shadow:var(--s2)}
+.combo .tag{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--azul-50);color:var(--azul);
+  border-radius:999px;padding:7px 13px;margin-bottom:22px;
+}
+.combo .precio{font-size:clamp(34px,4vw,42px);font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.combo h3{margin-top:10px}
+.combo ul{margin:24px 0 28px;display:grid;gap:12px}
+.combo li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--tinta-2);line-height:1.45}
+.combo li svg{flex-shrink:0;margin-top:3px;color:var(--azul)}
+.combo .btn{width:100%;margin-top:auto}
+
+.combo.destacado{
+  background:linear-gradient(165deg,#1E4BB8 0%, #14337F 100%);
+  border-color:transparent;color:#fff;box-shadow:var(--s3);
+}
+.combo.destacado .tag{background:var(--acento);color:#fff}
+.combo.destacado li{color:rgba(255,255,255,.82)}
+.combo.destacado li svg{color:#fff}
+.combo.destacado .btn{background:#fff;color:var(--azul);box-shadow:none}
+.combo.destacado .btn:hover{background:#EEF3FF;color:var(--azul-600)}
+
+.nota-combos{margin-top:26px;text-align:center;font-size:14.5px;color:var(--tinta-2)}
+
+/* ---------------- el local ---------------- */
+.dos{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,5vw,64px);align-items:start}
+.cuerpo{display:grid;gap:16px;color:var(--tinta-2);font-size:16.5px;margin-top:24px}
+.cuerpo strong{color:var(--tinta);font-weight:700}
+.hechos{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:0;
+  background:var(--linea);border:1px solid var(--linea);border-radius:var(--r-lg);overflow:hidden;
+}
+.hechos > div{background:#fff;padding:20px 22px}
+.hechos dt{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-3);font-weight:600}
+.hechos dd{margin:5px 0 0;font-size:16px;font-weight:700;letter-spacing:-.02em}
+
+/* ---------------- preguntas ---------------- */
+.faq-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,60px);align-items:start}
+.faq-izq h2{margin:18px 0 16px}
+.faq-izq p{color:var(--tinta-2);max-width:38ch;margin-bottom:26px}
+.faq{display:grid;gap:12px}
+.faq details{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r);
+  transition:border-color .18s, box-shadow .18s;
+}
+.faq details:hover{border-color:var(--linea-2)}
+.faq details[open]{border-color:var(--azul-100);box-shadow:var(--s1)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:19px 22px;
+  display:flex;align-items:center;gap:16px;
+  font-size:16px;font-weight:700;letter-spacing:-.015em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";margin-left:auto;flex-shrink:0;
+  width:32px;height:32px;border-radius:50%;background-color:var(--azul-50);
+  background-image:linear-gradient(var(--azul),var(--azul)),linear-gradient(var(--azul),var(--azul));
+  background-size:12px 2px, 2px 12px;
+  background-position:center,center;background-repeat:no-repeat;
+  transition:transform .25s, background-color .2s;
+}
+.faq details[open] summary::after{transform:rotate(135deg);background-color:var(--azul-100)}
+.faq .resp{padding:0 22px 20px;color:var(--tinta-2);font-size:15.5px;line-height:1.6}
+
+/* ---------------- contacto ---------------- */
+.contacto-card{
+  background:linear-gradient(160deg,#1E4BB8 0%, #0F2A6E 100%);
+  border-radius:var(--r-xl);color:#fff;
+  padding:clamp(34px,5vw,60px);
+  box-shadow:var(--s3);position:relative;overflow:hidden;
+}
+.contacto-card::after{
+  content:"";position:absolute;right:-90px;top:-90px;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 70%);
+}
+.contacto-card .eyebrow{background:rgba(255,255,255,.14);color:#fff}
+.contacto-card h2{margin:18px 0 0;max-width:16ch;position:relative;z-index:1}
+.contacto-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,52px);
+  margin-top:36px;position:relative;z-index:1;
+}
+.datos{display:grid;gap:22px;margin:0}
+.datos dt{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600}
+.datos dd{margin:6px 0 0;font-size:17.5px;font-weight:700;letter-spacing:-.02em;line-height:1.4}
+.datos a:hover{text-decoration:underline}
+.contacto-txt{color:rgba(255,255,255,.75);max-width:42ch}
+
+/* ---------------- pie ---------------- */
+.pie{background:var(--noche);color:#fff;padding:clamp(48px,6vw,72px) 0 30px}
+.pie-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.pie .marca{color:#fff;font-size:22px}
+.pie .marca span{color:#7C9AE8}
+.pie-txt{color:rgba(255,255,255,.5);font-size:14.5px;margin-top:14px;max-width:34ch}
+.pie h5{margin:0 0 14px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600}
+.pie li{margin-bottom:9px}
+.pie li a{color:rgba(255,255,255,.78);font-size:15px}
+.pie li a:hover{color:#fff}
+.pie-fin{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.4);font-size:13.5px;
+}
+
+/* ---------------- barra de pedido ---------------- */
+body.con-pedido{padding-bottom:130px}
+.pedido{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;padding:0 0 14px;
+  transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  pointer-events:none;
+}
+.pedido.abierta{transform:translateY(0);pointer-events:auto}
+.pedido-caja{
+  background:#fff;border:1px solid var(--linea-2);border-radius:var(--r-xl);
+  box-shadow:0 -4px 12px rgba(11,18,32,.04), 0 26px 50px -22px rgba(20,44,110,.45);
+  overflow:hidden;
+}
+.pedido-detalle{max-height:0;overflow:hidden;transition:max-height .32s ease}
+.pedido.expandida .pedido-detalle{max-height:min(52vh,440px);overflow-y:auto}
+.pedido-lista{padding:20px 22px 4px;display:grid;gap:11px}
+.linea{display:flex;align-items:center;gap:12px;font-size:15px}
+.linea .cant{min-width:20px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;color:var(--azul)}
+.linea .mini{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--linea-2);background:#fff;color:var(--tinta);
+  cursor:pointer;font-size:16px;line-height:1;display:grid;place-items:center;
+}
+.linea .mini:hover{border-color:var(--azul);color:var(--azul)}
+.linea .nom{font-weight:600}
+.linea .puntos{
+  flex:1;height:1px;min-width:16px;align-self:flex-end;margin-bottom:8px;
+  background-image:linear-gradient(90deg,var(--linea-2) 0 3px, transparent 3px 6px);
+  background-size:6px 1px;
+}
+.linea .sub{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.entrega{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 22px 18px}
+.entrega > span{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-3);font-weight:600;margin-right:2px}
+.chip{
+  border:1px solid var(--linea-2);background:#fff;border-radius:999px;
+  padding:8px 16px;font-size:14px;font-weight:600;color:var(--tinta-2);cursor:pointer;
+  transition:background .16s, border-color .16s, color .16s;
+}
+.chip:hover{border-color:var(--azul);color:var(--azul)}
+.chip[aria-pressed="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+
+.pedido-in{display:flex;align-items:center;gap:16px;padding:14px 16px 14px 22px;flex-wrap:wrap;border-top:1px solid var(--linea)}
+.pedido-res{display:flex;flex-direction:column;line-height:1.25}
+.pedido-res span{font-size:13px;color:var(--tinta-2);font-weight:600}
+.pedido-res b{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.txt-btn{background:none;border:0;cursor:pointer;padding:8px 6px;font-size:14px;font-weight:700;color:var(--azul)}
+.txt-btn:hover{text-decoration:underline}
+.txt-btn.gris{color:var(--tinta-3);font-weight:600}
+.ml-auto{margin-left:auto}
+
+/* ---------------- animación de entrada ---------------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.3,1)}
+.rv.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .estado i::after{animation:none}
+}
+
+/* ---------------- responsive ---------------- */
+@media (max-width:1000px){
+  .grid4{grid-template-columns:1fr 1fr}
+  .prods{grid-template-columns:1fr 1fr}
+  .combos{grid-template-columns:1fr}
+  .combo.destacado{order:-1}
+  .dos,.faq-grid,.contacto-grid{grid-template-columns:1fr}
+  .pie-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .ham{display:grid}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .env{width:min(1160px,100% - 32px)}
+  .tarjetas{grid-template-columns:1fr}
+  .grid4{grid-template-columns:1fr}
+  .prods{grid-template-columns:1fr}
+  .hechos{grid-template-columns:1fr}
+  .buscador{max-width:none;margin-left:0}
+  .estado{display:none}
+  .portada .acciones{flex-direction:column}
+  .portada .acciones .btn{width:100%}
+  .pedido-in{gap:10px;padding:12px 14px}
+  .pedido-in .btn{width:100%;order:9}
+  .ml-auto{margin-left:auto}
+  body.con-pedido{padding-bottom:200px}
+  .pie-grid{grid-template-columns:1fr;gap:26px}
+}
+</style>
+
+<!-- ══════════════════ AVISO DE VISTA PREVIA ══════════════════ -->
+<div class="aviso" id="aviso">
+  <span>VISTA PREVIA · Los precios y algunos productos son de ejemplo, a confirmar con el local.</span>
+  <button type="button" onclick="document.getElementById('aviso').remove()">Ocultar</button>
+</div>
+
+<!-- ══════════════════ NAVEGACIÓN ══════════════════ -->
+<div class="nav-wrap">
+  <div class="env">
+    <div class="nav">
+      <a class="marca" href="#top"><i class="punto"></i>LA <span>NIEVE</span></a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#carta">Carta</a>
+        <a href="#combos">Combos</a>
+        <a href="#nosotros">El local</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-fin">
+        <span class="estado" id="estado"><i></i><b id="estado-txt">Abierto ahora</b></span>
+        <a class="btn btn-sm" href="#carta">Pedir ahora</a>
+        <button class="ham" id="ham" type="button" aria-label="Abrir menú">
+          <b></b><b></b><b></b>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- menú de pantalla completa -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Menú">
+  <button class="cerrar" id="cerrar" type="button" aria-label="Cerrar menú">×</button>
+  <nav>
+    <a href="#carta">Carta</a>
+    <a href="#combos">Combos</a>
+    <a href="#nosotros">El local</a>
+    <a href="#preguntas">Preguntas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <p class="pie-ov">Rivadavia 3002 · Mar del Plata · 0223 495-0104</p>
+</div>
+
+<!-- ══════════════════ PORTADA ══════════════════ -->
+<header class="portada" id="top">
+  <div class="env">
+    <p class="eyebrow">Rivadavia esq. La Rioja · Mar del Plata</p>
+    <h1>Pizza al molde, como toda <em>la vida</em>.</h1>
+    <p class="bajada">
+      Una esquina, un mostrador y la pizza que los marplatenses conocen de memoria.
+      Armá tu pedido acá y te lo pasamos por WhatsApp en dos toques.
+    </p>
+    <div class="acciones">
+      <a class="btn" href="#carta">Ver la carta y pedir</a>
+      <a class="btn btn-lin" href="tel:+542234950104">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>
+        Llamar al 495-0104
+      </a>
+    </div>
+
+    <dl class="tarjetas">
+      <div class="tar rv">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <div><dt>Horario</dt><dd class="mono">08:00 — 01:00<small>Todos los días del año</small></dd></div>
+      </div>
+      <div class="tar rv">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <div><dt>Dónde</dt><dd>Rivadavia 3002<small>Esquina La Rioja, Mar del Plata</small></dd></div>
+      </div>
+      <div class="tar rv">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div>
+        <div><dt>Pedidos</dt><dd class="mono">0223 495-0104<small>Salón, take away y delivery</small></dd></div>
+      </div>
+    </dl>
+  </div>
+</header>
+
+<!-- ══════════════════ VENTAJAS ══════════════════ -->
+<section class="ventajas">
+  <div class="env">
+    <div class="grid4">
+      <article class="vent rv">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 21 20a24 24 0 0 1-18 0L12 3Z"/><circle cx="10" cy="12.5" r="1.1"/><circle cx="14" cy="16" r="1.1"/></svg></div>
+        <h4>Al molde, en serio</h4>
+        <p>Masa gruesa hecha en el local y muzzarella hasta el borde. La receta no se toca.</p>
+      </article>
+      <article class="vent rv">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 14h6l-1 7 8-11h-6l1-7Z"/></svg></div>
+        <h4>Pedir lleva 30 segundos</h4>
+        <p>Tocás el <strong>+</strong> en cada producto y te armamos el mensaje de WhatsApp con el total hecho.</p>
+      </article>
+      <article class="vent rv">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
+        <h4>Salón, take away y envío</h4>
+        <p>Comés en el mostrador, la retirás por la esquina o te la llevamos a casa.</p>
+      </article>
+      <article class="vent rv">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div>
+        <h4>Abierto los 7 días</h4>
+        <p>De 8 de la mañana a 1 de la madrugada, incluidos fines de semana y feriados.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CARTA ══════════════════ -->
+<section id="carta" class="alt">
+  <div class="env">
+    <div class="cab">
+      <p class="eyebrow">La carta</p>
+      <h2>Todo lo que sale del mostrador</h2>
+      <p>Tocá el <strong>+</strong> para ir armando el pedido. Cuando termines te lo pasamos por WhatsApp con el detalle y el total.</p>
+    </div>
+
+    <div class="barra-carta">
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="buscador">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <input id="buscar" type="search" placeholder="Buscar en la carta..." aria-label="Buscar en la carta" autocomplete="off">
+      </div>
+    </div>
+
+    <div id="carta-cont"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ COMBOS ══════════════════ -->
+<section id="combos">
+  <div class="env">
+    <div class="cab">
+      <p class="eyebrow">Para compartir</p>
+      <h2>Combos y pedidos grandes</h2>
+      <p>Para la previa, la reunión familiar o la oficina. Encargalos con un rato de anticipación.</p>
+    </div>
+    <div class="combos" id="combos-cont"></div>
+    <p class="nota-combos">¿Necesitás algo más grande? Escribinos y lo armamos a medida.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ EL LOCAL ══════════════════ -->
+<section id="nosotros" class="alt">
+  <div class="env dos">
+    <div>
+      <p class="eyebrow">El local</p>
+      <h2 style="margin-top:18px">Una esquina que no cambió de idea</h2>
+      <div class="cuerpo">
+        <p>La Nieve es de esas pizzerías que se explican solas: <strong>mostrador largo, porción al molde y muzzarella hasta el borde</strong>. Se come de parado, apoyado en la barra, y se sigue el día.</p>
+        <p>Nada de vueltas. Masa hecha en el local, horno prendido desde la mañana y la misma receta de siempre, que es exactamente el motivo por el que la gente vuelve.</p>
+        <p>Estamos sobre Rivadavia, en la esquina de La Rioja, a pasos del centro. Abrimos <strong>todos los días</strong>, de 8 de la mañana a 1 de la madrugada.</p>
+      </div>
+      <div class="acciones" style="margin-top:30px">
+        <a class="btn btn-lin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          Cómo llegar
+        </a>
+      </div>
+    </div>
+    <dl class="hechos rv">
+      <div><dt>Especialidad</dt><dd>Pizza al molde</dd></div>
+      <div><dt>Dirección</dt><dd>Rivadavia 3002</dd></div>
+      <div><dt>Abierto</dt><dd class="mono">Los 7 días</dd></div>
+      <div><dt>Horario</dt><dd class="mono">08:00 — 01:00</dd></div>
+      <div><dt>Salón</dt><dd>Mostrador y mesas</dd></div>
+      <div><dt>Delivery</dt><dd>Sí, en la zona</dd></div>
+      <div><dt>Pago</dt><dd>Efectivo y tarjeta</dd></div>
+      <div><dt>Accesible</dt><dd>Sí</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ══════════════════ PREGUNTAS ══════════════════ -->
+<section id="preguntas">
+  <div class="env faq-grid">
+    <div class="faq-izq">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2>Lo que más nos preguntan</h2>
+      <p>Si te queda alguna duda, escribinos por WhatsApp y te contestamos al toque.</p>
+      <a class="btn" id="wa-faq" href="#" target="_blank" rel="noopener">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
+        Escribinos
+      </a>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>¿Qué horario tienen?</summary>
+        <div class="resp">Abrimos todos los días de 8:00 a 01:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o WhatsApp.</div>
+      </details>
+      <details>
+        <summary>¿Hacen delivery?</summary>
+        <div class="resp">Sí, repartimos en la zona del centro y alrededores. El pedido se toma por teléfono o por WhatsApp desde esta misma página.</div>
+      </details>
+      <details>
+        <summary>¿Puedo pedir para llevar?</summary>
+        <div class="resp">Claro. Encargá tu pedido y pasá a retirarlo por Rivadavia 3002. Te decimos en cuánto tiempo lo tenés listo cuando confirmamos.</div>
+      </details>
+      <details>
+        <summary>¿Aceptan tarjeta?</summary>
+        <div class="resp">Sí, aceptamos efectivo y tarjetas de débito y crédito.</div>
+      </details>
+      <details>
+        <summary>¿Tienen opciones sin carne?</summary>
+        <div class="resp">Sí. Todas las pizzas de verdura, la fugazza, la fugazzeta y las empanadas de verdura y de humita son sin carne. Consultanos si necesitás algo puntual.</div>
+      </details>
+      <details>
+        <summary>¿Toman pedidos grandes para eventos?</summary>
+        <div class="resp">Sí, preparamos pedidos por cantidad para cumpleaños, reuniones y oficinas. Avisanos con anticipación y lo coordinamos.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACTO ══════════════════ -->
+<section id="contacto">
+  <div class="env">
+    <div class="contacto-card rv">
+      <p class="eyebrow">Contacto</p>
+      <h2>Te esperamos en la esquina de siempre</h2>
+      <div class="contacto-grid">
+        <dl class="datos">
+          <div>
+            <dt>Dirección</dt>
+            <dd>Rivadavia 3002, esq. La Rioja<br>Mar del Plata, Buenos Aires</dd>
+          </div>
+          <div>
+            <dt>Teléfono</dt>
+            <dd><a href="tel:+542234950104">0223 495-0104</a></dd>
+          </div>
+          <div>
+            <dt>Horario</dt>
+            <dd class="mono">Todos los días · 08:00 — 01:00</dd>
+          </div>
+        </dl>
+        <div>
+          <p class="contacto-txt">
+            Pedí por WhatsApp desde el celular, llamanos, o pasá directamente por el local.
+            Estamos sobre Rivadavia, a pocas cuadras del centro.
+          </p>
+          <div class="acciones" style="margin-top:30px">
+            <a class="btn" style="background:#fff;color:var(--azul);box-shadow:none" id="wa-contacto" href="#" target="_blank" rel="noopener">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
+              Pedir por WhatsApp
+            </a>
+            <a class="btn btn-lin" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.35)" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">Cómo llegar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PIE ══════════════════ -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-grid">
+      <div>
+        <a class="marca" href="#top"><i class="punto"></i>LA <span>NIEVE</span></a>
+        <p class="pie-txt">Pizza al molde en la esquina de Rivadavia y La Rioja, Mar del Plata. Desde siempre.</p>
+      </div>
+      <div>
+        <h5>Carta</h5>
+        <ul>
+          <li><a href="#carta" data-tab="0">Pizzas</a></li>
+          <li><a href="#carta" data-tab="1">Empanadas</a></li>
+          <li><a href="#carta" data-tab="2">Otros</a></li>
+          <li><a href="#carta" data-tab="3">Bebidas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>El local</h5>
+        <ul>
+          <li><a href="#nosotros">Quiénes somos</a></li>
+          <li><a href="#combos">Combos</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Pedidos</h5>
+        <ul>
+          <li><a href="tel:+542234950104">0223 495-0104</a></li>
+          <li><a id="wa-pie" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">Cómo llegar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie-fin">
+      <span>© 2026 Pizzería La Nieve · Rivadavia 3002, Mar del Plata</span>
+      <span>Todos los días de 08:00 a 01:00</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════ BARRA DE PEDIDO ══════════════════ -->
+<div class="pedido" id="barra" role="region" aria-label="Tu pedido">
+  <div class="env">
+    <div class="pedido-caja">
+      <div class="pedido-detalle">
+        <div class="pedido-lista" id="pedido-lista"></div>
+        <div class="entrega">
+          <span>Entrega</span>
+          <button class="chip" type="button" data-modo="Para retirar por el local" aria-pressed="true">Para retirar</button>
+          <button class="chip" type="button" data-modo="Con envío a domicilio" aria-pressed="false">Con envío</button>
+          <button class="chip" type="button" data-modo="Para comer en el local" aria-pressed="false">En el local</button>
+        </div>
+      </div>
+      <div class="pedido-in">
+        <div class="pedido-res">
+          <span id="pedido-res">Tu pedido</span>
+          <b id="pedido-total"></b>
+        </div>
+        <button class="txt-btn" id="ver" type="button">Ver detalle</button>
+        <button class="txt-btn gris" id="vaciar" type="button">Vaciar</button>
+        <a class="btn ml-auto" id="enviar" href="#" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
+          Enviar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   PARA ACTUALIZAR LA PÁGINA, TOCAR SOLO ESTAS DOS COSAS:
+   1) WHATSAPP  → el número al que llegan los pedidos
+   2) CARTA     → los productos y precios reales del local
+   ════════════════════════════════════════════════════════════ */
+
+// Formato internacional sin + ni espacios: 54 9 223 xxxxxxx
+const WHATSAPP = "5492234950104";   // ← PROVISORIO: reemplazar por el WhatsApp real del local
+
+const CARTA = [
+  {
+    tab: "Pizzas",
+    grupos: [
+      { nombre: "Al molde", items: [
+        { n:"Muzzarella",              d:"La de siempre. Salsa, muzzarella y aceitunas.", p:6500 },
+        { n:"Fugazzeta",               d:"Rellena de muzzarella, cebolla arriba.",        p:8200 },
+        { n:"Fugazza con queso",       d:"Cebolla, orégano y muzzarella.",                p:7600 },
+        { n:"Napolitana",              d:"Muzzarella, rodajas de tomate y ajo.",          p:7400 },
+        { n:"Calabresa",               d:"Muzzarella, longaniza y morrón.",               p:8400 },
+        { n:"Jamón y morrones",        d:"",                                              p:8000 },
+        { n:"Anchoas",                 d:"Muzzarella y filetes de anchoa.",               p:8900 },
+        { n:"Roquefort",               d:"Muzzarella y roquefort.",                       p:8600 },
+        { n:"Especial de la casa",     d:"Jamón, morrón, huevo y aceitunas.",             p:9200 }
+      ]},
+      { nombre: "Por porción", items: [
+        { n:"Porción de muzzarella",   d:"", p:1400 },
+        { n:"Porción de fugazzeta",    d:"", p:1800 },
+        { n:"Fainá",                   d:"Porción.", p:900 }
+      ]}
+    ]
+  },
+  {
+    tab: "Empanadas",
+    grupos: [
+      { nombre: "Por unidad", items: [
+        { n:"Carne",             d:"Cortada a cuchillo.", p:1200 },
+        { n:"Jamón y queso",     d:"",                    p:1200 },
+        { n:"Queso y cebolla",   d:"",                    p:1250 },
+        { n:"Pollo",             d:"",                    p:1200 },
+        { n:"Verdura",           d:"",                    p:1150 },
+        { n:"Humita",            d:"",                    p:1150 }
+      ]},
+      { nombre: "Por docena", items: [
+        { n:"Docena surtida",    d:"Elegís los gustos al confirmar el pedido.", p:12500 },
+        { n:"Media docena",      d:"",                                          p:6800 }
+      ]}
+    ]
+  },
+  {
+    tab: "Otros",
+    grupos: [
+      { nombre: "De la cocina", items: [
+        { n:"Calzone",                    d:"Jamón, muzzarella y huevo.",  p:9500 },
+        { n:"Tarta de verdura",           d:"Porción.",                    p:3200 },
+        { n:"Tarta de jamón y queso",     d:"Porción.",                    p:3400 },
+        { n:"Sándwich de milanesa",       d:"Lechuga, tomate y mayonesa.", p:7200 }
+      ]},
+      { nombre: "Postres", items: [
+        { n:"Cheesecake de ricota",  d:"Porción. La especialidad de la casa.", p:3800 },
+        { n:"Flan casero",           d:"Con dulce de leche o crema.",          p:3200 }
+      ]}
+    ]
+  },
+  {
+    tab: "Bebidas",
+    grupos: [
+      { nombre: "Sin alcohol", items: [
+        { n:"Gaseosa 500 ml", d:"", p:2200 },
+        { n:"Gaseosa 1,5 L",  d:"", p:3900 },
+        { n:"Agua mineral",   d:"", p:1900 }
+      ]},
+      { nombre: "Con alcohol", items: [
+        { n:"Cerveza 1 L",  d:"", p:4500 },
+        { n:"Moscato",      d:"Copa.", p:2400 }
+      ]}
+    ]
+  }
+];
+
+const COMBOS = [
+  { etiqueta:"El más pedido", destacado:true, nombre:"Combo familiar", precio:24000,
+    incluye:["2 pizzas grandes a elección","4 empanadas surtidas","1 gaseosa de 1,5 L"] },
+  { etiqueta:"Para picar", nombre:"Docena de empanadas", precio:12500,
+    incluye:["12 empanadas surtidas","Gustos a elección","Listas en 25 minutos"] },
+  { etiqueta:"Reuniones", nombre:"Combo fiesta", precio:46000,
+    incluye:["4 pizzas grandes","12 empanadas surtidas","2 gaseosas de 1,5 L","Alcanza para 8 a 10 personas"] }
+];
+
+/* ─────────── de acá para abajo no hace falta tocar nada ─────────── */
+
+const $  = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const plata = n => "$ " + n.toLocaleString("es-AR");
+
+const pedido = new Map();      // nombre -> { precio, cant }
+const acciones = new Map();    // nombre -> { cont, item, card }
+let tabActual = 0;
+let filtro = "";
+let entrega = "Para retirar por el local";
+
+const SVG_MAS  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+const SVG_TICK = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+
+/* ---------- guardar el pedido entre visitas ---------- */
+function guardar(){
+  try{ localStorage.setItem("lanieve-pedido", JSON.stringify([...pedido])); }catch(e){}
+}
+function recuperar(){
+  try{
+    const crudo = localStorage.getItem("lanieve-pedido");
+    if(crudo) JSON.parse(crudo).forEach(([k,v]) => pedido.set(k,v));
+  }catch(e){}
+}
+
+/* ---------- ¿está abierto ahora? ---------- */
+function estadoLocal(){
+  const ahora = new Date();
+  const h = ahora.getHours() + ahora.getMinutes()/60;
+  const abierto = (h >= 8 || h < 1);
+  const el = $("#estado");
+  el.classList.toggle("cerrado", !abierto);
+  $("#estado-txt").textContent = abierto ? "Abierto ahora" : "Cerrado · abre 08:00";
+}
+
+/* ---------- carta ---------- */
+const tabsEl = $("#tabs");
+const contEl = $("#carta-cont");
+
+CARTA.forEach((seccion, i) => {
+  const b = document.createElement("button");
+  b.className = "tab";
+  b.type = "button";
+  b.role = "tab";
+  b.textContent = seccion.tab;
+  b.setAttribute("aria-selected", i === 0 ? "true" : "false");
+  b.onclick = () => {
+    tabActual = i;
+    filtro = "";
+    $("#buscar").value = "";
+    pintarCarta();
+  };
+  tabsEl.appendChild(b);
+});
+
+function tarjeta(it){
+  const card = document.createElement("article");
+  card.className = "prod";
+
+  const h = document.createElement("h4");
+  h.textContent = it.n;
+  card.appendChild(h);
+
+  if(it.d){
+    const d = document.createElement("p");
+    d.className = "det";
+    d.textContent = it.d;
+    card.appendChild(d);
+  }
+
+  const fila = document.createElement("div");
+  fila.className = "fila";
+
+  const pre = document.createElement("span");
+  pre.className = "precio";
+  pre.textContent = plata(it.p);
+
+  const cont = document.createElement("div");
+  fila.append(pre, cont);
+  card.appendChild(fila);
+
+  acciones.set(it.n, { cont, item: it, card });
+  pintarAccion(it.n);
+  return card;
+}
+
+function pintarAccion(nombre){
+  const reg = acciones.get(nombre);
+  if(!reg) return;
+  const { cont, item, card } = reg;
+  const cant = pedido.has(nombre) ? pedido.get(nombre).cant : 0;
+
+  card.classList.toggle("en-pedido", cant > 0);
+  cont.innerHTML = "";
+
+  if(!cant){
+    const b = document.createElement("button");
+    b.className = "mas";
+    b.type = "button";
+    b.innerHTML = SVG_MAS;
+    b.setAttribute("aria-label", "Agregar " + item.n + " al pedido");
+    b.onclick = () => agregar(item.n, item.p);
+    cont.appendChild(b);
+    return;
+  }
+
+  const caja = document.createElement("div");
+  caja.className = "stepper";
+
+  const menos = document.createElement("button");
+  menos.type = "button"; menos.textContent = "−";
+  menos.setAttribute("aria-label", "Quitar uno de " + item.n);
+  menos.onclick = () => quitar(item.n);
+
+  const n = document.createElement("span");
+  n.className = "n";
+  n.textContent = cant;
+
+  const mas = document.createElement("button");
+  mas.type = "button"; mas.textContent = "+";
+  mas.setAttribute("aria-label", "Agregar otro " + item.n);
+  mas.onclick = () => agregar(item.n, item.p);
+
+  caja.append(menos, n, mas);
+  cont.appendChild(caja);
+}
+
+function pintarCarta(){
+  const q = filtro.trim().toLowerCase();
+  contEl.innerHTML = "";
+  acciones.clear();
+
+  [...tabsEl.children].forEach((b, i) =>
+    b.setAttribute("aria-selected", (!q && i === tabActual) ? "true" : "false"));
+
+  const fuentes = q ? CARTA : [CARTA[tabActual]];
+  let encontrados = 0;
+
+  fuentes.forEach(seccion => {
+    seccion.grupos.forEach(g => {
+      const items = q
+        ? g.items.filter(it => (it.n + " " + (it.d || "")).toLowerCase().includes(q))
+        : g.items;
+      if(!items.length) return;
+      encontrados += items.length;
+
+      const wrap = document.createElement("div");
+      wrap.className = "grupo";
+
+      const tit = document.createElement("div");
+      tit.className = "grupo-tit";
+      const h = document.createElement("h3");
+      h.textContent = q ? seccion.tab + " · " + g.nombre : g.nombre;
+      const raya = document.createElement("span");
+      raya.className = "raya";
+      const cuenta = document.createElement("span");
+      cuenta.className = "cuenta";
+      cuenta.textContent = items.length === 1 ? "1 producto" : items.length + " productos";
+      tit.append(h, raya, cuenta);
+
+      const grid = document.createElement("div");
+      grid.className = "prods";
+      items.forEach(it => grid.appendChild(tarjeta(it)));
+
+      wrap.append(tit, grid);
+      contEl.appendChild(wrap);
+    });
+  });
+
+  if(!encontrados){
+    const v = document.createElement("div");
+    v.className = "vacio";
+    const b = document.createElement("b");
+    b.textContent = "No encontramos nada con eso";
+    const p = document.createElement("p");
+    p.textContent = "Probá con otra palabra, o mirá la carta completa por categoría.";
+    v.append(b, p);
+    contEl.appendChild(v);
+  }
+}
+
+$("#buscar").addEventListener("input", e => {
+  filtro = e.target.value;
+  pintarCarta();
+});
+
+/* ---------- combos ---------- */
+const combosEl = $("#combos-cont");
+COMBOS.forEach(c => {
+  const d = document.createElement("article");
+  d.className = "combo" + (c.destacado ? " destacado" : "");
+
+  const tag = document.createElement("span");
+  tag.className = "tag";
+  tag.textContent = c.etiqueta;
+
+  const p = document.createElement("p");
+  p.className = "precio";
+  p.textContent = plata(c.precio);
+
+  const h = document.createElement("h3");
+  h.textContent = c.nombre;
+
+  const ul = document.createElement("ul");
+  c.incluye.forEach(t => {
+    const li = document.createElement("li");
+    const ic = document.createElement("span");
+    ic.innerHTML = SVG_TICK;
+    const tx = document.createElement("span");
+    tx.textContent = t;
+    li.append(ic.firstChild, tx);
+    ul.appendChild(li);
+  });
+
+  const b = document.createElement("button");
+  b.className = "btn";
+  b.type = "button";
+  b.textContent = "Agregar al pedido";
+  b.onclick = () => agregar(c.nombre, c.precio);
+
+  d.append(tag, p, h, ul, b);
+  combosEl.appendChild(d);
+});
+
+/* ---------- pedido ---------- */
+const barra = $("#barra");
+const listaEl = $("#pedido-lista");
+
+function agregar(nombre, precio){
+  const act = pedido.get(nombre) || { precio, cant: 0 };
+  act.cant++;
+  pedido.set(nombre, act);
+  pintarAccion(nombre);
+  pintarBarra();
+}
+function quitar(nombre){
+  const act = pedido.get(nombre);
+  if(!act) return;
+  act.cant--;
+  if(act.cant <= 0) pedido.delete(nombre); else pedido.set(nombre, act);
+  pintarAccion(nombre);
+  pintarBarra();
+}
+
+function total(){
+  let t = 0;
+  pedido.forEach(v => t += v.precio * v.cant);
+  return t;
+}
+function unidades(){
+  let u = 0;
+  pedido.forEach(v => u += v.cant);
+  return u;
+}
+
+function mensaje(){
+  if(!pedido.size) return "¡Hola La Nieve! Quería hacer un pedido.";
+  let m = "¡Hola La Nieve! Quería pedir:\n\n";
+  pedido.forEach((v, k) => { m += "• " + v.cant + " x " + k + " — " + plata(v.precio * v.cant) + "\n"; });
+  m += "\nTotal: " + plata(total());
+  m += "\nEntrega: " + entrega;
+  m += "\n\n¿Me confirman precio y tiempo de espera? ¡Gracias!";
+  return m;
+}
+function link(){
+  return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(mensaje());
+}
+
+function pintarBarra(){
+  const u = unidades();
+  barra.classList.toggle("abierta", u > 0);
+  document.body.classList.toggle("con-pedido", u > 0);
+  if(!u){
+    barra.classList.remove("expandida");
+    $("#ver").textContent = "Ver detalle";
+  }
+
+  $("#pedido-res").textContent = u
+    ? (u === 1 ? "1 producto en tu pedido" : u + " productos en tu pedido")
+    : "Tu pedido";
+  $("#pedido-total").textContent = u ? plata(total()) : "";
+
+  const enlace = link();
+  $("#enviar").href = enlace;
+  $("#wa-contacto").href = enlace;
+  $("#wa-faq").href = enlace;
+  $("#wa-pie").href = enlace;
+
+  listaEl.innerHTML = "";
+  pedido.forEach((v, k) => {
+    const row = document.createElement("div");
+    row.className = "linea";
+
+    const menos = document.createElement("button");
+    menos.className = "mini"; menos.type = "button"; menos.textContent = "−";
+    menos.setAttribute("aria-label", "Quitar uno de " + k);
+    menos.onclick = () => quitar(k);
+
+    const cant = document.createElement("span");
+    cant.className = "cant"; cant.textContent = v.cant;
+
+    const mas = document.createElement("button");
+    mas.className = "mini"; mas.type = "button"; mas.textContent = "+";
+    mas.setAttribute("aria-label", "Agregar otro " + k);
+    mas.onclick = () => agregar(k, v.precio);
+
+    const nom = document.createElement("span");
+    nom.className = "nom"; nom.textContent = k;
+
+    const pts = document.createElement("span");
+    pts.className = "puntos";
+
+    const sub = document.createElement("span");
+    sub.className = "sub";
+    sub.textContent = plata(v.precio * v.cant);
+
+    row.append(menos, cant, mas, nom, pts, sub);
+    listaEl.appendChild(row);
+  });
+
+  guardar();
+}
+
+$("#ver").onclick = () => {
+  const abierta = barra.classList.toggle("expandida");
+  $("#ver").textContent = abierta ? "Ocultar detalle" : "Ver detalle";
+};
+$("#vaciar").onclick = () => {
+  const nombres = [...pedido.keys()];
+  pedido.clear();
+  nombres.forEach(pintarAccion);
+  pintarBarra();
+};
+
+$$(".chip").forEach(chip => {
+  chip.onclick = () => {
+    $$(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+    chip.setAttribute("aria-pressed", "true");
+    entrega = chip.dataset.modo;
+    pintarBarra();
+  };
+});
+
+/* ---------- menú de pantalla completa ---------- */
+const overlay = $("#overlay");
+const abrirMenu  = () => { overlay.classList.add("abierto"); document.body.style.overflow = "hidden"; };
+const cerrarMenu = () => { overlay.classList.remove("abierto"); document.body.style.overflow = ""; };
+$("#ham").onclick = abrirMenu;
+$("#cerrar").onclick = cerrarMenu;
+overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", cerrarMenu));
+document.addEventListener("keydown", e => { if(e.key === "Escape") cerrarMenu(); });
+
+/* ---------- atajos del pie a las pestañas de la carta ---------- */
+$$("[data-tab]").forEach(a => {
+  a.addEventListener("click", () => {
+    tabActual = +a.dataset.tab;
+    filtro = "";
+    $("#buscar").value = "";
+    pintarCarta();
+  });
+});
+
+/* ---------- navegación: scroll suave y sección activa ---------- */
+$$('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const dest = document.querySelector(a.getAttribute("href"));
+    if(!dest) return;
+    e.preventDefault();
+    dest.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+const enlacesNav = [...$$("#nav-links a")];
+if("IntersectionObserver" in window){
+  const obsNav = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if(!en.isIntersecting) return;
+      const id = "#" + en.target.id;
+      enlacesNav.forEach(a => a.classList.toggle("act", a.getAttribute("href") === id));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  $$("section[id]").forEach(s => obsNav.observe(s));
+
+  const obsRv = new IntersectionObserver((entradas, obs) => {
+    entradas.forEach(en => {
+      if(!en.isIntersecting) return;
+      en.target.classList.add("visible");
+      obs.unobserve(en.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  $$(".rv").forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 70 + "ms";
+    obsRv.observe(el);
+  });
+} else {
+  $$(".rv").forEach(el => el.classList.add("visible"));
+}
+
+/* ---------- arranque ---------- */
+estadoLocal();
+setInterval(estadoLocal, 60000);
+recuperar();
+pintarCarta();
+pintarBarra();
+</script>
