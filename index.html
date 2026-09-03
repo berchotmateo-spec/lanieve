@@ -315,34 +315,10 @@ section{padding:clamp(62px,8.5vw,110px) 0}
   transition:transform .18s, box-shadow .18s, border-color .18s;
 }
 .prod:hover{transform:translateY(-2px);box-shadow:var(--s2);border-color:var(--amarillo)}
-.prod.en-pedido{border-color:var(--rojo);box-shadow:0 0 0 3px var(--rojo-50)}
 .prod h4{margin-bottom:6px}
 .prod .det{font-size:14.5px;color:var(--tinta-2);line-height:1.5}
 .prod .fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
 .prod .precio{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-
-.mas{
-  width:44px;height:44px;border-radius:50%;flex-shrink:0;
-  border:0;background:var(--rojo);color:#fff;cursor:pointer;
-  display:grid;place-items:center;
-  box-shadow:0 8px 18px -10px rgba(212,32,42,.9);
-  transition:background .18s, transform .18s;
-}
-.mas:hover{background:var(--rojo-600);transform:scale(1.06)}
-.mas:active{transform:scale(.94)}
-
-.stepper{
-  display:flex;align-items:center;gap:2px;
-  background:var(--rojo);border-radius:999px;padding:4px;
-  box-shadow:0 8px 18px -10px rgba(212,32,42,.9);
-}
-.stepper button{
-  width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(255,255,255,.15);color:#fff;font-size:18px;line-height:1;
-  display:grid;place-items:center;transition:background .16s;
-}
-.stepper button:hover{background:rgba(255,255,255,.32)}
-.stepper .n{min-width:26px;text-align:center;color:#fff;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
 
 .vacio{
   text-align:center;padding:56px 20px;color:var(--tinta-2);
@@ -465,54 +441,17 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 }
 
 /* ---------------- barra de pedido ---------------- */
-body.con-pedido{padding-bottom:130px}
-.pedido{
-  position:fixed;left:0;right:0;bottom:0;z-index:70;padding:0 0 14px;
-  transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.3,1);
-  pointer-events:none;
-}
-.pedido.abierta{transform:translateY(0);pointer-events:auto}
+body{padding-bottom:112px}
+.pedido{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:0 0 14px;pointer-events:none}
 .pedido-caja{
   background:#fff;border:1px solid var(--linea-2);border-radius:var(--r-xl);
   box-shadow:0 -4px 12px rgba(60,20,10,.05), 0 26px 50px -22px rgba(150,45,30,.42);
-  overflow:hidden;
+  overflow:hidden;pointer-events:auto;
 }
-.pedido-detalle{max-height:0;overflow:hidden;transition:max-height .32s ease}
-.pedido.expandida .pedido-detalle{max-height:min(52vh,440px);overflow-y:auto}
-.pedido-lista{padding:20px 22px 4px;display:grid;gap:11px}
-.linea{display:flex;align-items:center;gap:12px;font-size:15px}
-.linea .cant{min-width:20px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;color:var(--rojo)}
-.linea .mini{
-  width:30px;height:30px;border-radius:50%;flex-shrink:0;
-  border:1px solid var(--linea-2);background:#fff;color:var(--tinta);
-  cursor:pointer;font-size:16px;line-height:1;display:grid;place-items:center;
-}
-.linea .mini:hover{border-color:var(--rojo);color:var(--rojo)}
-.linea .nom{font-weight:600}
-.linea .puntos{
-  flex:1;height:1px;min-width:16px;align-self:flex-end;margin-bottom:8px;
-  background-image:linear-gradient(90deg,var(--linea-2) 0 3px, transparent 3px 6px);
-  background-size:6px 1px;
-}
-.linea .sub{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
-
-.entrega{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 22px 18px}
-.entrega > span{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-3);font-weight:600;margin-right:2px}
-.chip{
-  border:1px solid var(--linea-2);background:#fff;border-radius:999px;
-  padding:8px 16px;font-size:14px;font-weight:600;color:var(--tinta-2);cursor:pointer;
-  transition:background .16s, border-color .16s, color .16s;
-}
-.chip:hover{border-color:var(--rojo);color:var(--rojo)}
-.chip[aria-pressed="true"]{background:var(--rojo);border-color:var(--rojo);color:#fff}
-
-.pedido-in{display:flex;align-items:center;gap:16px;padding:14px 16px 14px 22px;flex-wrap:wrap;border-top:1px solid var(--linea)}
-.pedido-res{display:flex;flex-direction:column;line-height:1.25}
-.pedido-res span{font-size:13px;color:var(--tinta-2);font-weight:600}
-.pedido-res b{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.txt-btn{background:none;border:0;cursor:pointer;padding:8px 6px;font-size:14px;font-weight:700;color:var(--rojo)}
-.txt-btn:hover{text-decoration:underline}
-.txt-btn.gris{color:var(--tinta-3);font-weight:600}
+.pedido-in{display:flex;align-items:center;gap:16px;padding:14px 16px 14px 22px;flex-wrap:wrap}
+.pedido-res{display:flex;flex-direction:column;line-height:1.3}
+.pedido-res span{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-3);font-weight:600}
+.pedido-res b{font-size:17px;font-weight:800;letter-spacing:-.02em}
 .ml-auto{margin-left:auto}
 
 /* ---------------- nevada ---------------- */
@@ -557,8 +496,7 @@ body.con-pedido{padding-bottom:130px}
   .portada .acciones .btn{width:100%}
   .pedido-in{gap:10px;padding:12px 14px}
   .pedido-in .btn{width:100%;order:9}
-  .ml-auto{margin-left:auto}
-  body.con-pedido{padding-bottom:200px}
+  body{padding-bottom:170px}
   .pie-grid{grid-template-columns:1fr;gap:26px}
 }
 </style>
@@ -607,7 +545,7 @@ body.con-pedido{padding-bottom:130px}
     <h1>Pizza al molde, como toda <em>la vida</em>.</h1>
     <p class="bajada">
       Una esquina, un mostrador y la pizza que los marplatenses conocen de memoria.
-      Armá tu pedido acá y te lo pasamos por WhatsApp en dos toques.
+      Mirá la carta con precios y pedila por Pedidos Ya, o pasá directamente por el local.
     </p>
     <div class="acciones">
       <a class="btn" href="#carta">Ver la carta y pedir</a>
@@ -628,7 +566,7 @@ body.con-pedido{padding-bottom:130px}
       </div>
       <div class="tar rv">
         <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div>
-        <div><dt>Pedidos</dt><dd class="mono">0223 495-0104<small>Salón, take away y delivery</small></dd></div>
+        <div><dt>Pedidos</dt><dd class="mono">0223 495-0104<small>Salón, take away y Pedidos Ya</small></dd></div>
       </div>
     </dl>
   </div>
@@ -646,12 +584,12 @@ body.con-pedido{padding-bottom:130px}
       <article class="vent rv">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 14h6l-1 7 8-11h-6l1-7Z"/></svg></div>
         <h4>Pedir lleva 30 segundos</h4>
-        <p>Tocás el <strong>+</strong> en cada producto y te armamos el mensaje de WhatsApp con el total hecho.</p>
+        <p>Mirás la carta con los precios de acá y hacés el pedido por Pedidos Ya, sin llamar ni esperar.</p>
       </article>
       <article class="vent rv">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
         <h4>Salón, take away y envío</h4>
-        <p>Comés en el mostrador, la retirás por la esquina o te la llevamos a casa.</p>
+        <p>Comés en el mostrador, la retirás por la esquina o te la llevan a casa con Pedidos Ya.</p>
       </article>
       <article class="vent rv">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div>
@@ -668,7 +606,7 @@ body.con-pedido{padding-bottom:130px}
     <div class="cab">
       <p class="eyebrow">La carta</p>
       <h2>Todo lo que sale del mostrador</h2>
-      <p>Tocá el <strong>+</strong> para ir armando el pedido. Cuando termines te lo pasamos por WhatsApp con el detalle y el total.</p>
+      <p>Estos son los precios del mostrador. Para pedir a domicilio, el pedido se hace por Pedidos Ya.</p>
     </div>
 
     <figure class="foto foto-vitrina rv">
@@ -696,7 +634,7 @@ body.con-pedido{padding-bottom:130px}
       <p>Las súper promos del pizarrón, para llevar. Encargalas con un rato de anticipación.</p>
     </div>
     <div class="combos" id="combos-cont"></div>
-    <p class="nota-combos">Las promos son para llevar. ¿Necesitás algo más grande? Escribinos y lo armamos a medida.</p>
+    <p class="nota-combos">Las promos son para llevar. ¿Necesitás algo más grande? Llamanos al 0223 495-0104 y lo armamos a medida.</p>
   </div>
 </section>
 
@@ -740,24 +678,24 @@ body.con-pedido{padding-bottom:130px}
     <div class="faq-izq">
       <p class="eyebrow">Preguntas frecuentes</p>
       <h2>Lo que más nos preguntan</h2>
-      <p>Si te queda alguna duda, escribinos por WhatsApp y te contestamos al toque.</p>
-      <a class="btn" id="wa-faq" href="#" target="_blank" rel="noopener">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
-        Escribinos
+      <p>Si te queda alguna duda, llamanos al local y te contestamos al toque.</p>
+      <a class="btn" data-py href="#" target="_blank" rel="noopener">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+        Pedir por Pedidos Ya
       </a>
     </div>
     <div class="faq">
       <details open>
         <summary>¿Qué horario tienen?</summary>
-        <div class="resp">Abrimos todos los días de 8:00 a 01:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o WhatsApp.</div>
+        <div class="resp">Abrimos todos los días de 8:00 a 01:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o por Pedidos Ya.</div>
       </details>
       <details>
         <summary>¿Hacen delivery?</summary>
-        <div class="resp">Sí, hacemos delivery. Escribinos por WhatsApp o llamanos y te confirmamos si llegamos a tu zona y cuánto sale el envío.</div>
+        <div class="resp">Sí, con Pedidos Ya. No tenemos reparto propio: los envíos los hace la aplicación, que te dice si llega a tu dirección y cuánto sale el envío antes de confirmar.</div>
       </details>
       <details>
         <summary>¿Puedo pedir para llevar?</summary>
-        <div class="resp">Claro. Encargá tu pedido y pasá a retirarlo por Rivadavia 3002. Te decimos en cuánto tiempo lo tenés listo cuando confirmamos.</div>
+        <div class="resp">Claro. Llamanos al 0223 495-0104 o marcá "retiro en el local" en Pedidos Ya, y pasá a buscarlo por Rivadavia 3002.</div>
       </details>
       <details>
         <summary>¿Aceptan tarjeta?</summary>
@@ -769,7 +707,7 @@ body.con-pedido{padding-bottom:130px}
       </details>
       <details>
         <summary>¿Toman pedidos grandes para eventos?</summary>
-        <div class="resp">Sí, preparamos pedidos por cantidad para cumpleaños, reuniones y oficinas. Avisanos con anticipación y lo coordinamos.</div>
+        <div class="resp">Sí, preparamos pedidos por cantidad para cumpleaños, reuniones y oficinas. Llamanos con anticipación al 0223 495-0104 y lo coordinamos.</div>
       </details>
     </div>
   </div>
@@ -798,13 +736,13 @@ body.con-pedido{padding-bottom:130px}
         </dl>
         <div>
           <p class="contacto-txt">
-            Pedí por WhatsApp desde el celular, llamanos, o pasá directamente por el local.
+            Pedí por Pedidos Ya desde el celular, llamanos, o pasá directamente por el local.
             Estamos sobre Rivadavia, a pocas cuadras del centro.
           </p>
           <div class="acciones" style="margin-top:30px">
-            <a class="btn" style="background:#fff;color:var(--rojo);box-shadow:none" id="wa-contacto" href="#" target="_blank" rel="noopener">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
-              Pedir por WhatsApp
+            <a class="btn" style="background:#fff;color:var(--rojo);box-shadow:none" data-py href="#" target="_blank" rel="noopener">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+              Pedir por Pedidos Ya
             </a>
             <a class="btn btn-lin" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.35)" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">Cómo llegar</a>
           </div>
@@ -843,7 +781,7 @@ body.con-pedido{padding-bottom:130px}
         <h5>Pedidos</h5>
         <ul>
           <li><a href="tel:+542234950104">0223 495-0104</a></li>
-          <li><a id="wa-pie" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a data-py href="#" target="_blank" rel="noopener">Pedidos Ya</a></li>
           <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">Cómo llegar</a></li>
         </ul>
       </div>
@@ -859,28 +797,17 @@ body.con-pedido{padding-bottom:130px}
 <canvas id="nieve" aria-hidden="true"></canvas>
 
 <!-- ══════════════════ BARRA DE PEDIDO ══════════════════ -->
-<div class="pedido" id="barra" role="region" aria-label="Tu pedido">
+<div class="pedido" role="region" aria-label="Pedir online">
   <div class="env">
     <div class="pedido-caja">
-      <div class="pedido-detalle">
-        <div class="pedido-lista" id="pedido-lista"></div>
-        <div class="entrega">
-          <span>Entrega</span>
-          <button class="chip" type="button" data-modo="Para retirar por el local" aria-pressed="true">Para retirar</button>
-          <button class="chip" type="button" data-modo="Con envío a domicilio" aria-pressed="false">Con envío</button>
-          <button class="chip" type="button" data-modo="Para comer en el local" aria-pressed="false">En el local</button>
-        </div>
-      </div>
       <div class="pedido-in">
         <div class="pedido-res">
-          <span id="pedido-res">Tu pedido</span>
-          <b id="pedido-total"></b>
+          <span>Pedí online</span>
+          <b>El delivery lo hace Pedidos Ya</b>
         </div>
-        <button class="txt-btn" id="ver" type="button">Ver detalle</button>
-        <button class="txt-btn gris" id="vaciar" type="button">Vaciar</button>
-        <a class="btn ml-auto" id="enviar" href="#" target="_blank" rel="noopener">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>
-          Enviar por WhatsApp
+        <a class="btn ml-auto" data-py href="#" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+          Pedir por Pedidos Ya
         </a>
       </div>
     </div>
@@ -890,12 +817,12 @@ body.con-pedido{padding-bottom:130px}
 <script>
 /* ════════════════════════════════════════════════════════════
    PARA ACTUALIZAR LA PÁGINA, TOCAR SOLO ESTAS DOS COSAS:
-   1) WHATSAPP  → el número al que llegan los pedidos
-   2) CARTA     → los productos y precios reales del local
+   1) PEDIDOS_YA → el link del local en Pedidos Ya
+   2) CARTA      → los productos y precios reales del local
    ════════════════════════════════════════════════════════════ */
 
-// Formato internacional sin + ni espacios: 54 9 223 xxxxxxx
-const WHATSAPP = "5492235337853";   // ← PROVISORIO: WhatsApp de Mateo, para la demo. Cambiar por el del local al cerrar la venta.
+// El local no tiene delivery propio ni WhatsApp: los pedidos van por Pedidos Ya.
+const PEDIDOS_YA = "https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu";
 
 const CARTA = [
   {
@@ -1033,25 +960,13 @@ const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const plata = n => "$ " + n.toLocaleString("es-AR");
 
-const pedido = new Map();      // nombre -> { precio, cant }
-const acciones = new Map();    // nombre -> { cont, item, card }
 let tabActual = 0;
 let filtro = "";
-let entrega = "Para retirar por el local";
 
-const SVG_MAS  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
 const SVG_TICK = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
 
-/* ---------- guardar el pedido entre visitas ---------- */
-function guardar(){
-  try{ localStorage.setItem("lanieve-pedido", JSON.stringify([...pedido])); }catch(e){}
-}
-function recuperar(){
-  try{
-    const crudo = localStorage.getItem("lanieve-pedido");
-    if(crudo) JSON.parse(crudo).forEach(([k,v]) => pedido.set(k,v));
-  }catch(e){}
-}
+/* ---------- todos los botones de pedido apuntan a Pedidos Ya ---------- */
+$$("[data-py]").forEach(a => { a.href = PEDIDOS_YA; });
 
 /* ---------- ¿está abierto ahora? ---------- */
 function estadoLocal(){
@@ -1105,60 +1020,14 @@ function tarjeta(it){
   pre.className = "precio";
   pre.textContent = plata(it.p);
 
-  const cont = document.createElement("div");
-  fila.append(pre, cont);
+  fila.appendChild(pre);
   card.appendChild(fila);
-
-  acciones.set(it.n, { cont, item: it, card });
-  pintarAccion(it.n);
   return card;
-}
-
-function pintarAccion(nombre){
-  const reg = acciones.get(nombre);
-  if(!reg) return;
-  const { cont, item, card } = reg;
-  const cant = pedido.has(nombre) ? pedido.get(nombre).cant : 0;
-
-  card.classList.toggle("en-pedido", cant > 0);
-  cont.innerHTML = "";
-
-  if(!cant){
-    const b = document.createElement("button");
-    b.className = "mas";
-    b.type = "button";
-    b.innerHTML = SVG_MAS;
-    b.setAttribute("aria-label", "Agregar " + item.n + " al pedido");
-    b.onclick = () => agregar(item.n, item.p);
-    cont.appendChild(b);
-    return;
-  }
-
-  const caja = document.createElement("div");
-  caja.className = "stepper";
-
-  const menos = document.createElement("button");
-  menos.type = "button"; menos.textContent = "−";
-  menos.setAttribute("aria-label", "Quitar uno de " + item.n);
-  menos.onclick = () => quitar(item.n);
-
-  const n = document.createElement("span");
-  n.className = "n";
-  n.textContent = cant;
-
-  const mas = document.createElement("button");
-  mas.type = "button"; mas.textContent = "+";
-  mas.setAttribute("aria-label", "Agregar otro " + item.n);
-  mas.onclick = () => agregar(item.n, item.p);
-
-  caja.append(menos, n, mas);
-  cont.appendChild(caja);
 }
 
 function pintarCarta(){
   const q = filtro.trim().toLowerCase();
   contEl.innerHTML = "";
-  acciones.clear();
 
   [...tabsEl.children].forEach((b, i) =>
     b.setAttribute("aria-selected", (!q && i === tabActual) ? "true" : "false"));
@@ -1242,133 +1111,15 @@ COMBOS.forEach(c => {
     ul.appendChild(li);
   });
 
-  const b = document.createElement("button");
+  const b = document.createElement("a");
   b.className = "btn";
-  b.type = "button";
-  b.textContent = "Agregar al pedido";
-  b.onclick = () => agregar(c.nombre, c.precio);
+  b.href = PEDIDOS_YA;
+  b.target = "_blank";
+  b.rel = "noopener";
+  b.textContent = "Pedir por Pedidos Ya";
 
   d.append(tag, p, h, ul, b);
   combosEl.appendChild(d);
-});
-
-/* ---------- pedido ---------- */
-const barra = $("#barra");
-const listaEl = $("#pedido-lista");
-
-function agregar(nombre, precio){
-  const act = pedido.get(nombre) || { precio, cant: 0 };
-  act.cant++;
-  pedido.set(nombre, act);
-  pintarAccion(nombre);
-  pintarBarra();
-}
-function quitar(nombre){
-  const act = pedido.get(nombre);
-  if(!act) return;
-  act.cant--;
-  if(act.cant <= 0) pedido.delete(nombre); else pedido.set(nombre, act);
-  pintarAccion(nombre);
-  pintarBarra();
-}
-
-function total(){
-  let t = 0;
-  pedido.forEach(v => t += v.precio * v.cant);
-  return t;
-}
-function unidades(){
-  let u = 0;
-  pedido.forEach(v => u += v.cant);
-  return u;
-}
-
-function mensaje(){
-  if(!pedido.size) return "¡Hola La Nieve! Quería hacer un pedido.";
-  let m = "¡Hola La Nieve! Quería pedir:\n\n";
-  pedido.forEach((v, k) => { m += "• " + v.cant + " x " + k + " — " + plata(v.precio * v.cant) + "\n"; });
-  m += "\nTotal: " + plata(total());
-  m += "\nEntrega: " + entrega;
-  m += "\n\n¿Me confirman precio y tiempo de espera? ¡Gracias!";
-  return m;
-}
-function link(){
-  return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(mensaje());
-}
-
-function pintarBarra(){
-  const u = unidades();
-  barra.classList.toggle("abierta", u > 0);
-  document.body.classList.toggle("con-pedido", u > 0);
-  if(!u){
-    barra.classList.remove("expandida");
-    $("#ver").textContent = "Ver detalle";
-  }
-
-  $("#pedido-res").textContent = u
-    ? (u === 1 ? "1 producto en tu pedido" : u + " productos en tu pedido")
-    : "Tu pedido";
-  $("#pedido-total").textContent = u ? plata(total()) : "";
-
-  const enlace = link();
-  $("#enviar").href = enlace;
-  $("#wa-contacto").href = enlace;
-  $("#wa-faq").href = enlace;
-  $("#wa-pie").href = enlace;
-
-  listaEl.innerHTML = "";
-  pedido.forEach((v, k) => {
-    const row = document.createElement("div");
-    row.className = "linea";
-
-    const menos = document.createElement("button");
-    menos.className = "mini"; menos.type = "button"; menos.textContent = "−";
-    menos.setAttribute("aria-label", "Quitar uno de " + k);
-    menos.onclick = () => quitar(k);
-
-    const cant = document.createElement("span");
-    cant.className = "cant"; cant.textContent = v.cant;
-
-    const mas = document.createElement("button");
-    mas.className = "mini"; mas.type = "button"; mas.textContent = "+";
-    mas.setAttribute("aria-label", "Agregar otro " + k);
-    mas.onclick = () => agregar(k, v.precio);
-
-    const nom = document.createElement("span");
-    nom.className = "nom"; nom.textContent = k;
-
-    const pts = document.createElement("span");
-    pts.className = "puntos";
-
-    const sub = document.createElement("span");
-    sub.className = "sub";
-    sub.textContent = plata(v.precio * v.cant);
-
-    row.append(menos, cant, mas, nom, pts, sub);
-    listaEl.appendChild(row);
-  });
-
-  guardar();
-}
-
-$("#ver").onclick = () => {
-  const abierta = barra.classList.toggle("expandida");
-  $("#ver").textContent = abierta ? "Ocultar detalle" : "Ver detalle";
-};
-$("#vaciar").onclick = () => {
-  const nombres = [...pedido.keys()];
-  pedido.clear();
-  nombres.forEach(pintarAccion);
-  pintarBarra();
-};
-
-$$(".chip").forEach(chip => {
-  chip.onclick = () => {
-    $$(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
-    chip.setAttribute("aria-pressed", "true");
-    entrega = chip.dataset.modo;
-    pintarBarra();
-  };
 });
 
 /* ---------- menú de pantalla completa ---------- */
@@ -1521,7 +1272,5 @@ const FUERZA_COPO = [.50, .40];   // opacidad: mínima y cuánto más puede suma
 /* ---------- arranque ---------- */
 estadoLocal();
 setInterval(estadoLocal, 60000);
-recuperar();
 pintarCarta();
-pintarBarra();
 </script>

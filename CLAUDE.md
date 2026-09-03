@@ -7,8 +7,8 @@ Contexto para cualquier sesión de Claude Code que retome este proyecto.
 Sitio web de una página para la **Pizzería La Nieve**, Mar del Plata (Argentina).
 Forma parte de un negocio de Mateo: crear páginas web para locales de Mar del Plata
 y vendérselas. La Nieve es el primer cliente objetivo — es una pizzería muy conocida
-en la ciudad y **no tiene absolutamente nada en internet** (ni web, ni Instagram;
-solo una página de Facebook vieja).
+en la ciudad y **no tiene web ni Instagram** (solo una página de Facebook vieja y su
+ficha en Pedidos Ya, que es por donde toma los pedidos a domicilio).
 
 El sitio funciona como **demo de venta**: se le muestra al dueño ya funcionando,
 con sus datos reales, para cerrar la venta.
@@ -46,8 +46,13 @@ pizarrón de promos, las dos vitrinas y la fachada):
 | Horario | Todos los días, 08:00 a 01:00 |
 | Desde | 1949 (dice el toldo de la fachada) |
 | Especialidad | Pizza al molde |
-| Servicios | Salón (mostrador y mesas), take away, delivery |
+| Servicios | Salón (mostrador y mesas), take away, delivery **por Pedidos Ya** |
 | Pago | Efectivo y tarjeta |
+| Pedidos online | https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu |
+
+**El local no tiene delivery propio ni WhatsApp.** Todo lo que sea pedido a domicilio
+pasa por Pedidos Ya (dato de Mateo, 03/09/2026). Por eso el sitio no arma pedidos:
+la carta es un catálogo con precios y los botones llevan a la app.
 
 ## PENDIENTE — lo que falta para terminar
 
@@ -55,11 +60,9 @@ pizarrón de promos, las dos vitrinas y la fachada):
    fachada hay carteles de **Quilmes y Pepsi**. Cuando Mateo tenga los precios,
    agregar una pestaña `{ tab: "Bebidas", grupos: [...] }` al final de `CARTA`
    y sumar el link en el pie (`data-tab="4"`).
-2. **Número de WhatsApp.** La constante `WHATSAPP` tiene hoy el número **de Mateo**
-   (`5492235337853`), a propósito: así, en la demo delante del dueño, el pedido
-   llega de verdad a un teléfono que Mateo puede mostrar. Al cerrar la venta hay
-   que cambiarlo por el del delivery del local, en formato internacional sin `+`
-   ni espacios: `54 9 223 XXXXXXX`.
+2. **Link de Pedidos Ya.** Está en la constante `PEDIDOS_YA`. Confirmar con el dueño
+   que la página del local en la app es esa y que los precios de allá coinciden con
+   los de la carta del sitio (en Pedidos Ya suelen estar recargados).
 3. **Precios a re-chequear** (los carteles escritos a mano salieron con reflejo
    del vidrio o quedaron fuera de foco):
    - `Fugazzín` $2.200 — sospechosamente barato al lado del calentito ($5.200).
@@ -74,9 +77,8 @@ pizarrón de promos, las dos vitrinas y la fachada):
    (ver "Fotos"). Falta la **vitrina de salados** (fainá, calentitos, fatay) — la
    foto existe pero no quedó guardada en disco. Cuando aparezca, iría como segunda
    imagen en "El local" o arriba de la pestaña "Del mostrador".
-5. Confirmar zona de delivery y si cobran envío. **Ojo:** la respuesta del FAQ dice
-   "repartimos en la zona del centro y alrededores" y eso está inventado — hay que
-   confirmarlo o sacarlo antes de que lo lea el dueño.
+5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
+   Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
 ## Cómo actualizar la carta
 
@@ -166,12 +168,19 @@ notaban de plantilla y siguen descartadas.
 
 ## Cómo funciona el pedido
 
-Barra fija abajo: se arma tocando el `+` de cada producto (que se convierte en un
-control de cantidad) y genera un mensaje de WhatsApp con el detalle, el total y el
-tipo de entrega. Detalles de implementación:
+El pedido no se arma en el sitio: se hace en Pedidos Ya. La carta es un catálogo
+con precios y todos los botones de pedido abren la misma URL en una pestaña nueva.
 
-- El pedido se guarda en `localStorage` (`lanieve-pedido`), envuelto en `try/catch`.
-- Chips de entrega: retirar / con envío / en el local. Se suma al mensaje.
+- La URL vive en una sola constante, `PEDIDOS_YA`. Los botones del HTML llevan el
+  atributo `data-py` y el script les carga el `href` al arrancar; los de los combos
+  se crean por JS con la misma constante. Para cambiar el link se toca un solo lugar.
+- Ese `href` se asigna **antes** del bloque de scroll suave, que engancha los `a`
+  cuyo `href` empieza con `#`: si se asignara después, los botones scrollearían en
+  vez de abrir la app.
+- Barra fija abajo con el botón de Pedidos Ya, siempre visible. El `body` compensa
+  su alto con `padding-bottom` (112px, 170px en pantallas chicas).
+- No hay carrito, ni `localStorage`, ni chips de tipo de entrega: eso lo resuelve
+  la app. Retiro por el local y pedidos grandes van por teléfono.
 - Buscador de la carta: filtra **todas** las pestañas a la vez y muestra de qué
   pestaña viene cada grupo. Con el campo vacío vuelve a la pestaña activa.
 - Cartel "Abierto ahora / Cerrado" calculado con el reloj del visitante contra el
