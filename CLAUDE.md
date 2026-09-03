@@ -73,9 +73,12 @@ la carta es un catálogo con precios y los botones llevan a la app.
      analogía** con las de verdura y cebolla, que sí se leen. Confirmar.
    - `Budín de pan` $4.300: **resuelto**, era eso y no $8.300 (en Pedidos Ya sale
      $4.600, que con la comisión encima cierra con $4.300).
-   - Siguen faltando, porque no están en las capturas de Pedidos Ya que tenemos:
-     fatay picante, pizza de pollo, fugazzetta roquefort y fugazzetta pepperoni.
-     Están en las pestañas Pizzas / Empanadas de la app.
+   - Siguen faltando: fatay picante, pizza de pollo, fugazzetta roquefort y
+     fugazzetta pepperoni. De la pestaña Pizzas de la app solo tenemos las seis
+     primeras; falta bajar el resto, y la pestaña Empanadas entera.
+   - `Muzzarella`: nuestra descripción dice "salsa, muzzarella y **aceitunas**" (sale
+     de los TV del salón) y la app dice "salsa de tomate, muzzarella y **orégano**".
+     Se deja la nuestra. Preguntar cuál va.
    - En Pedidos Ya hay dos categorías que la carta del sitio **no tiene**: las
      **tartas saladas enteras** (jamón, queso y huevo; pascualina; pascualina
      especial; cebolla y muzzarella; pollo; pollo especial; atún) y **sándwiches**.
@@ -117,16 +120,46 @@ reemplaza el `null` por el número y listo.
 **No sirven como precio de mostrador**: la app suma su comisión. Comparando lo que
 tenemos relevado contra la app (captura del 03/09/2026), el recargo ronda el 7–11 %:
 
-| Producto | Mostrador | Pedidos Ya |
-|---|---|---|
-| Budín de pan | $4.300 | $4.600 |
-| Flan casero | $3.700 | $4.000 |
-| Mousse de chocolate | $3.700 | $4.000 |
-| Medialuna gigante | $6.000 | $6.700 |
+| Producto | Mostrador | Pedidos Ya | Recargo |
+|---|---|---|---|
+| Muzzarella | $16.000 | $17.900 | +11,9 % |
+| Fugazzetta | $20.000 | $22.400 | +12,0 % |
+| Salsa de tomate y anchoas | $22.400 | $25.000 | +11,6 % |
+| Fugazzetta especial | $28.000 | $31.300 | +11,8 % |
+| Pizza especial | $27.200 | $30.400 | +11,8 % |
+| Muzzarella, jamón y palmitos | $32.000 | $35.800 | +11,9 % |
+| Budín de pan | $4.300 | $4.600 | +7,0 % |
+| Flan casero | $3.700 | $4.000 | +8,1 % |
+| Mousse de chocolate | $3.700 | $4.000 | +8,1 % |
+| Medialuna gigante | $6.000 | $6.700 | +11,7 % |
+| Promos 2 a 9 (las nueve del pizarrón) | — | — | +6 a 8 % |
+
+Las **pizzas** llevan un recargo parejo de ~11,8 %; los **combos**, de 6 a 8 %.
+Que doce productos den un porcentaje tan constante confirma que los precios
+relevados de los carteles están bien leídos.
 
 Sirve para **validar** un precio dudoso (así se resolvió el budín de pan), no para
 cargarlo. La carta avisa de esta diferencia en una nota amarilla arriba de los
 productos (`.nota-precios`).
+
+### Los nueve combos, verificados
+
+Las nueve promos del pizarrón coinciden **una por una** con las de Pedidos Ya, en
+número y contenido (captura del 03/09/2026). Dos cosas para mirar:
+
+- **Promo 1** (tres muzzarellas) es la única que se sale del rango: $44.000 contra
+  $49.900 en la app, +13,4 % donde el resto va de 6 a 8 %. O el $44.000 del pizarrón
+  quedó mal leído, o la app la cobra distinto. Confirmar con el dueño.
+  Ojo además: en la app **la misma promo aparece dos veces**, como "Promo1 – 3
+  muzzarellas enteras" a $49.900 y como "Promoción 1 – 3 pizzas muzzarella" a
+  $57.000 con 12 % off ($50.160).
+- **Promo 3**: nuestra ficha dice "1 fugazzetta **o napolitana**"; la app dice solo
+  fugazzeta. Confirmar si la napolitana sigue siendo opción.
+
+La app tiene además promos que **no** están en el pizarrón: muzzarella + 2 cervezas
+(Quilmes/Brahma o Stella) y muzzarella + Pepsi 1,5 l. Preguntar si son solo de la
+app o también se venden en el mostrador. Las de cerveza están detrás de la
+validación de edad de Pedidos Ya.
 
 **El campo `n` no se repite en toda la carta.** Ya no es una obligación técnica
 —el carrito que indexaba por nombre se fue con el cambio a Pedidos Ya— pero se
