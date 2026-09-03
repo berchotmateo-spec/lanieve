@@ -275,7 +275,13 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .vent p{font-size:15px;color:var(--tinta-2);line-height:1.55}
 
 /* ---------------- carta ---------------- */
-.barra-carta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.barra-carta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.nota-precios{
+  display:flex;gap:11px;align-items:flex-start;margin-bottom:28px;
+  background:var(--amarillo-50);border:1px solid var(--amarillo);border-radius:var(--r);
+  padding:13px 17px;font-size:14.5px;line-height:1.5;color:var(--amarillo-900);
+}
+.nota-precios svg{flex-shrink:0;margin-top:2px}
 .tabs{
   display:flex;gap:6px;overflow-x:auto;padding:5px;
   background:var(--superficie);border-radius:999px;scrollbar-width:none;
@@ -606,7 +612,7 @@ body{padding-bottom:112px}
     <div class="cab">
       <p class="eyebrow">La carta</p>
       <h2>Todo lo que sale del mostrador</h2>
-      <p>Estos son los precios del mostrador. Para pedir a domicilio, el pedido se hace por Pedidos Ya.</p>
+      <p>Toda la carta con precios. Para pedir a domicilio, el pedido se hace por Pedidos Ya.</p>
     </div>
 
     <figure class="foto foto-vitrina rv">
@@ -620,6 +626,11 @@ body{padding-bottom:112px}
         <input id="buscar" type="search" placeholder="Buscar en la carta..." aria-label="Buscar en la carta" autocomplete="off">
       </div>
     </div>
+
+    <p class="nota-precios">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.6"/></svg>
+      <span>Estos son los precios del mostrador. En <strong>Pedidos Ya</strong> pueden ser un poco más altos: la app suma su comisión, y el envío se cobra aparte.</span>
+    </p>
 
     <div id="carta-cont"></div>
   </div>
