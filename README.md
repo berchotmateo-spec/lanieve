@@ -14,8 +14,8 @@ de los televisores del salón, el pizarrón de la vereda y las vitrinas del most
 ## Qué hace
 
 - Carta completa con precios: pizzas enteras y por porción, empanadas, fainá,
-  la vitrina del mostrador y los postres.
-- Buscador que filtra las cuatro pestañas a la vez.
+  la vitrina del mostrador, los postres y las bebidas.
+- Buscador que filtra las cinco pestañas a la vez.
 - Las nueve "súper promos" del pizarrón.
 - **Pedido por Pedidos Ya**: el local no tiene delivery propio ni WhatsApp, así que
   todos los botones de pedido llevan a su página en Pedidos Ya. La carta del sitio

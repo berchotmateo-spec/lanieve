@@ -325,6 +325,9 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .prod .det{font-size:14.5px;color:var(--tinta-2);line-height:1.5}
 .prod .fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
 .prod .precio{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+/* Productos que salen de la carta de Pedidos Ya: el precio de mostrador
+   todavía no está confirmado, así que se muestran sin número. */
+.prod .precio.a-confirmar{font-size:15px;font-weight:700;letter-spacing:0;color:var(--tinta-3)}
 
 .vacio{
   text-align:center;padding:56px 20px;color:var(--tinta-2);
@@ -778,6 +781,7 @@ body{padding-bottom:112px}
           <li><a href="#carta" data-tab="1">Empanadas y fainá</a></li>
           <li><a href="#carta" data-tab="2">Del mostrador</a></li>
           <li><a href="#carta" data-tab="3">Postres</a></li>
+          <li><a href="#carta" data-tab="4">Bebidas</a></li>
         </ul>
       </div>
       <div>
@@ -899,8 +903,12 @@ const CARTA = [
         { n:"Empanada de cebolla",        d:"Cebolla, muzzarella y especias.",        p:2700 }
       ]},
       { nombre: "Fainá, por porción", items: [
-        { n:"Fainá roquefort", d:"Rellena con roquefort y aceitunas.",                       p:2600 },
-        { n:"Fainá especial",  d:"Rellena con jamón, huevo, aceitunas y muzzarella picada.", p:2600 }
+        { n:"Fainá común",                    d:"Harina de garbanzos y pimienta, sin relleno.",             p:null },
+        { n:"Fainá con verdeo",               d:"Con cebolla de verdeo.",                                   p:null },
+        { n:"Fainá con cebolla y muzzarella", d:"Con cebolla y muzzarella arriba.",                         p:null },
+        { n:"Fainá rellena de jamón y queso", d:"Rellena con jamón y queso.",                               p:null },
+        { n:"Fainá roquefort",                d:"Rellena con roquefort y aceitunas.",                       p:2600 },
+        { n:"Fainá especial",                 d:"Rellena con jamón, huevo, aceitunas y muzzarella picada.", p:2600 }
       ]}
     ]
   },
@@ -932,13 +940,31 @@ const CARTA = [
         { n:"Torta choco",          d:"Bizcochuelo de chocolate con dulce de leche y mousse de cacao.",                p:8500 },
         { n:"Torta Oreo",           d:"Mousse de chocolate, mousse de dulce de leche y Oreo.",                         p:8500 },
         { n:"Lemon pie",            d:"Mousse de limón y merengue italiano.",                                          p:8000 },
-        { n:"Tarta de frutilla",    d:"Crema chantilly, frutillas y gelatina.",                                        p:8000 }
+        { n:"Tarta de frutilla",    d:"Crema chantilly, frutillas y gelatina.",                                        p:8000 },
+        { n:"Torta de ricota",      d:"Rellena de ricota.",                                                            p:null },
+        { n:"Pasta frola",          d:"De membrillo.",                                                                 p:null }
       ]},
       { nombre: "De la heladera", items: [
         { n:"Flan casero",                 d:"Con huevo y caramelo.",                             p:3700 },
         { n:"Mousse de chocolate",         d:"",                                                  p:3700 },
         { n:"Tiramisú con dulce de leche", d:"Crema italiana casera, vainilla y dulce de leche.", p:4300 },
         { n:"Budín de pan",                d:"Con caramelo.",                                     p:4300 }
+      ]}
+    ]
+  },
+  {
+    tab: "Bebidas",
+    grupos: [
+      { nombre: "Gaseosas", items: [
+        { n:"Pepsi lata 350 cc", d:"", p:null },
+        { n:"7up lata 350 cc",   d:"", p:null },
+        { n:"Pepsi 1,5 litros",  d:"", p:null },
+        { n:"7up 1,5 litros",    d:"", p:null }
+      ]},
+      { nombre: "Cerveza y agua", items: [
+        { n:"Cerveza 500 cc",        d:"Quilmes o Brahma.",  p:null },
+        { n:"Cerveza Stella Artois", d:"Lata de 473 ml.",    p:null },
+        { n:"Agua mineral 500 cc",   d:"Eco de los Andes.",  p:null }
       ]}
     ]
   }
@@ -1028,8 +1054,9 @@ function tarjeta(it){
   fila.className = "fila";
 
   const pre = document.createElement("span");
-  pre.className = "precio";
-  pre.textContent = plata(it.p);
+  // p:null = falta confirmar el precio del mostrador (ver CLAUDE.md).
+  pre.className = it.p == null ? "precio a-confirmar" : "precio";
+  pre.textContent = it.p == null ? "Consultar en el local" : plata(it.p);
 
   fila.appendChild(pre);
   card.appendChild(fila);

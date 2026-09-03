@@ -56,23 +56,32 @@ la carta es un catálogo con precios y los botones llevan a la app.
 
 ## PENDIENTE — lo que falta para terminar
 
-1. **Bebidas.** Es la única categoría sin datos: no hay foto de la lista. En la
-   fachada hay carteles de **Quilmes y Pepsi**. Cuando Mateo tenga los precios,
-   agregar una pestaña `{ tab: "Bebidas", grupos: [...] }` al final de `CARTA`
-   y sumar el link en el pie (`data-tab="4"`).
-2. **Link de Pedidos Ya.** Está en la constante `PEDIDOS_YA`. Confirmar con el dueño
-   que la página del local en la app es esa y que los precios de allá coinciden con
-   los de la carta del sitio (en Pedidos Ya suelen estar recargados).
+1. **Precios de mostrador de lo que salió de Pedidos Ya.** Los productos con
+   `p:null` se muestran como "Consultar en el local" (ver "Productos sin precio").
+   Son las **bebidas** enteras, las cuatro fainás nuevas, la torta de ricota y la
+   pasta frola. Nombres y descripciones ya están; falta que el dueño pase el precio
+   del mostrador. **No copiar el de Pedidos Ya**: trae la comisión de la app arriba
+   (ver "Precios de Pedidos Ya" más abajo).
+2. **Link de Pedidos Ya.** Está en la constante `PEDIDOS_YA`. En la app hay **dos
+   fichas** de La Nieve: la que usamos (`.../mar-del-plata/la-nieve-pizzeria-menu`)
+   y otra bajo la zona Santa Celina. Confirmar con el dueño cuál es la que atiende.
 3. **Precios a re-chequear** (los carteles escritos a mano salieron con reflejo
    del vidrio o quedaron fuera de foco):
    - `Fugazzín` $2.200 — sospechosamente barato al lado del calentito ($5.200).
-   - `Budín de pan` $4.300 — puede ser $8.300.
    - `Tarteleta` $4.200 y su descripción, medio tapada por el reflejo.
    - `Empanada de carne` y `Empanada de jamón y queso`: cargadas a $2.700 **por
      analogía** con las de verdura y cebolla, que sí se leen. Confirmar.
-   - Faltan en la carta por no tener precio legible: fainá común (sin relleno),
-     fatay picante, pizza de pollo, fugazzetta roquefort, fugazzetta pepperoni,
-     tarta de ricota.
+   - `Budín de pan` $4.300: **resuelto**, era eso y no $8.300 (en Pedidos Ya sale
+     $4.600, que con la comisión encima cierra con $4.300).
+   - Siguen faltando, porque no están en las capturas de Pedidos Ya que tenemos:
+     fatay picante, pizza de pollo, fugazzetta roquefort y fugazzetta pepperoni.
+     Están en las pestañas Pizzas / Empanadas de la app.
+   - En Pedidos Ya hay dos categorías que la carta del sitio **no tiene**: las
+     **tartas saladas enteras** (jamón, queso y huevo; pascualina; pascualina
+     especial; cebolla y muzzarella; pollo; pollo especial; atún) y **sándwiches**.
+     Preguntar si se venden también por mostrador antes de sumarlas.
+   - `Cerveza Stella Artois`: en la app el título dice 473 ml y la descripción
+     500 cc. Cargada como 473 ml. Confirmar.
 4. **Más fotos.** Ya están embebidas el logo, la fachada y la vitrina de tortas
    (ver "Fotos"). Falta la **vitrina de salados** (fainá, calentitos, fatay) — la
    foto existe pero no quedó guardada en disco. Cuando aparezca, iría como segunda
@@ -96,9 +105,34 @@ const CARTA = [
 ];
 ```
 
-**El campo `n` es la clave del pedido**: no puede repetirse en toda la carta ni
-coincidir con el `nombre` de un combo, porque el carrito indexa por nombre. Por eso
-las porciones se llaman `"Porción de muzzarella"` y no `"Muzzarella"`.
+**### Productos sin precio
+
+`p:null` en vez de un número muestra **"Consultar en el local"** en gris chico, en
+lugar del precio. Es para los productos que salieron de la carta de Pedidos Ya y
+todavía no tienen precio de mostrador confirmado. Cuando el dueño lo pase, se
+reemplaza el `null` por el número y listo.
+
+### Precios de Pedidos Ya
+
+**No sirven como precio de mostrador**: la app suma su comisión. Comparando lo que
+tenemos relevado contra la app (captura del 03/09/2026), el recargo ronda el 7–11 %:
+
+| Producto | Mostrador | Pedidos Ya |
+|---|---|---|
+| Budín de pan | $4.300 | $4.600 |
+| Flan casero | $3.700 | $4.000 |
+| Mousse de chocolate | $3.700 | $4.000 |
+| Medialuna gigante | $6.000 | $6.700 |
+
+Sirve para **validar** un precio dudoso (así se resolvió el budín de pan), no para
+cargarlo. La carta avisa de esta diferencia en una nota amarilla arriba de los
+productos (`.nota-precios`).
+
+**El campo `n` no se repite en toda la carta.** Ya no es una obligación técnica
+—el carrito que indexaba por nombre se fue con el cambio a Pedidos Ya— pero se
+mantiene: el buscador filtra las cinco pestañas a la vez y dos productos con el
+mismo nombre no se distinguirían. Por eso las porciones se llaman
+`"Porción de muzzarella"` y no `"Muzzarella"`.
 
 Los combos están en el array `COMBOS`, con la misma lógica: son las nueve "súper
 promos" del pizarrón de la vereda, que son **para llevar**. El que lleva
@@ -280,7 +314,7 @@ envolverlo:
 ## Estructura del sitio
 
 Portada → Ventajas → Carta (pestañas Pizzas / Empanadas y fainá / Del mostrador /
-Postres + buscador) → Combos (las 9 promos) → El local → Preguntas frecuentes →
+Postres / Bebidas + buscador) → Combos (las 9 promos) → El local → Preguntas frecuentes →
 Contacto → Pie.
 
 Arriba, barra flotante con estado del local y botón de pedido; en pantallas chicas
