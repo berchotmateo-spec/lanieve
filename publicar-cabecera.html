@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Pizzería La Nieve — pizza al molde en Mar del Plata desde 1949</title>
-<meta name="description" content="Pizza al molde, empanadas, fainá, calentitos y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Abierto todos los días de 8:00 a 01:00. Mirá la carta con precios y pedí por Pedidos Ya.">
+<meta name="description" content="Pizza al molde, empanadas, fainá, calentitos y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Abierto todos los días desde las 8:00. Mirá la carta con precios y pedí por Pedidos Ya.">
 <link rel="canonical" href="https://berchotmateo-spec.github.io/lanieve/">
 <meta name="theme-color" content="#D4202A">
 
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://berchotmateo-spec.github.io/lanieve/">
 <meta property="og:title" content="Pizzería La Nieve — pizza al molde desde 1949">
-<meta property="og:description" content="La carta completa con precios y pedidos por Pedidos Ya. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días de 8:00 a 01:00.">
+<meta property="og:description" content="La carta completa con precios y pedidos por Pedidos Ya. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días desde las 8:00.">
 <meta property="og:image" content="https://berchotmateo-spec.github.io/lanieve/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
 
-<!-- Ficha para Google: dirección, horario y teléfono en formato que entiende el buscador -->
+<!-- Ficha para Google: dirección y teléfono en formato que entiende el buscador.
+     Sin "openingHoursSpecification" a propósito: el horario de cierre que
+     teníamos (01:00) el dueño lo desmintió el 05/09/2026 y todavía no
+     tenemos el real. Publicarle a Google un horario de cierre inventado es
+     peor que no darle ninguno. Sumarlo de nuevo en CLAUDE.md, "PENDIENTE"
+     punto 0, cuando llegue el dato real. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +60,7 @@
     "addressRegion": "Buenos Aires",
     "postalCode": "7600",
     "addressCountry": "AR"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "08:00",
-      "closes": "01:00"
-    }
-  ]
+  }
 }
 </script>
 </head>

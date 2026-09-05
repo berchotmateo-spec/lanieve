@@ -56,24 +56,31 @@ la carta es un catálogo con precios y los botones llevan a la app.
 
 ## PENDIENTE — lo que falta para terminar
 
-0. **EL HORARIO ESTÁ MAL.** El dueño avisó el 05/09/2026 que **no cierran a la 01:00**.
-   El 08:00 de apertura no lo desmintió, pero conviene confirmarlo igual. Cuando
-   Mateo traiga el horario real hay que cambiarlo en **siete lugares**:
+0. **FALTA EL HORARIO DE CIERRE REAL.** El dueño avisó el 05/09/2026 que **no
+   cierran a la 01:00** (el 08:00 de apertura no lo desmintió, pero conviene
+   confirmarlo igual). Mientras tanto, **ya se neutralizó** todo el "01:00"
+   inventado — no queda a la vista de nadie — y quedó así:
 
-   | Dónde | Qué dice hoy |
-   |---|---|
-   | `index.html` tarjeta de portada | `08:00 — 01:00` + "Todos los días del año" |
-   | `index.html` hechos de "El local" | `08:00 — 01:00` |
-   | `index.html` FAQ "¿Qué horario tienen?" | "de 8:00 a 01:00" |
-   | `index.html` datos de contacto | "Todos los días · 08:00 — 01:00" |
-   | `index.html` pie | "Todos los días de 08:00 a 01:00" |
-   | `index.html` función `estadoLocal()` | `h >= 8 \|\| h < 1` y "Cerrado · abre 08:00" |
-   | `publicar-cabecera.html` | `description`, y `opens`/`closes` del JSON-LD |
+   - Las seis menciones de horario en `index.html` (portada, "El local",
+     FAQ, contacto, pie) dicen ahora **"Desde las 08:00"**, sin hora de cierre.
+   - El cartel `#estado` de la barra de navegación (el puntito verde de
+     "Abierto ahora / Cerrado") quedó fijo en **"Abre 08:00"**. La función
+     `estadoLocal()` está vaciada a propósito — no hay forma de calcular
+     abierto/cerrado sin saber cuándo cierran, y mostrar un estado en vivo
+     calculado con un horario inventado es peor que no mostrar nada.
+   - `publicar-cabecera.html`: la `description`, el `og:description` y el
+     JSON-LD para Google. Se sacó del todo el bloque
+     `openingHoursSpecification` en vez de dejarlo con un `closes` inventado
+     — eso es dato estructurado que Google puede mostrar como un hecho.
 
-   Ojo con `estadoLocal()`: la condición `(h >= 8 || h < 1)` está escrita para un
-   horario que **cruza la medianoche**. Si cierran antes de las 24:00, pasa a ser
-   `(h >= 8 && h < cierre)`. El cartel verde de "Abierto ahora" es de lo primero
-   que mira el dueño, así que tiene que dar bien a la hora de la reunión.
+   **Cuando Mateo traiga el horario real**, hay que:
+   1. Reponer el horario completo en las seis menciones de `index.html`.
+   2. Reescribir `estadoLocal()` con la condición correcta. Si el cierre
+      **cruza la medianoche** (como el 01:00 original), la condición es
+      `(h >= apertura || h < cierre)`; si cierra **antes de las 24:00**, es
+      `(h >= apertura && h < cierre)`. No es la misma fórmula.
+   3. Volver a poner `openingHoursSpecification` en `publicar-cabecera.html`
+      con los valores reales.
 
 1. **Precios de mostrador de lo que salió de Pedidos Ya.** Los productos con
    `p:null` se muestran como "Consultar en el local" (ver "Productos sin precio").

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Pizzería La Nieve — pizza al molde en Mar del Plata desde 1949</title>
-<meta name="description" content="Pizza al molde, empanadas, fainá, calentitos y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Abierto todos los días de 8:00 a 01:00. Mirá la carta con precios y pedí por Pedidos Ya.">
+<meta name="description" content="Pizza al molde, empanadas, fainá, calentitos y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Abierto todos los días desde las 8:00. Mirá la carta con precios y pedí por Pedidos Ya.">
 <link rel="canonical" href="https://berchotmateo-spec.github.io/lanieve/">
 <meta name="theme-color" content="#D4202A">
 
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://berchotmateo-spec.github.io/lanieve/">
 <meta property="og:title" content="Pizzería La Nieve — pizza al molde desde 1949">
-<meta property="og:description" content="La carta completa con precios y pedidos por Pedidos Ya. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días de 8:00 a 01:00.">
+<meta property="og:description" content="La carta completa con precios y pedidos por Pedidos Ya. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días desde las 8:00.">
 <meta property="og:image" content="https://berchotmateo-spec.github.io/lanieve/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
 
-<!-- Ficha para Google: dirección, horario y teléfono en formato que entiende el buscador -->
+<!-- Ficha para Google: dirección y teléfono en formato que entiende el buscador.
+     Sin "openingHoursSpecification" a propósito: el horario de cierre que
+     teníamos (01:00) el dueño lo desmintió el 05/09/2026 y todavía no
+     tenemos el real. Publicarle a Google un horario de cierre inventado es
+     peor que no darle ninguno. Sumarlo de nuevo en CLAUDE.md, "PENDIENTE"
+     punto 0, cuando llegue el dato real. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +60,7 @@
     "addressRegion": "Buenos Aires",
     "postalCode": "7600",
     "addressCountry": "AR"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "08:00",
-      "closes": "01:00"
-    }
-  ]
+  }
 }
 </script>
 </head>
@@ -588,7 +585,7 @@ body{padding-bottom:112px}
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="nav-fin">
-        <span class="estado" id="estado"><i></i><b id="estado-txt">Abierto ahora</b></span>
+        <span class="estado" id="estado"><i></i><b id="estado-txt">Abre 08:00</b></span>
         <a class="btn btn-sm" href="#carta">Pedir ahora</a>
         <button class="ham" id="ham" type="button" aria-label="Abrir menú">
           <b></b><b></b><b></b>
@@ -632,7 +629,7 @@ body{padding-bottom:112px}
     <dl class="tarjetas">
       <div class="tar rv">
         <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
-        <div><dt>Horario</dt><dd class="mono">08:00 — 01:00<small>Todos los días del año</small></dd></div>
+        <div><dt>Horario</dt><dd class="mono">Desde las 08:00<small>Todos los días del año</small></dd></div>
       </div>
       <div class="tar rv">
         <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
@@ -732,7 +729,7 @@ body{padding-bottom:112px}
         <div><dt>Especialidad</dt><dd>Pizza al molde</dd></div>
         <div><dt>Dirección</dt><dd>Rivadavia 3002</dd></div>
         <div><dt>Abierto</dt><dd class="mono">Los 7 días</dd></div>
-        <div><dt>Horario</dt><dd class="mono">08:00 — 01:00</dd></div>
+        <div><dt>Horario</dt><dd class="mono">Desde las 08:00</dd></div>
         <div><dt>Salón</dt><dd>Mostrador y mesas</dd></div>
         <div><dt>Delivery</dt><dd>Sí, en la zona</dd></div>
         <div><dt>Pago</dt><dd>Efectivo y tarjeta</dd></div>
@@ -766,7 +763,7 @@ body{padding-bottom:112px}
     <div class="faq">
       <details open>
         <summary>¿Qué horario tienen?</summary>
-        <div class="resp">Abrimos todos los días de 8:00 a 01:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o por Pedidos Ya.</div>
+        <div class="resp">Abrimos todos los días desde las 8:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o por Pedidos Ya.</div>
       </details>
       <details>
         <summary>¿Hacen delivery?</summary>
@@ -810,7 +807,7 @@ body{padding-bottom:112px}
           </div>
           <div>
             <dt>Horario</dt>
-            <dd class="mono">Todos los días · 08:00 — 01:00</dd>
+            <dd class="mono">Todos los días · desde las 08:00</dd>
           </div>
         </dl>
         <div>
@@ -868,7 +865,7 @@ body{padding-bottom:112px}
     </div>
     <div class="pie-fin">
       <span>© 2026 Pizzería La Nieve · Rivadavia 3002, Mar del Plata</span>
-      <span>Todos los días de 08:00 a 01:00</span>
+      <span>Todos los días desde las 08:00</span>
     </div>
   </div>
 </footer>
@@ -1072,15 +1069,12 @@ const SVG_TICK = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" st
 /* ---------- todos los botones de pedido apuntan a Pedidos Ya ---------- */
 $$("[data-py]").forEach(a => { a.href = PEDIDOS_YA; });
 
-/* ---------- ¿está abierto ahora? ---------- */
-function estadoLocal(){
-  const ahora = new Date();
-  const h = ahora.getHours() + ahora.getMinutes()/60;
-  const abierto = (h >= 8 || h < 1);
-  const el = $("#estado");
-  el.classList.toggle("cerrado", !abierto);
-  $("#estado-txt").textContent = abierto ? "Abierto ahora" : "Cerrado · abre 08:00";
-}
+/* ---------- ¿está abierto ahora? ----------
+   DESACTIVADO: no tenemos el horario de cierre real (el dueño avisó el
+   05/09/2026 que no es 01:00). Hasta confirmarlo, el cartel queda fijo en
+   "Abre 08:00" en vez de calcular Abierto/Cerrado con un horario inventado.
+   Para reactivarlo: ver CLAUDE.md, punto 0 de "PENDIENTE". */
+function estadoLocal(){}
 
 /* ---------- carta ---------- */
 const tabsEl = $("#tabs");
