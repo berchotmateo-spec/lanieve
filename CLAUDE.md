@@ -43,7 +43,7 @@ pizarrón de promos, las dos vitrinas y la fachada):
 |---|---|
 | Dirección | Rivadavia 3002, esq. La Rioja, Mar del Plata |
 | Teléfono | 0223 495-0104 |
-| Horario | Todos los días, 08:00 a 01:00 |
+| Horario | ⚠️ **MAL. No cierran a la 01:00** (lo dijo el dueño el 05/09/2026). Falta el real. |
 | Desde | 1949 (dice el toldo de la fachada) |
 | Especialidad | Pizza al molde |
 | Servicios | Salón (mostrador y mesas), take away, delivery **por Pedidos Ya** |
@@ -55,6 +55,25 @@ pasa por Pedidos Ya (dato de Mateo, 03/09/2026). Por eso el sitio no arma pedido
 la carta es un catálogo con precios y los botones llevan a la app.
 
 ## PENDIENTE — lo que falta para terminar
+
+0. **EL HORARIO ESTÁ MAL.** El dueño avisó el 05/09/2026 que **no cierran a la 01:00**.
+   El 08:00 de apertura no lo desmintió, pero conviene confirmarlo igual. Cuando
+   Mateo traiga el horario real hay que cambiarlo en **siete lugares**:
+
+   | Dónde | Qué dice hoy |
+   |---|---|
+   | `index.html` tarjeta de portada | `08:00 — 01:00` + "Todos los días del año" |
+   | `index.html` hechos de "El local" | `08:00 — 01:00` |
+   | `index.html` FAQ "¿Qué horario tienen?" | "de 8:00 a 01:00" |
+   | `index.html` datos de contacto | "Todos los días · 08:00 — 01:00" |
+   | `index.html` pie | "Todos los días de 08:00 a 01:00" |
+   | `index.html` función `estadoLocal()` | `h >= 8 \|\| h < 1` y "Cerrado · abre 08:00" |
+   | `publicar-cabecera.html` | `description`, y `opens`/`closes` del JSON-LD |
+
+   Ojo con `estadoLocal()`: la condición `(h >= 8 || h < 1)` está escrita para un
+   horario que **cruza la medianoche**. Si cierran antes de las 24:00, pasa a ser
+   `(h >= 8 && h < cierre)`. El cartel verde de "Abierto ahora" es de lo primero
+   que mira el dueño, así que tiene que dar bien a la hora de la reunión.
 
 1. **Precios de mostrador de lo que salió de Pedidos Ya.** Los productos con
    `p:null` se muestran como "Consultar en el local" (ver "Productos sin precio").
