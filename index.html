@@ -523,7 +523,7 @@ body{padding-bottom:112px}
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="nav-fin">
-        <span class="estado" id="estado"><i></i><b id="estado-txt">Abre 08:00</b></span>
+        <span class="estado" id="estado"><i></i><b id="estado-txt">Abierto ahora</b></span>
         <a class="btn btn-sm" href="#carta">Pedir ahora</a>
         <button class="ham" id="ham" type="button" aria-label="Abrir menú">
           <b></b><b></b><b></b>
@@ -567,7 +567,7 @@ body{padding-bottom:112px}
     <dl class="tarjetas">
       <div class="tar rv">
         <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
-        <div><dt>Horario</dt><dd class="mono">Desde las 08:00<small>Todos los días del año</small></dd></div>
+        <div><dt>Horario</dt><dd class="mono">08:00 — 00:00<small>Todos los días del año</small></dd></div>
       </div>
       <div class="tar rv">
         <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
@@ -667,10 +667,10 @@ body{padding-bottom:112px}
         <div><dt>Especialidad</dt><dd>Pizza al molde</dd></div>
         <div><dt>Dirección</dt><dd>Rivadavia 3002</dd></div>
         <div><dt>Abierto</dt><dd class="mono">Los 7 días</dd></div>
-        <div><dt>Horario</dt><dd class="mono">Desde las 08:00</dd></div>
+        <div><dt>Horario</dt><dd class="mono">08:00 — 00:00</dd></div>
         <div><dt>Salón</dt><dd>Mostrador y mesas</dd></div>
         <div><dt>Delivery</dt><dd>Sí, en la zona</dd></div>
-        <div><dt>Pago</dt><dd>Efectivo y tarjeta</dd></div>
+        <div><dt>Pago</dt><dd>Efectivo, débito y QR</dd></div>
         <div><dt>Desde</dt><dd class="mono">1949</dd></div>
       </dl>
       <div class="acciones" style="margin-top:30px">
@@ -701,7 +701,7 @@ body{padding-bottom:112px}
     <div class="faq">
       <details open>
         <summary>¿Qué horario tienen?</summary>
-        <div class="resp">Abrimos todos los días desde las 8:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o por Pedidos Ya.</div>
+        <div class="resp">Abrimos todos los días de 8:00 a 00:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por teléfono o por Pedidos Ya.</div>
       </details>
       <details>
         <summary>¿Hacen delivery?</summary>
@@ -712,8 +712,8 @@ body{padding-bottom:112px}
         <div class="resp">Claro. Llamanos al 0223 495-0104 o marcá "retiro en el local" en Pedidos Ya, y pasá a buscarlo por Rivadavia 3002.</div>
       </details>
       <details>
-        <summary>¿Aceptan tarjeta?</summary>
-        <div class="resp">Sí, aceptamos efectivo y tarjetas de débito y crédito.</div>
+        <summary>¿Cómo puedo pagar?</summary>
+        <div class="resp">Efectivo, tarjeta de débito, Mercado Pago y pagos con QR. Crédito no tomamos.</div>
       </details>
       <details>
         <summary>¿Tienen opciones sin carne?</summary>
@@ -745,7 +745,7 @@ body{padding-bottom:112px}
           </div>
           <div>
             <dt>Horario</dt>
-            <dd class="mono">Todos los días · desde las 08:00</dd>
+            <dd class="mono">Todos los días · 08:00 — 00:00</dd>
           </div>
         </dl>
         <div>
@@ -803,7 +803,7 @@ body{padding-bottom:112px}
     </div>
     <div class="pie-fin">
       <span>© 2026 Pizzería La Nieve · Rivadavia 3002, Mar del Plata</span>
-      <span>Todos los días desde las 08:00</span>
+      <span>Todos los días de 08:00 a 00:00</span>
     </div>
   </div>
 </footer>
@@ -1008,11 +1008,19 @@ const SVG_TICK = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" st
 $$("[data-py]").forEach(a => { a.href = PEDIDOS_YA; });
 
 /* ---------- ¿está abierto ahora? ----------
-   DESACTIVADO: no tenemos el horario de cierre real (el dueño avisó el
-   05/09/2026 que no es 01:00). Hasta confirmarlo, el cartel queda fijo en
-   "Abre 08:00" en vez de calcular Abierto/Cerrado con un horario inventado.
-   Para reactivarlo: ver CLAUDE.md, punto 0 de "PENDIENTE". */
-function estadoLocal(){}
+   Horario confirmado por el dueño el 11/09/2026: todos los días de 08:00 a
+   00:00. Cerrar a las 00:00 es cerrar al final del día, así que el horario
+   NO cruza la medianoche y alcanza con `h >= 8`. (La versión vieja usaba
+   `h >= 8 || h < 1` porque cerraba a la 01:00 del día siguiente; si el
+   horario vuelve a cruzar la medianoche hay que volver a esa forma). */
+function estadoLocal(){
+  const ahora = new Date();
+  const h = ahora.getHours() + ahora.getMinutes()/60;
+  const abierto = h >= 8;
+  const el = $("#estado");
+  el.classList.toggle("cerrado", !abierto);
+  $("#estado-txt").textContent = abierto ? "Abierto ahora" : "Cerrado · abre 08:00";
+}
 
 /* ---------- carta ---------- */
 const tabsEl = $("#tabs");

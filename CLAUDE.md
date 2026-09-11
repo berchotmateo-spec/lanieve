@@ -43,11 +43,11 @@ pizarrón de promos, las dos vitrinas y la fachada):
 |---|---|
 | Dirección | Rivadavia 3002, esq. La Rioja, Mar del Plata |
 | Teléfono | 0223 495-0104 |
-| Horario | ⚠️ **MAL. No cierran a la 01:00** (lo dijo el dueño el 05/09/2026). Falta el real. |
+| Horario | Todos los días, 08:00 a 00:00 (confirmado por el dueño el 11/09/2026) |
 | Desde | 1949 (dice el toldo de la fachada) |
 | Especialidad | Pizza al molde |
 | Servicios | Salón (mostrador y mesas), take away, delivery **por Pedidos Ya** |
-| Pago | Efectivo y tarjeta |
+| Pago | Efectivo, tarjeta de **débito**, Mercado Pago y QR. **Crédito no** (dueño, 11/09/2026) |
 | Pedidos online | https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu |
 
 **El local no tiene delivery propio ni WhatsApp.** Todo lo que sea pedido a domicilio
@@ -56,31 +56,20 @@ la carta es un catálogo con precios y los botones llevan a la app.
 
 ## PENDIENTE — lo que falta para terminar
 
-0. **FALTA EL HORARIO DE CIERRE REAL.** El dueño avisó el 05/09/2026 que **no
-   cierran a la 01:00** (el 08:00 de apertura no lo desmintió, pero conviene
-   confirmarlo igual). Mientras tanto, **ya se neutralizó** todo el "01:00"
-   inventado — no queda a la vista de nadie — y quedó así:
+0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,
+   todos los días**. Ya está cargado en las seis menciones de `index.html`, en
+   `estadoLocal()` y en `publicar-cabecera.html`. Dos cosas que conviene saber
+   si el horario vuelve a cambiar:
 
-   - Las seis menciones de horario en `index.html` (portada, "El local",
-     FAQ, contacto, pie) dicen ahora **"Desde las 08:00"**, sin hora de cierre.
-   - El cartel `#estado` de la barra de navegación (el puntito verde de
-     "Abierto ahora / Cerrado") quedó fijo en **"Abre 08:00"**. La función
-     `estadoLocal()` está vaciada a propósito — no hay forma de calcular
-     abierto/cerrado sin saber cuándo cierran, y mostrar un estado en vivo
-     calculado con un horario inventado es peor que no mostrar nada.
-   - `publicar-cabecera.html`: la `description`, el `og:description` y el
-     JSON-LD para Google. Se sacó del todo el bloque
-     `openingHoursSpecification` en vez de dejarlo con un `closes` inventado
-     — eso es dato estructurado que Google puede mostrar como un hecho.
-
-   **Cuando Mateo traiga el horario real**, hay que:
-   1. Reponer el horario completo en las seis menciones de `index.html`.
-   2. Reescribir `estadoLocal()` con la condición correcta. Si el cierre
-      **cruza la medianoche** (como el 01:00 original), la condición es
-      `(h >= apertura || h < cierre)`; si cierra **antes de las 24:00**, es
-      `(h >= apertura && h < cierre)`. No es la misma fórmula.
-   3. Volver a poner `openingHoursSpecification` en `publicar-cabecera.html`
-      con los valores reales.
+   - **La fórmula de `estadoLocal()` depende de si el horario cruza la
+     medianoche.** Cerrar a las 00:00 es cerrar al final del día, así que
+     alcanza con `h >= 8`. Si alguna vez cierran **después** de medianoche (la
+     versión vieja cerraba a la 01:00), hay que volver a
+     `(h >= apertura || h < cierre)`. No es la misma cuenta.
+   - En el JSON-LD el cierre va como **`"closes": "23:59"`**, no `"00:00"`, a
+     propósito: con `opens` 08:00, un `closes` de 00:00 queda antes de la
+     apertura y hay parsers que lo leen como que el local sigue abierto al día
+     siguiente. `23:59` es la convención que no se presta a confusión.
 
 1. **Precios de mostrador de lo que salió de Pedidos Ya.** Los productos con
    `p:null` se muestran como "Consultar en el local" (ver "Productos sin precio").
