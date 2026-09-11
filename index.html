@@ -500,13 +500,21 @@ body{padding-bottom:112px}
   .foto-vitrina img{aspect-ratio:16/9}
   .foto-fachada img{aspect-ratio:4/5;object-position:center 36%}
   .buscador{max-width:none;margin-left:0}
-  .estado{display:none}
+  /* En el celular el botón "Pedir ahora" de la barra sobra: abajo está fija
+     la barra de Pedidos Ya, siempre a la vista. Se saca y el lugar que deja
+     lo ocupa el cartel de "Abierto ahora", que antes no entraba. */
+  .nav-fin > .btn{display:none}
   .portada .acciones{flex-direction:column}
   .portada .acciones .btn{width:100%}
   .pedido-in{gap:10px;padding:12px 14px}
   .pedido-in .btn{width:100%;order:9}
   body{padding-bottom:170px}
   .pie-grid{grid-template-columns:1fr;gap:26px}
+}
+/* Abajo de ~340px (iPhone SE viejo y similares) ni con el texto corto entra
+   el cartel sin empujar la hamburguesa, así que ahí sí se esconde. */
+@media (max-width:340px){
+  .estado{display:none}
 }
 </style>
 
@@ -1019,8 +1027,13 @@ function estadoLocal(){
   const abierto = h >= 8;
   const el = $("#estado");
   el.classList.toggle("cerrado", !abierto);
-  $("#estado-txt").textContent = abierto ? "Abierto ahora" : "Cerrado · abre 08:00";
+  // En la barra del celular no entra el texto largo: va la versión corta.
+  const chico = window.matchMedia("(max-width:720px)").matches;
+  $("#estado-txt").textContent = abierto
+    ? (chico ? "Abierto" : "Abierto ahora")
+    : (chico ? "Cerrado" : "Cerrado · abre 08:00");
 }
+addEventListener("resize", estadoLocal);
 
 /* ---------- carta ---------- */
 const tabsEl = $("#tabs");
