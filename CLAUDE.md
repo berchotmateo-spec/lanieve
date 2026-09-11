@@ -57,9 +57,15 @@ la carta es un catálogo con precios y los botones llevan a la app.
 ## PENDIENTE — lo que falta para terminar
 
 0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,
-   todos los días**. Ya está cargado en las seis menciones de `index.html`, en
-   `estadoLocal()` y en `publicar-cabecera.html`. Dos cosas que conviene saber
+   todos los días**. Está cargado en las **ocho** menciones de `index.html`, en
+   `estadoLocal()` y en `publicar-cabecera.html`. Tres cosas que conviene saber
    si el horario vuelve a cambiar:
+
+   - **Ojo al buscar: dos de las ocho menciones están escritas en palabras**,
+     no en números — "de 8 de la mañana a medianoche", en la tarjeta "Abierto
+     los 7 días" de Ventajas y en el último párrafo de "El local". Un
+     `grep "08:00"` no las encuentra, y por eso quedaron sin corregir hasta el
+     11/09. Buscar también por `madrugada`, `de la mañana` y `medianoche`.
 
    - **La fórmula de `estadoLocal()` depende de si el horario cruza la
      medianoche.** Cerrar a las 00:00 es cerrar al final del día, así que
@@ -266,7 +272,7 @@ con precios y todos los botones de pedido abren la misma URL en una pestaña nue
 - Buscador de la carta: filtra **todas** las pestañas a la vez y muestra de qué
   pestaña viene cada grupo. Con el campo vacío vuelve a la pestaña activa.
 - Cartel "Abierto ahora / Cerrado" calculado con el reloj del visitante contra el
-  horario 08:00–01:00, refrescado cada minuto.
+  horario 08:00–00:00, refrescado cada minuto.
 
 ## Publicar
 

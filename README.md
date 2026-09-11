@@ -20,7 +20,7 @@ de los televisores del salón, el pizarrón de la vereda y las vitrinas del most
 - **Pedido por Pedidos Ya**: el local no tiene delivery propio ni WhatsApp, así que
   todos los botones de pedido llevan a su página en Pedidos Ya. La carta del sitio
   funciona como catálogo con precios.
-- Cartel de "Abierto ahora / Cerrado" calculado contra el horario 08:00–01:00.
+- Cartel de "Abierto ahora / Cerrado" calculado contra el horario 08:00–00:00.
 
 Sin dependencias, sin build, sin framework. HTML, CSS y JavaScript a mano.
 
