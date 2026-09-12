@@ -113,31 +113,98 @@ la carta es un catálogo con precios y los botones llevan a la app.
 5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
    Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
-6. **Sistema de reseñas — pedido por el dueño el 12/09/2026, sin empezar.**
-   Conversación cortada antes de elegir el camino. Lo que hay hasta ahora:
+6. **Reseñas: falta conectar Supabase.** La sección está hecha y andando (ver
+   "Reseñas" más abajo), pero mientras `RESENAS` esté vacío corre en modo
+   local y **la página muestra un cartel rojo avisándolo**. Para que sea real:
+   crear el proyecto en Supabase, correr el SQL, pegar las dos claves. Son
+   unos minutos y están los pasos escritos.
 
-   - **Dato clave: La Nieve ya tiene 4,3 ★ con más de 11.000 reseñas en Google**
-     (sale de agregadores tipo Yelp/Wanderlog/Tripadvisor, **falta confirmarlo
-     en la ficha de Google directamente** — desde esta sesión la red bloquea
-     google.com). Once mil reseñas es prueba social mucho más fuerte que
-     cualquier cosa que podamos construir.
-   - **El sitio no puede guardar reseñas solo.** Es estático en GitHub Pages:
-     un formulario necesita Firebase/Supabase, clave pública en el HTML,
-     reglas de seguridad y **alguien que modere** (si no, entra spam).
+   Dos cosas de contexto que conviene no perder:
+
+   - **La Nieve ya tiene 4,3 ★ con más de 11.000 reseñas en Google** (dato de
+     agregadores tipo Yelp/Wanderlog, **sin confirmar en la ficha directa** —
+     la red de la sesión bloquea google.com). Se le propuso a Mateo aprovechar
+     eso en vez de un sistema propio, pero **el dueño pidió expresamente
+     reseñas en la web**, así que se hizo eso. Si alguna vez se quiere sumar,
+     un bloque con la nota de Google y un botón "Dejanos tu reseña" convive
+     bien con el formulario propio.
    - **Nada de reseñas inventadas** (regla del proyecto, ver "Decisiones de
-     diseño"). Las que se muestren van textuales de Google, con nombre y fecha.
-   - Las tres opciones que se le plantearon a Mateo: (a) vitrina de Google
-     —calificación real + 3 o 4 reseñas textuales + botón "Dejanos tu reseña"
-     que lleva a la ficha—, (b) formulario propio con backend, (c) las dos.
-     **Recomendada la (a)**: sin backend ni moderación, y cada reseña nueva en
-     Google le mejora el posicionamiento en el mapa, que es lo que le trae
-     clientes. Un sistema propio con 4 reseñas al lado de 11.000 se ve peor.
-   - **Falta pedirle a Mateo**: el link de la ficha de Google del local y las
-     capturas de las reseñas que quieran mostrar.
-   - Ojo al implementar: **no marcar `aggregateRating` en el JSON-LD** con la
-     nota de Google. Las políticas de datos estructurados de Google no admiten
-     que un negocio publique su propia calificación agregada ni reseñas de
-     terceros; se muestra visualmente y listo.
+     diseño"). La sección arranca vacía a propósito, con un estado de "todavía
+     no hay reseñas". No cargar ninguna a mano para "que no se vea pelada".
+
+## Reseñas
+
+Sección `#resenas`, entre Preguntas y Contacto. El dueño pidió que la gente
+deje reseñas **en la web** (no las de Google), así que se armó de cero.
+
+### Los dos modos
+
+El sitio es estático y GitHub Pages no guarda nada, así que las reseñas viven
+en **Supabase** (plan gratis, se habla por HTTP común, sin librerías nuevas).
+La configuración es la constante `RESENAS`, arriba de `CARTA`:
+
+- **Con `url` y `clave` cargadas** → modo real. Se muestran sólo las reseñas
+  con `aprobada = true`.
+- **Vacías** → modo local: la reseña queda en el `localStorage` del visitante
+  y no la ve nadie más. La página lo aclara con un cartel rojo que desaparece
+  al cargar las claves. Sirve para mostrarle el sistema al dueño.
+
+### Alta en Supabase (una vez)
+
+1. Crear cuenta en supabase.com → **New project**. Anotar la contraseña.
+2. **SQL Editor** → pegar y correr:
+
+```sql
+create table resenas (
+  id        bigint generated always as identity primary key,
+  nombre    text not null check (char_length(nombre) between 2 and 40),
+  estrellas int  not null check (estrellas between 1 and 5),
+  texto     text not null check (char_length(texto) between 10 and 500),
+  fecha     timestamptz not null default now(),
+  aprobada  boolean not null default false
+);
+
+alter table resenas enable row level security;
+
+-- Cualquiera puede leer, pero SÓLO lo aprobado.
+create policy "leer aprobadas" on resenas
+  for select to anon using (aprobada = true);
+
+-- Cualquiera puede escribir, pero nunca autoaprobarse.
+create policy "dejar resena" on resenas
+  for insert to anon with check (aprobada = false);
+```
+
+3. **Settings → API** → copiar *Project URL* y la clave **anon public**, y
+   pegarlas en `RESENAS` en `index.html`. Regenerar `docs\` y commitear.
+
+### Moderar
+
+Supabase → **Table Editor** → tabla `resenas` → tildar `aprobada` en las que
+se publican. No hace falta panel de administración: la reseña aparece en la
+web en cuanto se tilda y se recarga la página.
+
+### Por qué está armado así
+
+- **La clave `anon` es pública a propósito**: viaja al navegador de cualquiera.
+  Lo que cuida los datos son las políticas RLS de arriba, no que la clave sea
+  secreta. **Nunca** poner la `service_role` en el HTML: esa saltea las
+  políticas y deja la base abierta.
+- **`with check (aprobada = false)`** es lo que impide que alguien arme un
+  pedido a mano con `aprobada: true` y se publique solo.
+- **Todo lo que escribe el visitante se pinta con `textContent`**, nunca con
+  `innerHTML`. Es lo único que separa un campo de comentarios de dejar que
+  cualquiera meta HTML en la página del cliente. Hay una prueba de esto.
+- Contra el spam hay una **trampa para robots** (campo `web` escondido: si
+  viene lleno, no se envía) y una **espera de 2 minutos** entre envíos del
+  mismo navegador. No son a prueba de todo; el filtro de verdad es la
+  aprobación manual.
+- **En el Artifact las reseñas no cargan.** Ese visor bloquea los pedidos de
+  red a dominios de afuera, así que contra Supabase no puede hablar. En GitHub
+  Pages anda bien. Para mostrarle el sistema al dueño, usar el sitio publicado.
+- **No marcar `aggregateRating` en el JSON-LD** con el promedio de estas
+  reseñas: Google no admite que un negocio publique su propia calificación
+  agregada y puede penalizar la ficha.
 
 ## Cómo actualizar la carta
 

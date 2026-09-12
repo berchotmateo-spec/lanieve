@@ -474,6 +474,99 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .faq details[open] summary::after{transform:rotate(135deg);background-color:var(--rojo-100)}
 .faq .resp{padding:0 22px 20px;color:var(--tinta-2);font-size:15.5px;line-height:1.6}
 
+/* ---------------- reseñas ---------------- */
+/* Las estrellas son el único lugar del sitio donde el amarillo manda: es el
+   color con el que todo el mundo lee "calificación". El rojo queda para el
+   botón de enviar, como en el resto de la página. */
+.resumen{
+  display:flex;align-items:center;gap:clamp(18px,3vw,34px);flex-wrap:wrap;
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:24px 28px;box-shadow:var(--s1);margin-bottom:20px;
+}
+.resumen .nota{display:flex;align-items:baseline;gap:10px}
+.resumen .nota b{font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.resumen .nota span{font-size:15px;color:var(--tinta-3);font-weight:600}
+.resumen .de-cinco{display:flex;flex-direction:column;gap:5px}
+.estrellas{display:inline-flex;gap:3px;color:var(--amarillo)}
+.estrellas svg{display:block}
+.resumen .cuantas{font-size:14.5px;color:var(--tinta-2);font-weight:600}
+.resumen .btn{margin-left:auto}
+
+.resenas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+/* Con una o dos reseñas, tres columnas dejan huecos al lado. Se usan tantas
+   columnas como reseñas haya. Va con :where() para que pese lo mismo que la
+   regla de arriba y las media queries de abajo lo sigan pisando en el celular. */
+.resenas:where(.una){grid-template-columns:minmax(0,440px)}
+.resenas:where(.dos){grid-template-columns:repeat(2,1fr)}
+.resena{
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:22px 22px 20px;display:flex;flex-direction:column;gap:11px;
+  transition:transform .18s, box-shadow .18s, border-color .18s;
+}
+.resena:hover{transform:translateY(-2px);box-shadow:var(--s2);border-color:var(--amarillo)}
+.resena .arriba{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.resena .quien{font-weight:700;letter-spacing:-.015em;overflow-wrap:anywhere}
+.resena .cuando{font-size:12.5px;color:var(--tinta-3);font-weight:600;white-space:nowrap}
+.resena p{font-size:15px;color:var(--tinta-2);line-height:1.55;overflow-wrap:anywhere}
+
+/* formulario */
+.dejar{
+  background:var(--superficie);border:1px solid var(--linea-2);
+  border-radius:var(--r-xl);padding:clamp(24px,3.4vw,34px);
+}
+.dejar h3{margin-bottom:6px}
+.dejar > p{font-size:15px;color:var(--tinta-2);margin-bottom:22px}
+.campos{display:grid;gap:16px}
+.campo{display:grid;gap:7px}
+/* La etiqueta del puntaje es un span y no un label: un label apunta a un
+   solo control y acá el control son cinco radios. Lleva el mismo estilo. */
+.campo > label, .campo > .etiqueta-estrellas{
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tinta-3);font-weight:600;
+}
+.campo input[type=text], .campo textarea{
+  width:100%;border:1px solid var(--linea-2);border-radius:var(--r);
+  background:#fff;padding:13px 16px;
+  font-family:inherit;font-size:15.5px;color:var(--tinta);
+  transition:border-color .18s, box-shadow .18s;
+}
+.campo textarea{min-height:110px;resize:vertical;line-height:1.55}
+.campo input[type=text]::placeholder, .campo textarea::placeholder{color:var(--tinta-3)}
+.campo input[type=text]:focus, .campo textarea:focus{
+  outline:0;border-color:var(--rojo);box-shadow:0 0 0 4px var(--rojo-50);
+}
+/* Las estrellas van en orden 5→1 en el HTML y se dan vuelta con row-reverse:
+   así `input:checked ~ label` pinta las de menor valor, que quedan a la
+   izquierda. Es el truco clásico y evita una línea de JS. */
+.estrellas-input{display:inline-flex;flex-direction:row-reverse;justify-content:flex-end;gap:5px}
+.estrellas-input input{position:absolute;width:1px;height:1px;opacity:0}
+.estrellas-input label{
+  color:var(--linea-2);cursor:pointer;border-radius:6px;
+  transition:color .15s, transform .15s;
+}
+.estrellas-input label:hover{transform:scale(1.12)}
+.estrellas-input input:checked ~ label,
+.estrellas-input label:hover,
+.estrellas-input label:hover ~ label{color:var(--amarillo)}
+.estrellas-input input:focus-visible + label{outline:2px solid var(--rojo);outline-offset:3px}
+/* trampa para robots: invisible para la gente, la completan los bots */
+.tarro{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.dejar .fin{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
+.dejar .btn[disabled]{opacity:.55;cursor:not-allowed}
+.aclara{font-size:13.5px;color:var(--tinta-3);max-width:46ch;line-height:1.45}
+.mensaje{
+  display:none;gap:10px;align-items:flex-start;margin-top:18px;
+  border-radius:var(--r);padding:13px 16px;font-size:14.5px;line-height:1.5;
+}
+.mensaje.se-ve{display:flex}
+.mensaje.bien{background:#E8F7EF;border:1px solid #9FD9BC;color:#0B5132}
+.mensaje.mal{background:var(--rojo-50);border:1px solid var(--rojo-100);color:var(--rojo-600)}
+.sin-resenas{
+  text-align:center;padding:44px 20px;color:var(--tinta-2);
+  border:1px dashed var(--linea-2);border-radius:var(--r-lg);background:#fff;margin-bottom:20px;
+}
+.sin-resenas b{display:block;color:var(--tinta);font-size:18px;margin-bottom:6px}
+
 /* ---------------- contacto ---------------- */
 .contacto-card{
   background:linear-gradient(160deg,#D8242B 0%, #7C0D13 100%);
@@ -548,6 +641,7 @@ body{padding-bottom:112px}
 @media (max-width:1000px){
   .grid4{grid-template-columns:1fr 1fr}
   .prods{grid-template-columns:1fr 1fr}
+  .resenas{grid-template-columns:1fr 1fr}
   .combos{grid-template-columns:1fr}
   .combo.destacado{order:-1}
   .dos,.faq-grid,.contacto-grid{grid-template-columns:1fr}
@@ -561,6 +655,7 @@ body{padding-bottom:112px}
   .tarjetas{grid-template-columns:1fr}
   .grid4{grid-template-columns:1fr}
   .prods{grid-template-columns:1fr}
+  .resenas{grid-template-columns:1fr}
   .hechos{grid-template-columns:1fr}
   .foto-vitrina img{aspect-ratio:16/9}
   .foto-fachada img{aspect-ratio:4/5;object-position:center 36%}
@@ -593,6 +688,7 @@ body{padding-bottom:112px}
         <a href="#combos">Combos</a>
         <a href="#nosotros">El local</a>
         <a href="#preguntas">Preguntas</a>
+        <a href="#resenas">Reseñas</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="nav-fin">
@@ -614,6 +710,7 @@ body{padding-bottom:112px}
     <a href="#combos">Combos</a>
     <a href="#nosotros">El local</a>
     <a href="#preguntas">Preguntas</a>
+    <a href="#resenas">Reseñas</a>
     <a href="#contacto">Contacto</a>
   </nav>
   <p class="pie-ov">Rivadavia 3002 · Mar del Plata · 0223 495-0104</p>
@@ -800,6 +897,64 @@ body{padding-bottom:112px}
   </div>
 </section>
 
+<!-- ══════════════════ RESEÑAS ══════════════════ -->
+<section id="resenas" class="alt">
+  <div class="env">
+    <div class="cab">
+      <p class="eyebrow">Reseñas</p>
+      <h2>Lo que dicen los clientes</h2>
+      <p>Si viniste, contanos cómo te fue. Se publican después de una revisión rápida.</p>
+    </div>
+
+    <!-- El resumen y la lista los pinta el script: dependen de las reseñas
+         que haya. Arrancan vacíos a propósito. -->
+    <div id="resenas-resumen"></div>
+    <div id="resenas-lista"></div>
+
+    <div class="dejar rv">
+      <h3>Dejá tu reseña</h3>
+      <p>No hace falta registrarse ni dejar el mail. Con el nombre y un comentario alcanza.</p>
+      <form id="form-resena" novalidate>
+        <div class="campos">
+          <div class="campo">
+            <span id="lbl-estrellas" class="etiqueta-estrellas">Tu puntaje</span>
+            <div class="estrellas-input" role="radiogroup" aria-labelledby="lbl-estrellas">
+              <input type="radio" id="est5" name="estrellas" value="5">
+              <label for="est5" title="5 estrellas" aria-label="5 estrellas"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z"/></svg></label>
+              <input type="radio" id="est4" name="estrellas" value="4">
+              <label for="est4" title="4 estrellas" aria-label="4 estrellas"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z"/></svg></label>
+              <input type="radio" id="est3" name="estrellas" value="3">
+              <label for="est3" title="3 estrellas" aria-label="3 estrellas"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z"/></svg></label>
+              <input type="radio" id="est2" name="estrellas" value="2">
+              <label for="est2" title="2 estrellas" aria-label="2 estrellas"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z"/></svg></label>
+              <input type="radio" id="est1" name="estrellas" value="1">
+              <label for="est1" title="1 estrella" aria-label="1 estrella"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z"/></svg></label>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="res-nombre">Tu nombre</label>
+            <input type="text" id="res-nombre" name="nombre" maxlength="40" placeholder="Cómo querés que aparezca" autocomplete="name">
+          </div>
+          <div class="campo">
+            <label for="res-texto">Tu comentario</label>
+            <textarea id="res-texto" name="texto" maxlength="500" placeholder="¿Qué pediste? ¿Cómo estuvo?"></textarea>
+          </div>
+        </div>
+        <!-- Trampa para robots: si viene completo, es un bot. -->
+        <div class="tarro" aria-hidden="true">
+          <label for="res-web">No completar</label>
+          <input type="text" id="res-web" name="web" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="fin">
+          <button class="btn" type="submit" id="res-enviar">Enviar reseña</button>
+          <p class="aclara">Publicamos las reseñas después de leerlas, para filtrar spam. Puede tardar un rato.</p>
+        </div>
+        <div class="mensaje" id="res-msj" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════════ CONTACTO ══════════════════ -->
 <section id="contacto">
   <div class="env">
@@ -904,13 +1059,35 @@ body{padding-bottom:112px}
 
 <script>
 /* ════════════════════════════════════════════════════════════
-   PARA ACTUALIZAR LA PÁGINA, TOCAR SOLO ESTAS DOS COSAS:
+   PARA ACTUALIZAR LA PÁGINA, TOCAR SOLO ESTAS TRES COSAS:
    1) PEDIDOS_YA → el link del local en Pedidos Ya
    2) CARTA      → los productos y precios reales del local
+   3) RESENAS    → las claves de Supabase, donde se guardan las reseñas
    ════════════════════════════════════════════════════════════ */
 
 // El local no tiene delivery propio ni WhatsApp: los pedidos van por Pedidos Ya.
 const PEDIDOS_YA = "https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu";
+
+/* Dónde se guardan las reseñas.
+   El sitio es estático: GitHub Pages sirve archivos, no guarda nada. Para que
+   una reseña sobreviva al cierre del navegador hace falta un servicio afuera.
+   Elegimos Supabase porque tiene plan gratis y se habla por HTTP común, sin
+   sumarle ninguna librería al proyecto.
+
+   MIENTRAS ESTAS DOS LÍNEAS ESTÉN VACÍAS el bloque anda en MODO LOCAL: las
+   reseñas quedan en el navegador de quien las escribe y nadie más las ve.
+   Sirve para mostrar cómo funciona; no es el sistema de verdad. La página lo
+   avisa sola con un cartel, que desaparece al completar las claves.
+
+   Cómo completarlas: ver "Reseñas" en CLAUDE.md (alta, tabla y permisos).
+   La clave anon es pública por diseño, va en el navegador de cualquiera: lo
+   que protege los datos son los permisos de la tabla, no el secreto de la
+   clave. Nunca poner acá la service_role. */
+const RESENAS = {
+  url:   "",          // https://xxxxxxxx.supabase.co
+  clave: "",          // la clave "anon public" del proyecto
+  tabla: "resenas"
+};
 
 const CARTA = [
   {
@@ -1245,6 +1422,238 @@ COMBOS.forEach(c => {
   combosEl.appendChild(d);
 });
 
+/* ---------- reseñas ----------
+   Dos modos, misma pantalla:
+   · CONECTADO   → hay claves en RESENAS. Las reseñas se piden y se guardan en
+                   Supabase. Sólo se muestran las que el local ya aprobó.
+   · MODO LOCAL  → RESENAS vacío. Todo pasa en el navegador de quien mira, con
+                   un cartel que lo aclara. Es para demostrar, no para usar.
+
+   Nada de lo que escribe el visitante se inserta con innerHTML: todo va por
+   textContent. Es lo único que separa un campo de comentarios de un agujero
+   por donde cualquiera mete HTML en la página del cliente. */
+
+const CONECTADO = Boolean(RESENAS.url && RESENAS.clave);
+const CLAVE_LOCAL = "lanieve-resenas-demo";
+const ESPERA_ENTRE_RESENAS = 2 * 60 * 1000;   // dos minutos, contra el doble envío
+
+const resumenEl = $("#resenas-resumen");
+const listaResEl = $("#resenas-lista");
+const formRes = $("#form-resena");
+const msjRes = $("#res-msj");
+const btnRes = $("#res-enviar");
+
+function estrellasSVG(cantidad){
+  const caja = document.createElement("span");
+  caja.className = "estrellas";
+  caja.setAttribute("role", "img");
+  caja.setAttribute("aria-label", cantidad + (cantidad === 1 ? " estrella de 5" : " estrellas de 5"));
+  for(let i = 1; i <= 5; i++){
+    const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("width", "17"); s.setAttribute("height", "17");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true");
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", "M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z");
+    if(i <= cantidad){
+      p.setAttribute("fill", "currentColor");
+    }else{
+      p.setAttribute("fill", "none");
+      p.setAttribute("stroke", "currentColor");
+      p.setAttribute("stroke-width", "1.6");
+      p.setAttribute("stroke-linejoin", "round");
+      s.style.color = "var(--linea-2)";
+    }
+    s.appendChild(p);
+    caja.appendChild(s);
+  }
+  return caja;
+}
+
+function cuandoFue(iso){
+  const d = new Date(iso);
+  if(isNaN(d)) return "";
+  return d.toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function guardadasLocal(){
+  try{ return JSON.parse(localStorage.getItem(CLAVE_LOCAL)) || []; }catch(e){ return []; }
+}
+
+async function traerResenas(){
+  if(!CONECTADO) return guardadasLocal();
+  const url = RESENAS.url.replace(/\/+$/, "") +
+    "/rest/v1/" + RESENAS.tabla +
+    "?select=nombre,estrellas,texto,fecha&aprobada=eq.true&order=fecha.desc&limit=30";
+  const r = await fetch(url, { headers: { apikey: RESENAS.clave, Authorization: "Bearer " + RESENAS.clave } });
+  if(!r.ok) throw new Error("respuesta " + r.status);
+  return await r.json();
+}
+
+function pintarResenas(lista){
+  resumenEl.innerHTML = "";
+  listaResEl.innerHTML = "";
+
+  // En modo local el visitante tiene que saber que esto todavía no es real.
+  // Va acá adentro y no afuera para que sobreviva a cada repintado.
+  if(!CONECTADO){
+    const aviso = document.createElement("div");
+    aviso.className = "mensaje se-ve mal";
+    aviso.style.margin = "0 0 20px";
+    const s = document.createElement("span");
+    s.textContent = "Modo demostración: las reseñas se guardan sólo en este navegador. " +
+                    "Falta conectar el sistema para que las vea todo el mundo.";
+    aviso.appendChild(s);
+    resumenEl.appendChild(aviso);
+  }
+
+  if(!lista.length){
+    const v = document.createElement("div");
+    v.className = "sin-resenas";
+    const b = document.createElement("b");
+    b.textContent = "Todavía no hay reseñas";
+    const p = document.createElement("p");
+    p.textContent = "Si ya viniste, tu comentario puede ser el primero.";
+    v.append(b, p);
+    listaResEl.appendChild(v);
+    return;
+  }
+
+  // Resumen: promedio y cuántas son.
+  const suma = lista.reduce((t, r) => t + Number(r.estrellas || 0), 0);
+  const prom = suma / lista.length;
+
+  const caja = document.createElement("div");
+  caja.className = "resumen";
+
+  const nota = document.createElement("div");
+  nota.className = "nota";
+  const b = document.createElement("b");
+  b.textContent = prom.toFixed(1).replace(".", ",");
+  const de = document.createElement("span");
+  de.textContent = "de 5";
+  nota.append(b, de);
+
+  const col = document.createElement("div");
+  col.className = "de-cinco";
+  col.appendChild(estrellasSVG(Math.round(prom)));
+  const cuantas = document.createElement("span");
+  cuantas.className = "cuantas";
+  cuantas.textContent = lista.length === 1 ? "1 reseña" : lista.length + " reseñas";
+  col.appendChild(cuantas);
+
+  caja.append(nota, col);
+  resumenEl.appendChild(caja);
+
+  // Las tarjetas.
+  const grilla = document.createElement("div");
+  grilla.className = "resenas" + (lista.length === 1 ? " una" : lista.length === 2 ? " dos" : "");
+  lista.forEach(r => {
+    const art = document.createElement("article");
+    art.className = "resena";
+
+    const arriba = document.createElement("div");
+    arriba.className = "arriba";
+    const quien = document.createElement("span");
+    quien.className = "quien";
+    quien.textContent = r.nombre;
+    const cuando = document.createElement("span");
+    cuando.className = "cuando";
+    cuando.textContent = cuandoFue(r.fecha);
+    arriba.append(quien, cuando);
+
+    const p = document.createElement("p");
+    p.textContent = r.texto;
+
+    art.append(arriba, estrellasSVG(Number(r.estrellas) || 0), p);
+    grilla.appendChild(art);
+  });
+  listaResEl.appendChild(grilla);
+}
+
+function avisoResena(texto, bien){
+  msjRes.innerHTML = "";
+  const s = document.createElement("span");
+  s.textContent = texto;
+  msjRes.appendChild(s);
+  msjRes.className = "mensaje se-ve " + (bien ? "bien" : "mal");
+}
+
+async function cargarResenas(){
+  try{
+    pintarResenas(await traerResenas());
+  }catch(e){
+    listaResEl.innerHTML = "";
+    const v = document.createElement("div");
+    v.className = "sin-resenas";
+    const b = document.createElement("b");
+    b.textContent = "No pudimos cargar las reseñas";
+    const p = document.createElement("p");
+    p.textContent = "Probá de nuevo en un rato. El formulario de abajo sigue andando.";
+    v.append(b, p);
+    listaResEl.appendChild(v);
+  }
+}
+
+formRes.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const estrella = formRes.querySelector('input[name="estrellas"]:checked');
+  const nombre = $("#res-nombre").value.trim();
+  const texto = $("#res-texto").value.trim();
+
+  if($("#res-web").value) return;                       // lo llenó un bot
+  if(!estrella)      return avisoResena("Elegí cuántas estrellas le ponés.", false);
+  if(nombre.length < 2)  return avisoResena("Escribí tu nombre, aunque sea el de pila.", false);
+  if(texto.length < 10)  return avisoResena("Contanos un poco más: al menos diez caracteres.", false);
+
+  try{
+    const ultima = Number(localStorage.getItem(CLAVE_LOCAL + "-hora") || 0);
+    if(Date.now() - ultima < ESPERA_ENTRE_RESENAS){
+      return avisoResena("Ya enviaste una recién. Esperá un par de minutos.", false);
+    }
+  }catch(err){ /* si no hay localStorage, se sigue igual */ }
+
+  const datos = {
+    nombre: nombre.slice(0, 40),
+    estrellas: Number(estrella.value),
+    texto: texto.slice(0, 500),
+    fecha: new Date().toISOString()
+  };
+
+  btnRes.disabled = true;
+  btnRes.textContent = "Enviando...";
+
+  try{
+    if(CONECTADO){
+      const r = await fetch(RESENAS.url.replace(/\/+$/, "") + "/rest/v1/" + RESENAS.tabla, {
+        method: "POST",
+        headers: {
+          apikey: RESENAS.clave,
+          Authorization: "Bearer " + RESENAS.clave,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal"
+        },
+        body: JSON.stringify(datos)
+      });
+      if(!r.ok) throw new Error("respuesta " + r.status);
+      avisoResena("¡Gracias! La publicamos apenas la revisemos.", true);
+    }else{
+      const todas = guardadasLocal();
+      todas.unshift(datos);
+      try{ localStorage.setItem(CLAVE_LOCAL, JSON.stringify(todas.slice(0, 30))); }catch(err){}
+      pintarResenas(todas);
+      avisoResena("¡Gracias! Así se vería publicada (por ahora sólo la ves vos).", true);
+    }
+    try{ localStorage.setItem(CLAVE_LOCAL + "-hora", String(Date.now())); }catch(err){}
+    formRes.reset();
+  }catch(err){
+    avisoResena("No pudimos enviarla. Fijate la conexión y probá de nuevo.", false);
+  }finally{
+    btnRes.disabled = false;
+    btnRes.textContent = "Enviar reseña";
+  }
+});
+
 /* ---------- menú de pantalla completa ---------- */
 const overlay = $("#overlay");
 const abrirMenu  = () => { overlay.classList.add("abierto"); document.body.style.overflow = "hidden"; };
@@ -1396,6 +1805,7 @@ const FUERZA_COPO = [.50, .40];   // opacidad: mínima y cuánto más puede suma
 estadoLocal();
 setInterval(estadoLocal, 60000);
 pintarCarta();
+cargarResenas();
 </script>
 
 </body>
