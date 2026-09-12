@@ -113,6 +113,32 @@ la carta es un catálogo con precios y los botones llevan a la app.
 5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
    Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
+6. **Sistema de reseñas — pedido por el dueño el 12/09/2026, sin empezar.**
+   Conversación cortada antes de elegir el camino. Lo que hay hasta ahora:
+
+   - **Dato clave: La Nieve ya tiene 4,3 ★ con más de 11.000 reseñas en Google**
+     (sale de agregadores tipo Yelp/Wanderlog/Tripadvisor, **falta confirmarlo
+     en la ficha de Google directamente** — desde esta sesión la red bloquea
+     google.com). Once mil reseñas es prueba social mucho más fuerte que
+     cualquier cosa que podamos construir.
+   - **El sitio no puede guardar reseñas solo.** Es estático en GitHub Pages:
+     un formulario necesita Firebase/Supabase, clave pública en el HTML,
+     reglas de seguridad y **alguien que modere** (si no, entra spam).
+   - **Nada de reseñas inventadas** (regla del proyecto, ver "Decisiones de
+     diseño"). Las que se muestren van textuales de Google, con nombre y fecha.
+   - Las tres opciones que se le plantearon a Mateo: (a) vitrina de Google
+     —calificación real + 3 o 4 reseñas textuales + botón "Dejanos tu reseña"
+     que lleva a la ficha—, (b) formulario propio con backend, (c) las dos.
+     **Recomendada la (a)**: sin backend ni moderación, y cada reseña nueva en
+     Google le mejora el posicionamiento en el mapa, que es lo que le trae
+     clientes. Un sistema propio con 4 reseñas al lado de 11.000 se ve peor.
+   - **Falta pedirle a Mateo**: el link de la ficha de Google del local y las
+     capturas de las reseñas que quieran mostrar.
+   - Ojo al implementar: **no marcar `aggregateRating` en el JSON-LD** con la
+     nota de Google. Las políticas de datos estructurados de Google no admiten
+     que un negocio publique su propia calificación agregada ni reseñas de
+     terceros; se muestra visualmente y listo.
+
 ## Cómo actualizar la carta
 
 Toda la carta vive en el array `CARTA` al final del `<script>`, separada del diseño.
