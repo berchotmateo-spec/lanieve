@@ -1084,8 +1084,8 @@ const PEDIDOS_YA = "https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-n
    que protege los datos son los permisos de la tabla, no el secreto de la
    clave. Nunca poner acá la service_role. */
 const RESENAS = {
-  url:   "",          // https://xxxxxxxx.supabase.co
-  clave: "",          // la clave "anon public" del proyecto
+  url:   "https://cisswzxdgeeaapfbzuky.supabase.co",
+  clave: "sb_publishable_MAErH8C4hHcrpWjFfQ9qoA_TQ6qyJlu",
   tabla: "resenas"
 };
 
@@ -1479,12 +1479,25 @@ function guardadasLocal(){
   try{ return JSON.parse(localStorage.getItem(CLAVE_LOCAL)) || []; }catch(e){ return []; }
 }
 
+/* Supabase tiene dos formatos de clave y no se mandan igual:
+   · la vieja es un JWT (arranca con "eyJ") y va en `apikey` y además en
+     `Authorization: Bearer`, como pide la documentación de siempre;
+   · la nueva (`sb_publishable_...`) va sólo en `apikey`. Si se la mete en
+     `Authorization`, el servidor intenta leerla como JWT, no puede, y
+     responde 401.
+   Por eso la cabecera se arma según el formato y no a lo bruto. */
+function cabecerasResenas(extra){
+  const h = Object.assign({ apikey: RESENAS.clave }, extra || {});
+  if(RESENAS.clave.startsWith("eyJ")) h.Authorization = "Bearer " + RESENAS.clave;
+  return h;
+}
+
 async function traerResenas(){
   if(!CONECTADO) return guardadasLocal();
   const url = RESENAS.url.replace(/\/+$/, "") +
     "/rest/v1/" + RESENAS.tabla +
     "?select=nombre,estrellas,texto,fecha&aprobada=eq.true&order=fecha.desc&limit=30";
-  const r = await fetch(url, { headers: { apikey: RESENAS.clave, Authorization: "Bearer " + RESENAS.clave } });
+  const r = await fetch(url, { headers: cabecerasResenas() });
   if(!r.ok) throw new Error("respuesta " + r.status);
   return await r.json();
 }
@@ -1627,12 +1640,7 @@ formRes.addEventListener("submit", async e => {
     if(CONECTADO){
       const r = await fetch(RESENAS.url.replace(/\/+$/, "") + "/rest/v1/" + RESENAS.tabla, {
         method: "POST",
-        headers: {
-          apikey: RESENAS.clave,
-          Authorization: "Bearer " + RESENAS.clave,
-          "Content-Type": "application/json",
-          Prefer: "return=minimal"
-        },
+        headers: cabecerasResenas({ "Content-Type": "application/json", Prefer: "return=minimal" }),
         body: JSON.stringify(datos)
       });
       if(!r.ok) throw new Error("respuesta " + r.status);

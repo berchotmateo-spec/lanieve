@@ -113,11 +113,14 @@ la carta es un catálogo con precios y los botones llevan a la app.
 5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
    Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
-6. **Reseñas: falta conectar Supabase.** La sección está hecha y andando (ver
-   "Reseñas" más abajo), pero mientras `RESENAS` esté vacío corre en modo
-   local y **la página muestra un cartel rojo avisándolo**. Para que sea real:
-   crear el proyecto en Supabase, correr el SQL, pegar las dos claves. Son
-   unos minutos y están los pasos escritos.
+6. **Reseñas: conectadas el 14/09/2026**, falta la prueba de punta a punta.
+   Supabase quedó dado de alta y las claves cargadas (ver "Reseñas"). Lo que
+   **no se pudo probar desde la sesión** es la conexión real: la red del
+   entorno bloquea `supabase.co` (403 del proxy), así que se verificó contra
+   un Supabase simulado —qué URL, qué cabeceras y qué cuerpo salen, y qué se
+   hace con la respuesta— pero el ida y vuelta de verdad lo tiene que hacer
+   Mateo desde el sitio publicado. Pendiente: que deje una reseña, que aparezca
+   la fila en el Table Editor, tildar `aprobada` y ver que salga en la web.
 
    Dos cosas de contexto que conviene no perder:
 
@@ -149,7 +152,12 @@ La configuración es la constante `RESENAS`, arriba de `CARTA`:
   y no la ve nadie más. La página lo aclara con un cartel rojo que desaparece
   al cargar las claves. Sirve para mostrarle el sistema al dueño.
 
-### Alta en Supabase (una vez)
+### Alta en Supabase — **YA HECHA** (14/09/2026)
+
+Proyecto `cisswzxdgeeaapfbzuky`, tabla creada y claves cargadas en `RESENAS`.
+Panel: https://supabase.com/dashboard/project/cisswzxdgeeaapfbzuky
+
+Los pasos quedan escritos por si hay que rehacerlo o montar otro local:
 
 1. Crear cuenta en supabase.com → **New project**. Anotar la contraseña.
 2. **SQL Editor** → pegar y correr:
@@ -186,10 +194,17 @@ web en cuanto se tilda y se recarga la página.
 
 ### Por qué está armado así
 
-- **La clave `anon` es pública a propósito**: viaja al navegador de cualquiera.
+- **La clave pública es pública a propósito**: viaja al navegador de cualquiera.
   Lo que cuida los datos son las políticas RLS de arriba, no que la clave sea
-  secreta. **Nunca** poner la `service_role` en el HTML: esa saltea las
-  políticas y deja la base abierta.
+  secreta. **Nunca** poner la `service_role` (o `secret`) en el HTML: esa
+  saltea las políticas y deja la base abierta.
+- **Hay dos formatos de clave y no se mandan igual.** La vieja es un JWT
+  (arranca con `eyJ`) y va en `apikey` **y** en `Authorization: Bearer`. La
+  nueva (`sb_publishable_...`, que es la que usamos) va **sólo** en `apikey`:
+  si se la mete en `Authorization`, el servidor intenta leerla como JWT, no
+  puede, y contesta 401. De eso se encarga `cabecerasResenas()`, que mira el
+  prefijo de la clave. Si algún día se rota la clave y vuelve una `eyJ...`,
+  funciona igual sin tocar nada.
 - **`with check (aprobada = false)`** es lo que impide que alguien arme un
   pedido a mano con `aprobada: true` y se publique solo.
 - **Todo lo que escribe el visitante se pinta con `textContent`**, nunca con
