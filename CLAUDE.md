@@ -113,14 +113,16 @@ la carta es un catálogo con precios y los botones llevan a la app.
 5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
    Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
-6. **Reseñas: conectadas el 14/09/2026**, falta la prueba de punta a punta.
-   Supabase quedó dado de alta y las claves cargadas (ver "Reseñas"). Lo que
-   **no se pudo probar desde la sesión** es la conexión real: la red del
-   entorno bloquea `supabase.co` (403 del proxy), así que se verificó contra
-   un Supabase simulado —qué URL, qué cabeceras y qué cuerpo salen, y qué se
-   hace con la respuesta— pero el ida y vuelta de verdad lo tiene que hacer
-   Mateo desde el sitio publicado. Pendiente: que deje una reseña, que aparezca
-   la fila en el Table Editor, tildar `aprobada` y ver que salga en la web.
+6. ~~Reseñas~~ **LISTAS — probadas de punta a punta por Mateo el 14/09/2026.**
+   Se deja una reseña en el sitio publicado, aparece sola al instante, y se
+   borra desde el Table Editor. Ver "Reseñas" para cómo está armado.
+
+   Ojo si hay que tocarlo de nuevo: **desde la sesión no se puede probar la
+   conexión real**, la red del entorno bloquea `supabase.co` (403 del proxy).
+   Lo que sí se puede es interceptar los pedidos en Chrome y responder como
+   respondería Supabase: así se verifica qué URL, qué cabeceras y qué cuerpo
+   salen, y qué hace la página con la respuesta. El ida y vuelta de verdad
+   siempre lo tiene que confirmar Mateo.
 
    Dos cosas de contexto que conviene no perder:
 
