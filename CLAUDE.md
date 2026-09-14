@@ -174,23 +174,57 @@ create table resenas (
 
 alter table resenas enable row level security;
 
--- Cualquiera puede leer, pero SÓLO lo aprobado.
+-- Cualquiera puede leer, pero sólo lo que está publicado.
 create policy "leer aprobadas" on resenas
   for select to anon using (aprobada = true);
 
--- Cualquiera puede escribir, pero nunca autoaprobarse.
+-- Cualquiera puede escribir. Se publica sola, pero sin links.
 create policy "dejar resena" on resenas
-  for insert to anon with check (aprobada = false);
+  for insert to anon
+  with check (
+    aprobada = true
+    and texto  !~* '(https?://|www\.|[a-z0-9-]+\.(com|net|org|ar|io|co|me|ly|info|shop|site|xyz)(/|[[:space:]]|$))'
+    and nombre !~* '(https?://|www\.|[a-z0-9-]+\.(com|net|org|ar|io|co|me|ly|info|shop|site|xyz)(/|[[:space:]]|$))'
+  );
 ```
+
+> El `default` de `aprobada` arrancó en `false` (aprobar una por una) y se dio
+> vuelta el 14/09/2026: el dueño de una pizzería no va a estar tildando
+> casillas. Ahora se publica todo y se borra lo que moleste. La columna
+> `aprobada` **queda igual**, pero cambia de rol: ya no es "aprobar para que
+> salga", es un interruptor para **ocultar** algo sin borrarlo.
 
 3. **Settings → API** → copiar *Project URL* y la clave **anon public**, y
    pegarlas en `RESENAS` en `index.html`. Regenerar `docs\` y commitear.
 
 ### Moderar
 
-Supabase → **Table Editor** → tabla `resenas` → tildar `aprobada` en las que
-se publican. No hace falta panel de administración: la reseña aparece en la
-web en cuanto se tilda y se recarga la página.
+**Las reseñas se publican solas.** No hay nada que aprobar: el dueño no tiene
+que entrar a menos que algo moleste. Cuando pasa, Supabase → **Table Editor**
+→ tabla `resenas`, y sobre la fila:
+
+- **Borrarla**: botón derecho → *Delete row*. Desaparece de la web al recargar.
+- **Ocultarla sin borrarla**: destildar `aprobada`. Sirve cuando se quiere
+  conservar el registro (por ejemplo, un reclamo real que ya se resolvió).
+
+Vale la pena que Mateo le muestre esto al dueño una vez y le deje el link del
+panel a mano. Son dos clics.
+
+**Lo que frena el spam sin que nadie mire:**
+
+1. **No se admiten links**, ni en el texto ni en el nombre. Casi todo el spam
+   trae una dirección adentro. Se valida en el navegador (para avisarle a la
+   persona con un mensaje claro) **y en la política de la base**, que es la
+   que vale: lo del navegador se saltea con cuatro líneas de consola.
+2. **Trampa para robots**: un campo escondido que la gente no ve. Si viene
+   lleno, no se envía.
+3. **Dos minutos de espera** entre envíos del mismo navegador.
+4. Los `check` de la tabla: nombre de 2 a 40, texto de 10 a 500, estrellas
+   de 1 a 5. Un cliente hecho a mano tampoco puede saltearlos.
+
+Lo que **no** cubre nada de esto es un agravio escrito a mano por una persona.
+Para eso está el borrado. Es la contracara de publicar sin revisar, y fue una
+decisión tomada a propósito.
 
 ### Por qué está armado así
 
@@ -205,8 +239,9 @@ web en cuanto se tilda y se recarga la página.
   puede, y contesta 401. De eso se encarga `cabecerasResenas()`, que mira el
   prefijo de la clave. Si algún día se rota la clave y vuelve una `eyJ...`,
   funciona igual sin tocar nada.
-- **`with check (aprobada = false)`** es lo que impide que alguien arme un
-  pedido a mano con `aprobada: true` y se publique solo.
+- **El filtro de links vive en el `with check` de la política**, no sólo en el
+  navegador. Cualquiera puede abrir la consola y saltear la validación de
+  JavaScript; la de la base no.
 - **Todo lo que escribe el visitante se pinta con `textContent`**, nunca con
   `innerHTML`. Es lo único que separa un campo de comentarios de dejar que
   cualquiera meta HTML en la página del cliente. Hay una prueba de esto.
