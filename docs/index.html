@@ -339,7 +339,10 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 /* ---------------- fotos del local ---------------- */
 /* Fotos propias sacadas en el local el 26/08. Van embebidas como data URI
    para que el archivo siga siendo autocontenido. Nada de fotos de stock. */
-.logo-grande{display:block;height:clamp(94px,11vw,124px);width:auto;margin:0 auto 20px}
+/* El logotipo de verdad —el muñeco con el óvalo rojo— va solo en la portada.
+   En la barra y en el pie se usa el muñeco suelto: a 34 px el óvalo con
+   "La Nieve" adentro no se lee y lo único que hace es ensuciar. */
+.logotipo{display:block;height:clamp(104px,13vw,142px);width:auto;max-width:100%;margin:0 auto 24px}
 .foto{
   margin:0;border-radius:var(--r-lg);overflow:hidden;
   background:var(--superficie);box-shadow:var(--s2);
@@ -729,7 +732,7 @@ body{padding-bottom:112px}
 <div class="nav-wrap">
   <div class="env">
     <div class="nav">
-      <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="204" height="192">LA <span>NIEVE</span></a>
+      <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="244" height="300">LA <span>NIEVE</span></a>
       <nav class="nav-links" id="nav-links">
         <a href="#carta">Carta</a>
         <a href="#combos">Combos</a>
@@ -766,7 +769,7 @@ body{padding-bottom:112px}
 <!-- ══════════════════ PORTADA ══════════════════ -->
 <header class="portada" id="top">
   <div class="env">
-    <img class="logo-grande" src="logo.png" alt="Logo de la Pizzería La Nieve" width="204" height="192">
+    <img class="logotipo" src="logotipo.png" alt="Pizzería La Nieve" width="750" height="420">
     <p class="eyebrow">Desde 1949 · Rivadavia esq. La Rioja</p>
     <h1>Pizza al molde, como toda <em>la vida</em>.</h1>
     <p class="bajada">
@@ -1055,7 +1058,7 @@ body{padding-bottom:112px}
   <div class="env">
     <div class="pie-grid">
       <div>
-        <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="204" height="192">LA <span>NIEVE</span></a>
+        <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="244" height="300">LA <span>NIEVE</span></a>
         <p class="pie-txt">Pizza al molde en la esquina de Rivadavia y La Rioja, Mar del Plata. Desde 1949.</p>
         <div class="redes">
           <a class="red" data-red="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram de La Nieve" title="Instagram" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4"/><line x1="17.4" y1="6.6" x2="17.41" y2="6.6"/></svg></a>

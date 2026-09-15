@@ -204,10 +204,19 @@ el link, que también tenía el muñeco del Mundial abajo a la izquierda).
 `hacer-og.ps1` lee `docs/logo.png`, así que si el logo vuelve a cambiar,
 alcanza con reemplazar ese archivo y correrlo.
 
-**El logotipo completo** —el óvalo rojo con "La Nieve" en amarillo— **no se
-usa** en el sitio: la barra y el pie escriben "LA NIEVE" con la tipografía de
-la página. Si alguna vez se quiere el óvalo de verdad, está en el archivo que
-mandó el dueño, a la derecha del muñeco.
+**El logotipo completo** —el muñeco con el óvalo rojo al lado— está en
+`docs/logotipo.png` (750×420) y **va solo en la portada**, con la clase
+`.logotipo`. En la barra y en el pie sigue el muñeco suelto: a 34 px el óvalo
+con "La Nieve" adentro no se lee y lo único que hace es ensuciar.
+
+`hacer-publicar.ps1` lo saca a archivo suelto igual que el logo, así que si se
+agrega otra imagen embebida **hay que sumarla al `$mapa`**, si no queda un data
+URI en el HTML de `docs/`. El script avisa al final cuántos quedaron: tiene que
+decir 0.
+
+Las imágenes llevan `width`/`height` con las medidas **reales** del archivo.
+Cuando cambió el logo quedaron las del viejo (204×192 contra 244×300) y el
+navegador reservaba mal el lugar: la página saltaba sola al terminar de cargar.
 
 ## Fotos de producto — el mecanismo ya está, faltan las fotos
 
