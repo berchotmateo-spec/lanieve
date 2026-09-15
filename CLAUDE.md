@@ -193,35 +193,56 @@ que se está leyendo bien.
      apertura y hay parsers que lo leen como que el local sigue abierto al día
      siguiente. `23:59` es la convención que no se presta a confusión.
 
-1. **Precios de mostrador de lo que salió de Pedidos Ya.** Los productos con
-   `p:null` se muestran como "Consultar en el local" (ver "Productos sin precio").
-   Son las **bebidas** enteras, las cuatro fainás nuevas, la torta de ricota y la
-   pasta frola. Nombres y descripciones ya están; falta que el dueño pase el precio
-   del mostrador. **No copiar el de Pedidos Ya**: trae la comisión de la app arriba
-   (ver "Precios de Pedidos Ya" más abajo).
-2. **Link de Pedidos Ya.** Está en la constante `PEDIDOS_YA`. En la app hay **dos
-   fichas** de La Nieve: la que usamos (`.../mar-del-plata/la-nieve-pizzeria-menu`)
-   y otra bajo la zona Santa Celina. Confirmar con el dueño cuál es la que atiende.
-3. **Precios a re-chequear** (los carteles escritos a mano salieron con reflejo
-   del vidrio o quedaron fuera de foco):
-   - `Fugazzín` $2.200 — sospechosamente barato al lado del calentito ($5.200).
-   - `Tarteleta` $4.200 y su descripción, medio tapada por el reflejo.
-   - `Empanada de carne` y `Empanada de jamón y queso`: cargadas a $2.700 **por
-     analogía** con las de verdura y cebolla, que sí se leen. Confirmar.
-   - `Budín de pan` $4.300: **resuelto**, era eso y no $8.300 (en Pedidos Ya sale
-     $4.600, que con la comisión encima cierra con $4.300).
-   - Siguen faltando: fatay picante, pizza de pollo, fugazzetta roquefort y
-     fugazzetta pepperoni. De la pestaña Pizzas de la app solo tenemos las seis
-     primeras; falta bajar el resto, y la pestaña Empanadas entera.
-   - `Muzzarella`: nuestra descripción dice "salsa, muzzarella y **aceitunas**" (sale
-     de los TV del salón) y la app dice "salsa de tomate, muzzarella y **orégano**".
-     Se deja la nuestra. Preguntar cuál va.
-   - En Pedidos Ya hay dos categorías que la carta del sitio **no tiene**: las
-     **tartas saladas enteras** (jamón, queso y huevo; pascualina; pascualina
-     especial; cebolla y muzzarella; pollo; pollo especial; atún) y **sándwiches**.
-     Preguntar si se venden también por mostrador antes de sumarlas.
-   - `Cerveza Stella Artois`: en la app el título dice 473 ml y la descripción
-     500 cc. Cargada como 473 ml. Confirmar.
+1. ~~Precios de mostrador~~ **RESUELTO el 16/09/2026 con el rollo completo.**
+   **No queda ni un producto sin precio en la carta.** Los rubros 07 a 16
+   cerraron lo que faltaba: fainá (rubro 09), cerveza y vino (08 y 13), agua
+   (07), sándwiches y calentitos (11), extras (14).
+
+2. ~~Link de Pedidos Ya~~ **sigue abierto**: en la app hay **dos fichas** de La
+   Nieve, la que usamos (`.../mar-del-plata/la-nieve-pizzeria-menu`) y otra bajo
+   la zona Santa Celina. Confirmar con el dueño cuál atiende.
+
+3. ~~Precios a re-chequear~~ **RESUELTOS**, con una corrección importante:
+
+   - **`Fugazzín` era $5.200, no $2.200.** La duda estaba bien planteada: el
+     precio leído del cartel a mano estaba mal y durante un día la web lo
+     mostró a menos de la mitad. Lección: cuando un precio queda raro al lado
+     de sus vecinos (el calentito sale $5.200 y son productos parecidos), **es
+     raro de verdad**, no una ganga.
+   - `Tarteleta` $4.200 y `empanadas de carne / jamón y queso` $2.700:
+     confirmados, estaban bien.
+   - `Cerveza Stella`: el sistema dice **lata de 500 cc, $6.000**. Se cambió el
+     nombre y se sacó el "473 ml" que venía de Pedidos Ya.
+   - `Fatay picante` $4.200, `fugazzetta roquefort` y `fugazzetta pepperoni`
+     $32.000: aparecieron en el rollo y están cargados.
+   - **Las nueve promos del pizarrón coinciden una por una** con el rubro 12
+     ("promos para llevar"), Promo 1 incluida: **$44.000**, contra $49.900 en
+     Pedidos Ya. El pizarrón estaba bien y la app cobra +13,4 %.
+   - **Por qué la Promo 1 aparece dos veces en la app**: en el sistema está
+     cargada con dos códigos, el 117 (`PROMO1 P/LLEVAR`) y el 901
+     (`PRO 3 MUZZA ENT`), los dos a $44.000. No es un error de la app.
+   - `Muzzarella`: sigue sin confirmar si lleva **aceitunas** (lo que dicen los
+     televisores del salón, y lo que usa la web) u **orégano** (lo que dice
+     Pedidos Ya). El rollo no trae descripciones, así que esto solo lo contesta
+     el dueño.
+
+3b. **Lo que el rollo trae y NO se cargó, esperando al dueño:**
+
+   - **`POLBLAPROVO` $33.600** (media $16.800, porción $4.200). Falta el nombre.
+   - **`CALENTITO SAB` $5.900** y **`SANDWICH M Y Q` $6.500**: las abreviaturas
+     no se pueden desarmar sin adivinar.
+   - **`CERVEZ STOUT/BO` $7.500**: no se sabe si es botella o qué formato. Sí se
+     cargó la `LATA STOUT 500CC` a $5.500, que no tiene ambigüedad.
+   - **Rubro 15, seis helados** a $2.400, $3.000, $3.100, $4.200, $4.500 y
+     $7.800. Los seis se llaman "HELADO" en el sistema. Faltan los nombres.
+   - **Rubro 10, "PROMOCIONES"**: ocho promos de $22.000 a $32.000, más una
+     "PROMO INDIVIDUAL" de $6.700. **No son las del pizarrón** — esas son las
+     del rubro 12. Preguntar qué son antes de mostrarlas.
+   - **`ROSCA PASCUA` $27.000**: de temporada.
+   - Códigos internos que no son productos: `BEBIDA S/C PROMO MUNDIAL` ($1),
+     `DELIVERY`, `FUERA DE MENU 1 y 2`, `VINO 3/8` y `CERVEZA PORRON` (los dos
+
+     sin precio cargado), y los genéricos `PORCION TORTA` / `PORC TORTA ESP`.
 4. **Más fotos.** Ya están embebidas el logo, la fachada y la vitrina de tortas
    (ver "Fotos"). Falta la **vitrina de salados** (fainá, calentitos, fatay) — la
    foto existe pero no quedó guardada en disco. Cuando aparezca, iría como segunda
