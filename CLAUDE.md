@@ -42,7 +42,7 @@ pizarrón de promos, las dos vitrinas y la fachada):
 | Dato | Valor |
 |---|---|
 | Dirección | Rivadavia 3002, esq. La Rioja, Mar del Plata |
-| Teléfono | 0223 495-0104 |
+| Teléfono | 0223 495-0104 — ⚠️ **NO va en el sitio**, el dueño pidió sacarlo el 15/09/2026 |
 | Horario | Todos los días, 08:00 a 00:00 (confirmado por el dueño el 11/09/2026) |
 | Desde | 1949 (dice el toldo de la fachada) |
 | Especialidad | Pizza al molde |
@@ -53,6 +53,14 @@ pizarrón de promos, las dos vitrinas y la fachada):
 **El local no tiene delivery propio ni WhatsApp.** Todo lo que sea pedido a domicilio
 pasa por Pedidos Ya (dato de Mateo, 03/09/2026). Por eso el sitio no arma pedidos:
 la carta es un catálogo con precios y los botones llevan a la app.
+
+**El teléfono NO se publica.** El dueño pidió sacarlo el 15/09/2026 y se quitó de
+los ocho lugares donde aparecía, incluido el `telephone` del JSON-LD (si queda
+ahí, Google lo sigue mostrando en la ficha aunque no esté a la vista en la
+página). Quedan **dos canales**: Pedidos Ya y el mostrador. Ojo al escribir
+textos nuevos: las respuestas del FAQ sobre retiro, pedidos grandes y dudas
+**decían "llamanos"** y hubo que reescribirlas. No volver a ofrecer el teléfono
+como canal sin que el dueño lo pida.
 
 ## PENDIENTE — lo que falta para terminar
 
