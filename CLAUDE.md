@@ -170,6 +170,45 @@ que se está leyendo bien.
   sistema, no productos: son el precio con el que se cobran las tortas que en la
   carta tienen nombre propio (María Renée, pistacho Dubai y las demás).
 
+## El logo (cambiado el 16/09/2026)
+
+El que estaba era **el del Mundial**: el muñeco con la camiseta de Argentina y
+el 10. Era de temporada. El dueño mandó el original y es el que va: **gorra
+verde, bufanda amarilla a cuadros rojos, la pizza humeante en la mano**.
+
+**No volver a poner el del Mundial** sin que lo pida el dueño.
+
+Salió del archivo oficial, que trae el muñeco y el óvalo rojo del logotipo uno
+al lado del otro sobre fondo blanco. Para quedarse solo con el muñeco:
+
+- **El fondo se saca con un relleno desde los bordes, nunca borrando el
+  blanco.** El muñeco *es* blanco: un borrado por color lo deja hecho un
+  fantasma con el contorno flotando.
+- **El óvalo se corta midiendo, no a ojo.** Desde `x=1300`, que siempre cae
+  adentro del óvalo, se camina hacia la izquierda hasta el blanco que lo separa
+  de la pizza: eso da el borde exacto fila por fila. Las puntas del óvalo son
+  tan finas que ahí `x=1300` ya es blanco, así que esas filas se limpian con un
+  borde fijo bien a la derecha.
+- **Primero se borra el óvalo y después se saca el fondo.** Al revés queda un
+  bloque blanco opaco: el hueco entre el muñeco y el óvalo está encerrado y el
+  relleno desde los bordes no llega.
+- **Se guarda con paleta** (`quantize(64, FASTOCTREE)`). El dibujo es de colores
+  planos: pasa de 100 KB a 11 KB y en pantalla es idéntico. Como el logo va
+  embebido **tres veces** en `index.html`, eso solo bajó el archivo de 755 KB a
+  554 KB.
+
+Se rehicieron los tres archivos: `docs/logo.png` (244×300), `docs/icono.png`
+(180×180, el de la pestaña) y `docs/og.jpg` (la tarjeta que se ve al compartir
+el link, que también tenía el muñeco del Mundial abajo a la izquierda).
+
+`hacer-og.ps1` lee `docs/logo.png`, así que si el logo vuelve a cambiar,
+alcanza con reemplazar ese archivo y correrlo.
+
+**El logotipo completo** —el óvalo rojo con "La Nieve" en amarillo— **no se
+usa** en el sitio: la barra y el pie escriben "LA NIEVE" con la tipografía de
+la página. Si alguna vez se quiere el óvalo de verdad, está en el archivo que
+mandó el dueño, a la derecha del muñeco.
+
 ## Fotos de producto — el mecanismo ya está, faltan las fotos
 
 Un producto de la `CARTA` lleva **`f:"archivo.webp"`** y la tarjeta le dibuja la
