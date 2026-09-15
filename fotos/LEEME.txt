@@ -1,0 +1,14 @@
+Acá van las fotos de producto ya procesadas, en WebP.
+
+No se ponen a mano: se tiran las fotos crudas del celular en
+fotos-originales/ y se corre
+
+    python3 hacer-fotos.py
+
+que las recorta, las achica y las deja acá con el mismo nombre.
+
+Después, en la CARTA de index.html, el producto lleva su archivo:
+
+    { n:"Muzzarella", ..., f:"muzzarella.webp" }
+
+Un producto sin f se dibuja igual, sin foto y sin hueco.

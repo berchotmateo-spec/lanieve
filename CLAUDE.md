@@ -170,6 +170,41 @@ que se está leyendo bien.
   sistema, no productos: son el precio con el que se cobran las tortas que en la
   carta tienen nombre propio (María Renée, pistacho Dubai y las demás).
 
+## Fotos de producto — el mecanismo ya está, faltan las fotos
+
+Un producto de la `CARTA` lleva **`f:"archivo.webp"`** y la tarjeta le dibuja la
+foto arriba, a sangre, en 4:3. **Sin `f` la tarjeta se dibuja igual**, sin hueco
+ni placeholder gris: la carta funciona con fotos parciales.
+
+**Las fotos NO van embebidas como data URI.** Van sueltas en `fotos/`, y
+`hacer-publicar.ps1` las copia a `docs/fotos/`. Sesenta fotos embebidas dejarían
+el HTML inservible. Van con `loading="lazy"` y `width`/`height` puestos, para
+que el navegador reserve el lugar y la página no salte mientras bajan.
+
+### De la foto del celular a la carta
+
+1. Tirar las fotos crudas en **`fotos-originales/`** (está en el `.gitignore`:
+   pesan 3 o 4 MB cada una y no van al repo).
+2. Correr **`python3 hacer-fotos.py`**. Recorta al centro en 4:3, achica a
+   900 px y guarda WebP calidad 82, en `fotos/`, con el mismo nombre.
+   De ~4 MB a ~40 KB. Necesita Pillow (`pip install pillow`).
+3. Agregar `f:"<archivo>.webp"` al producto en la `CARTA`.
+4. Correr `hacer-publicar.ps1` como siempre.
+
+El script respeta el `exif_transpose`: sin eso, las fotos verticales del celular
+salen acostadas en la web y no se nota hasta que alguien las mira en el celular.
+
+### Dos cosas para no olvidar
+
+- **Al publicar el Artifact hay que mandar también las fotos**, con el parámetro
+  `files` (`{"fotos/x.webp": "fotos/x.webp", ...}`). El Artifact es una página
+  suelta: si no van, se ven los alt y nada más. En GitHub Pages esto no pasa,
+  ahí las copia el script.
+- **Conviene completar por grupo, no de a una.** Cuando un grupo tiene fotos,
+  las tarjetas pasan a medir lo que necesitan (`\.prods:has(.foto-prod)`), así
+  que una sola con foto entre diez sin foto queda desprolija. Mejor terminar
+  todas las pizzas, después todas las tortas.
+
 ## PENDIENTE — lo que falta para terminar
 
 0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,

@@ -4,3 +4,10 @@ _preview.html
 # capturas de prueba del navegador
 *.png
 !docs/*.png
+
+# fotos crudas del celular: pesan 3 o 4 MB cada una y no van al repo.
+# Las que se publican son las de fotos/, que salen de hacer-fotos.py
+fotos-originales/
+
+# las fotos de producto si van
+!fotos/*

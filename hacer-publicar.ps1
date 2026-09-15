@@ -66,6 +66,17 @@ $sitemap = @"
 "@
 [System.IO.File]::WriteAllText((Join-Path $dest "sitemap.xml"), $sitemap, $utf8)
 
+# Las fotos de producto van sueltas, nunca embebidas: son decenas y el HTML
+# quedaria inservible. Se copian tal cual a docs\fotos\.
+$fotos = Join-Path $raiz "fotos"
+if (Test-Path $fotos) {
+  $fotosDest = Join-Path $dest "fotos"
+  if (-not (Test-Path $fotosDest)) { New-Item -ItemType Directory -Path $fotosDest | Out-Null }
+  Copy-Item (Join-Path $fotos "*") $fotosDest -Recurse -Force
+  $cuantas = (Get-ChildItem $fotosDest -File).Count
+  Write-Output ("Fotos de producto copiadas: {0}" -f $cuantas)
+}
+
 Write-Output "Listo. Contenido de docs\:"
 Get-ChildItem $dest | Sort-Object Name | Select-Object Name, @{n = "KB"; e = { [math]::Round($_.Length / 1KB, 1) } }
 $quedan = ([regex]::Matches($salida, "data:image/")).Count
