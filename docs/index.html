@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Pizzería La Nieve — pizza al molde en Mar del Plata desde 1949</title>
-<meta name="description" content="Pizza al molde, empanadas, fainá, calentitos y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Abierto todos los días de 8:00 a 00:00. Mirá la carta con precios y pedí por Pedidos Ya.">
+<meta name="description" content="Pizza al molde, empanadas, tartas, fainá, calentitos, cafetería y postres en la esquina de Rivadavia y La Rioja, Mar del Plata. Desayunos desde las 8:00 y cocina hasta las 00:00. Mirá la carta con precios y pedí por Pedidos Ya.">
 <link rel="canonical" href="https://berchotmateo-spec.github.io/lanieve/">
 <meta name="theme-color" content="#D4202A">
 
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://berchotmateo-spec.github.io/lanieve/">
 <meta property="og:title" content="Pizzería La Nieve — pizza al molde desde 1949">
-<meta property="og:description" content="La carta completa con precios y pedidos por Pedidos Ya. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días de 8:00 a 00:00.">
+<meta property="og:description" content="La carta completa con precios: pizzas, empanadas, tartas, cafetería y postres. Rivadavia 3002, esq. La Rioja, Mar del Plata. Todos los días de 8:00 a 00:00.">
 <meta property="og:image" content="https://berchotmateo-spec.github.io/lanieve/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -40,7 +40,7 @@
   "image": "https://berchotmateo-spec.github.io/lanieve/og.jpg",
   "logo": "https://berchotmateo-spec.github.io/lanieve/icono.png",
   "foundingDate": "1949",
-  "servesCuisine": ["Pizza al molde", "Empanadas", "Fainá"],
+  "servesCuisine": ["Pizza al molde", "Empanadas", "Tartas", "Fainá", "Cafetería", "Pasteleria"],
   "sameAs": ["https://www.instagram.com/lanieve_oficial/"],
   "paymentAccepted": "Efectivo, tarjeta de débito, Mercado Pago y pagos con QR",
   "hasMenu": "https://berchotmateo-spec.github.io/lanieve/#carta",
@@ -418,6 +418,12 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .prod h4{margin-bottom:6px}
 .prod .det{font-size:14.5px;color:var(--tinta-2);line-height:1.5}
 .prod .fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
+/* entera · media · porción, en la misma tarjeta */
+.prod .precios{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:auto;padding-top:18px}
+.prod .pr{display:flex;flex-direction:column;gap:1px}
+.prod .pr > span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-3);font-weight:600}
+.prod .pr b{font-size:15.5px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
+.prod .pr.entera b{font-size:21px;letter-spacing:-.03em}
 .prod .precio{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 /* Productos que salen de la carta de Pedidos Ya: el precio de mostrador
    todavía no está confirmado, así que se muestran sin número. */
@@ -904,6 +910,10 @@ body{padding-bottom:112px}
         <div class="resp">Abrimos todos los días de 8:00 a 00:00. En temporada alta puede haber algo de espera al mediodía y a la noche: si vas apurado, encargá antes por Pedidos Ya.</div>
       </details>
       <details>
+        <summary>¿Se puede desayunar o merendar?</summary>
+        <div class="resp">Sí. Abrimos a las 8 con la cafetería andando: café, cortado, café con leche, té, submarino y medialunas. También podés acompañarlo con una porción de torta de ricota o con un calentito recién hecho.</div>
+      </details>
+      <details>
         <summary>¿Hacen delivery?</summary>
         <div class="resp">Sí, con Pedidos Ya. No tenemos reparto propio: los envíos los hace la aplicación, que te dice si llega a tu dirección y cuánto sale el envío antes de confirmar.</div>
       </details>
@@ -1046,9 +1056,9 @@ body{padding-bottom:112px}
         <ul>
           <li><a href="#carta" data-tab="0">Pizzas</a></li>
           <li><a href="#carta" data-tab="1">Empanadas y fainá</a></li>
-          <li><a href="#carta" data-tab="2">Del mostrador</a></li>
-          <li><a href="#carta" data-tab="3">Postres</a></li>
-          <li><a href="#carta" data-tab="4">Bebidas</a></li>
+          <li><a href="#carta" data-tab="2">Tartas saladas</a></li>
+          <li><a href="#carta" data-tab="4">Cafetería</a></li>
+          <li><a href="#carta" data-tab="5">Postres</a></li>
         </ul>
       </div>
       <div>
@@ -1140,133 +1150,190 @@ const CARTA = [
   {
     tab: "Pizzas",
     grupos: [
-      { nombre: "Pizzas enteras", items: [
-        { n:"Muzzarella",                    d:"Salsa, muzzarella y aceitunas.",         p:16000 },
-        { n:"Fugazza",                       d:"Cebolla y orégano, sin queso.",          p:15200 },
-        { n:"Fugazzetta",                    d:"Cebolla arriba, muzzarella adentro.",    p:20000 },
-        { n:"Fugazzetta especial",           d:"De cebolla, rellena con muzzarella y jamón.", p:28000 },
-        { n:"Fugazzetta super",              d:"",                                       p:32000 },
-        { n:"Salsa de tomate y anchoas",     d:"Salsa de tomate con anchoas.",           p:22400 },
-        { n:"Muzzarella y anchoas",          d:"",                                       p:25600 },
-        { n:"Muzzarella y jamón",            d:"",                                       p:20000 },
-        { n:"Muzzarella y champignón",       d:"",                                       p:32000 },
-        { n:"Napolitana",                    d:"Muzzarella, rodajas de tomate y ajo.",   p:20000 },
-        { n:"Calabresa",                     d:"Muzzarella y longaniza.",                p:20000 },
-        { n:"Roquefort",                     d:"",                                       p:24000 },
-        { n:"Muzzarella, jamón y morrón",    d:"",                                       p:25600 },
-        { n:"Muzzarella, jamón y ananá",     d:"",                                       p:32000 },
-        { n:"Muzzarella, jamón y palmitos",  d:"Con jamón, palmitos y orégano.",         p:32000 },
-        { n:"Pizza rellena",                 d:"Masa de pizza rellena con jamón, muzzarella y tomate natural.", p:28000 },
-        { n:"Pizza arrollada",               d:"",                                       p:29600 },
-        { n:"Pizza arrollada especial",      d:"",                                       p:32000 },
-        { n:"Pizza especial",                d:"Muzzarella, jamón, morrón, huevo y aceitunas.", p:27200 },
-        { n:"Pizza caprese",                 d:"",                                       p:24000 },
-        { n:"Pizza de verdura",              d:"",                                       p:24000 },
-        { n:"Pizza de rúcula y crudo",       d:"",                                       p:32000 }
+      { nombre: "Las clásicas", items: [
+        { n:"Muzzarella", d:"Salsa, muzzarella y aceitunas.", p:16000, m:8000, c:2000 },
+        { n:"Fugazza", d:"Cebolla y orégano, sin queso.", p:15200, m:7600, c:1900 },
+        { n:"Fugazzetta", d:"Cebolla arriba, muzzarella adentro.", p:20000, m:10000, c:2500 },
+        { n:"Pizza canchera", d:"", p:15200, m:7600, c:1900 },
+        { n:"Napolitana", d:"Muzzarella, rodajas de tomate y ajo.", p:20000, m:10000, c:2500 },
+        { n:"Calabresa", d:"Muzzarella y longaniza.", p:20000, m:10000, c:2500 },
+        { n:"Salsa de tomate y anchoas", d:"Salsa de tomate con anchoas.", p:22400, m:11200, c:2800 },
+        { n:"Muzzarella y jamón", d:"", p:20000, m:10000, c:2500 },
+        { n:"Muzzarella y anchoas", d:"", p:25600, m:12800, c:3200 },
+        { n:"Muzzarella, jamón y morrón", d:"", p:25600, m:12800, c:3200 },
+        { n:"Roquefort", d:"", p:24000, m:12000, c:3000 },
+        { n:"Tomate y albahaca", d:"", p:24000, m:12000, c:3000 },
+        { n:"Pizza de acelga", d:"", p:24000, m:12000, c:3000 },
+        { n:"Peperoni", d:"", p:24000, m:12000, c:3000 },
       ]},
-      { nombre: "Al corte, por porción", items: [
-        { n:"Porción de muzzarella",                   d:"", p:2000 },
-        { n:"Porción de fugazza",                      d:"", p:1900 },
-        { n:"Porción de fugazzetta",                   d:"", p:2500 },
-        { n:"Porción de fugazzetta especial",          d:"", p:3500 },
-        { n:"Porción de fugazzetta super",             d:"", p:4000 },
-        { n:"Porción de salsa y anchoas",              d:"", p:2800 },
-        { n:"Porción de muzzarella y anchoas",         d:"", p:3200 },
-        { n:"Porción de muzzarella y jamón",           d:"", p:2500 },
-        { n:"Porción de muzzarella y champignón",      d:"", p:4000 },
-        { n:"Porción de napolitana",                   d:"", p:2500 },
-        { n:"Porción de calabresa",                    d:"", p:2500 },
-        { n:"Porción de roquefort",                    d:"", p:3000 },
-        { n:"Porción de muzzarella, jamón y morrón",   d:"", p:3200 },
-        { n:"Porción de muzzarella, jamón y ananá",    d:"", p:4000 },
-        { n:"Porción de muzzarella, jamón y palmitos", d:"", p:4000 },
-        { n:"Porción de pizza rellena",                d:"", p:3500 },
-        { n:"Porción de pizza arrollada",              d:"", p:3700 },
-        { n:"Porción de arrollada especial",           d:"", p:4000 },
-        { n:"Porción de pizza especial",               d:"", p:3400 },
-        { n:"Porción de caprese",                      d:"", p:3000 },
-        { n:"Porción de verdura",                      d:"", p:3000 },
-        { n:"Porción de rúcula y crudo",               d:"", p:4000 }
-      ]}
+      { nombre: "Las especiales", items: [
+        { n:"Pizza especial", d:"Muzzarella, jamón, morrón, huevo y aceitunas.", p:27200, m:13600, c:3400 },
+        { n:"Pizza rellena", d:"Masa de pizza rellena con jamón, muzzarella y tomate natural.", p:28000, m:14000, c:3500 },
+        { n:"Fugazzetta especial", d:"De cebolla, rellena con muzzarella y jamón.", p:28000, m:14000, c:3500 },
+        { n:"Fugazzetta de verdura", d:"", p:24000, m:12000, c:3000 },
+        { n:"Pizza arrollada", d:"", p:29600, m:14800, c:3700 },
+        { n:"Pizza arrollada especial", d:"", p:32000, c:4000 },
+        { n:"Fugazzetta super", d:"", p:32000, m:16000, c:4000 },
+        { n:"Fugazzetta de panceta", d:"", p:32000, m:16000, c:4000 },
+        { n:"Fugazzetta de roquefort", d:"", p:32000, m:16000, c:4000 },
+        { n:"Fugazzetta de pepperoni", d:"", p:32000, c:4000 },
+        { n:"Cuatro quesos", d:"", p:32000, m:16000, c:4000 },
+        { n:"Muzzarella, jamón y palmitos", d:"Con jamón, palmitos y orégano.", p:32000, m:16000, c:4000 },
+        { n:"Muzzarella, jamón y ananá", d:"", p:32000, m:16000, c:4000 },
+        { n:"Muzzarella y champignón", d:"", p:32000, m:16000, c:4000 },
+        { n:"Rúcula y jamón crudo", d:"", p:32000, m:16000, c:4000 },
+      ]},
+      { nombre: "Arrolladas rellenas, solo por porción", items: [
+        { n:"Arrollada de carne", d:"", p:4000 },
+        { n:"Arrollada de pollo", d:"", p:4000 },
+        { n:"Arrollada primavera", d:"", p:4000 },
+        { n:"Arrollada con roquefort", d:"", p:4000 },
+        { n:"Arrollada con longaniza", d:"", p:4000 },
+      ]},
     ]
   },
   {
     tab: "Empanadas y fainá",
     grupos: [
       { nombre: "Empanadas, por unidad", items: [
-        { n:"Empanada de carne",          d:"",                                       p:2700 },
-        { n:"Empanada de jamón y queso",  d:"",                                       p:2700 },
-        { n:"Empanada de verdura",        d:"Acelga, cebolla, morrón y especias.",    p:2700 },
-        { n:"Empanada de cebolla",        d:"Cebolla, muzzarella y especias.",        p:2700 }
+        { n:"Empanada de carne", d:"", p:2700 },
+        { n:"Empanada de jamón y queso", d:"", p:2700 },
+        { n:"Empanada de pollo", d:"", p:2700 },
+        { n:"Empanada de humita", d:"", p:2700 },
+        { n:"Empanada de verdura", d:"Acelga, cebolla, morrón y especias.", p:2700 },
+        { n:"Empanada de cebolla", d:"Cebolla, muzzarella y especias.", p:2700 },
+        { n:"Empanada de atún", d:"", p:4200 },
+        { n:"Empanada de atún de vigilia", d:"", p:4200 },
+      ]},
+      { nombre: "Empanadas, por docena", items: [
+        { n:"Docena de carne", d:"", p:32400 },
+        { n:"Docena de jamón y queso", d:"", p:32400 },
+        { n:"Docena de pollo", d:"", p:32400 },
+        { n:"Docena de humita", d:"", p:32400 },
       ]},
       { nombre: "Fainá, por porción", items: [
-        { n:"Fainá común",                    d:"Harina de garbanzos y pimienta, sin relleno.",             p:null },
-        { n:"Fainá con verdeo",               d:"Con cebolla de verdeo.",                                   p:null },
-        { n:"Fainá con cebolla y muzzarella", d:"Con cebolla y muzzarella arriba.",                         p:null },
-        { n:"Fainá rellena de jamón y queso", d:"Rellena con jamón y queso.",                               p:null },
-        { n:"Fainá roquefort",                d:"Rellena con roquefort y aceitunas.",                       p:2600 },
-        { n:"Fainá especial",                 d:"Rellena con jamón, huevo, aceitunas y muzzarella picada.", p:2600 }
-      ]}
+        { n:"Fainá común", d:"Harina de garbanzos y pimienta, sin relleno.", p:null },
+        { n:"Fainá con verdeo", d:"Con cebolla de verdeo.", p:null },
+        { n:"Fainá con cebolla y muzzarella", d:"Con cebolla y muzzarella arriba.", p:null },
+        { n:"Fainá rellena de jamón y queso", d:"Rellena con jamón y queso.", p:null },
+        { n:"Fainá roquefort", d:"Rellena con roquefort y aceitunas.", p:2600 },
+        { n:"Fainá especial", d:"Rellena con jamón, huevo, aceitunas y muzzarella picada.", p:2600 },
+      ]},
+    ]
+  },
+  {
+    tab: "Tartas saladas",
+    grupos: [
+      { nombre: "Tartas", items: [
+        { n:"Tarta de jamón y queso", d:"", p:21600, m:10800, c:2700 },
+        { n:"Pascualina", d:"", p:21600, m:10800, c:2700 },
+        { n:"Tarta de cebolla y queso", d:"", p:21600, m:10800, c:2700 },
+        { n:"Tarta de humita", d:"", p:24000, m:12000, c:3000 },
+        { n:"Pascualina especial", d:"", p:24000, m:12000, c:3000 },
+        { n:"Tarta de pollo", d:"", p:25600, m:12800, c:3200 },
+        { n:"Tarta de pollo especial", d:"", p:28800, m:14400, c:3600 },
+        { n:"Tarta de atún", d:"", p:34400, m:17200, c:4300 },
+      ]},
     ]
   },
   {
     tab: "Del mostrador",
     grupos: [
       { nombre: "Panes rellenos", items: [
-        { n:"Calentito de jamón y queso", d:"Pan casero relleno con jamón y muzzarella.",    p:5200 },
-        { n:"Calentito de matambre",      d:"Pan casero relleno con matambre y muzzarella.", p:6300 },
-        { n:"Calentito de panceta",       d:"Pan casero con muzzarella, huevo y panceta.",   p:7600 },
-        { n:"Fugazzín",                   d:"Pan casero de cebolla con orégano, relleno de jamón y muzzarella.", p:2200 },
-        { n:"Zepelín super",              d:"Jamón cocido, muzzarella, morrón, tomate y cebolla de verdeo.",     p:4200 },
-        { n:"Medialuna gigante",          d:"Medialuna dulce rellena con jamón y muzzarella.", p:6000 }
+        { n:"Calentito de jamón y queso", d:"Pan casero relleno con jamón y muzzarella.", p:5200 },
+        { n:"Calentito de matambre", d:"Pan casero relleno con matambre y muzzarella.", p:6300 },
+        { n:"Calentito de panceta", d:"Pan casero con muzzarella, huevo y panceta.", p:7600 },
+        { n:"Fugazzín", d:"Pan casero de cebolla con orégano, relleno de jamón y muzzarella.", p:2200 },
+        { n:"Medialuna gigante", d:"Medialuna dulce rellena con jamón y muzzarella.", p:6000 },
+      ]},
+      { nombre: "Zepelines", items: [
+        { n:"Zepelín super", d:"Jamón cocido, muzzarella, morrón, tomate y cebolla de verdeo.", p:4200 },
+        { n:"Zepelín variado", d:"", p:4200 },
+        { n:"Zepelín de pollo", d:"", p:4200 },
+        { n:"Zepelín de panceta", d:"", p:4200 },
+        { n:"Zepelín de longaniza", d:"", p:4200 },
+        { n:"Zepelín de roquefort", d:"", p:4200 },
       ]},
       { nombre: "Al paso", items: [
         { n:"Fatay suave", d:"Carne picada especial, tomate, morrón, cebolla y especias.", p:4200 },
-        { n:"Tarteleta",   d:"Rellena con muzzarella y tomate.",                           p:4200 }
-      ]}
+        { n:"Fatay picante", d:"", p:4200 },
+        { n:"Tarteleta", d:"Rellena con muzzarella y tomate.", p:4200 },
+        { n:"Tarteleta de albahaca", d:"", p:4200 },
+      ]},
+    ]
+  },
+  {
+    tab: "Cafetería",
+    grupos: [
+      { nombre: "Café, té y submarino", items: [
+        { n:"Café o cortado", d:"", p:3700 },
+        { n:"Café doble", d:"", p:4400 },
+        { n:"Café con leche", d:"", p:4400 },
+        { n:"Café con crema", d:"", p:4000 },
+        { n:"Té", d:"", p:3700 },
+        { n:"Té con leche", d:"", p:4400 },
+        { n:"Submarino", d:"", p:4600 },
+        { n:"Vaso de leche", d:"", p:2700 },
+      ]},
+      { nombre: "Para acompañar", items: [
+        { n:"Medialuna", d:"", p:1000 },
+        { n:"Café con tres medialunas", d:"", p:6800 },
+        { n:"Café con medialuna de jamón y queso", d:"", p:7500 },
+        { n:"Café con porción de ricota", d:"", p:7300 },
+        { n:"Submarino con porción de ricota", d:"", p:7500 },
+        { n:"Café con calentito", d:"", p:8600 },
+      ]},
     ]
   },
   {
     tab: "Postres",
     grupos: [
       { nombre: "Tortas, por porción", items: [
-        { n:"Rogel",                d:"Capas de hojaldre rellenas con dulce de leche.",                                p:8000 },
-        { n:"Cuatro chocolates",    d:"Mousse de chocolate, de dulce de leche, de chocolate blanco y crema.",          p:8500 },
+        { n:"Rogel", d:"Capas de hojaldre rellenas con dulce de leche.", p:8000 },
+        { n:"Lemon pie", d:"Mousse de limón y merengue italiano.", p:8000 },
+        { n:"Tarta de frutilla", d:"Crema chantilly, frutillas y gelatina.", p:8000 },
+        { n:"Cuatro chocolates", d:"Mousse de chocolate, de dulce de leche, de chocolate blanco y crema.", p:8500 },
         { n:"Torta pistacho Dubai", d:"Rellena con brownie, crema de chocolate, pistacho Dubai y mousse de pistacho.", p:8500 },
-        { n:"María Renée",          d:"Bizcochuelo de vainilla, merengue, dulce de leche y duraznos.",                 p:8500 },
-        { n:"Torta choco",          d:"Bizcochuelo de chocolate con dulce de leche y mousse de cacao.",                p:8500 },
-        { n:"Torta Oreo",           d:"Mousse de chocolate, mousse de dulce de leche y Oreo.",                         p:8500 },
-        { n:"Torta mousse de limón", d:"Mousse de limón, brownie y dulce de leche.",                                    p:8500 },
-        { n:"Cheese cake",          d:"Torta de queso crema, base de bizcochuelo y jalea de frutilla.",                p:8500 },
-        { n:"Lemon pie",            d:"Mousse de limón y merengue italiano.",                                          p:8000 },
-        { n:"Tarta de frutilla",    d:"Crema chantilly, frutillas y gelatina.",                                        p:8000 },
-        { n:"Torta de ricota",      d:"Rellena de ricota.",                                                            p:null },
-        { n:"Pasta frola",          d:"De membrillo.",                                                                 p:null }
+        { n:"María Renée", d:"Bizcochuelo de vainilla, merengue, dulce de leche y duraznos.", p:8500 },
+        { n:"Torta choco", d:"Bizcochuelo de chocolate con dulce de leche y mousse de cacao.", p:8500 },
+        { n:"Torta Oreo", d:"Mousse de chocolate, mousse de dulce de leche y Oreo.", p:8500 },
+        { n:"Torta mousse de limón", d:"Mousse de limón, brownie y dulce de leche.", p:8500 },
+        { n:"Cheese cake", d:"Torta de queso crema, base de bizcochuelo y jalea de frutilla.", p:8500 },
+        { n:"Selva negra", d:"", p:8500 },
+        { n:"Torta de ricota", d:"Rellena de ricota.", p:3700 },
+        { n:"Pasta frola", d:"De membrillo.", p:2600 },
+      ]},
+      { nombre: "Tortas enteras, por encargue", items: [
+        { n:"Torta de ricota entera", d:"", p:35000 },
+        { n:"Pasta frola entera", d:"", p:20000 },
+        { n:"Tarta grande", d:"", p:72000 },
+        { n:"Torta especial entera", d:"", p:76500 },
       ]},
       { nombre: "De la heladera", items: [
-        { n:"Flan casero",                 d:"Con huevo y caramelo.",                             p:3700 },
-        { n:"Mousse de chocolate",         d:"",                                                  p:3700 },
+        { n:"Flan casero", d:"Con huevo y caramelo.", p:3700 },
+        { n:"Mousse de chocolate", d:"", p:3700 },
         { n:"Tiramisú con dulce de leche", d:"Crema italiana casera, vainilla y dulce de leche.", p:4300 },
-        { n:"Budín de pan",                d:"Con caramelo.",                                     p:4300 }
-      ]}
+        { n:"Budín de pan", d:"Con caramelo.", p:4300 },
+        { n:"Adicional de dulce de leche o crema", d:"", p:1300 },
+      ]},
     ]
   },
   {
     tab: "Bebidas",
     grupos: [
       { nombre: "Gaseosas", items: [
-        { n:"Pepsi lata 350 cc", d:"", p:null },
-        { n:"7up lata 350 cc",   d:"", p:null },
-        { n:"Pepsi 1,5 litros",  d:"", p:null },
-        { n:"7up 1,5 litros",    d:"", p:null }
+        { n:"Pepsi lata 350 cc", d:"", p:3400 },
+        { n:"7up lata 350 cc", d:"", p:3400 },
+        { n:"Pepsi 1,5 litros", d:"", p:6600 },
+        { n:"7up 1,5 litros", d:"", p:6600 },
       ]},
       { nombre: "Cerveza y agua", items: [
-        { n:"Cerveza 500 cc",        d:"Quilmes o Brahma.",  p:null },
-        { n:"Cerveza Stella Artois", d:"Lata de 473 ml.",    p:null },
-        { n:"Agua mineral 500 cc",   d:"Eco de los Andes.",  p:null }
-      ]}
+        { n:"Cerveza 500 cc", d:"Quilmes o Brahma.", p:null },
+        { n:"Cerveza Stella Artois", d:"Lata de 473 ml.", p:null },
+        { n:"Agua mineral 500 cc", d:"Eco de los Andes.", p:null },
+      ]},
     ]
-  }
+  },
 ];
 
 const COMBOS = [
@@ -1368,15 +1435,43 @@ function tarjeta(it){
     card.appendChild(d);
   }
 
+  /* El local vende muchas pizzas y tartas de tres formas: entera, media y por
+     porción. Van las tres en la misma tarjeta, con el precio de la entera
+     grande: es como se pide en el mostrador y evita repetir el producto
+     tres veces en la carta. */
   const fila = document.createElement("div");
-  fila.className = "fila";
+  fila.className = "precios";
 
-  const pre = document.createElement("span");
-  // p:null = falta confirmar el precio del mostrador (ver CLAUDE.md).
-  pre.className = it.p == null ? "precio a-confirmar" : "precio";
-  pre.textContent = it.p == null ? "Consultar en el local" : plata(it.p);
+  function precio(rotulo, valor, grande){
+    const c = document.createElement("span");
+    c.className = grande ? "pr entera" : "pr";
+    const r = document.createElement("span");
+    r.textContent = rotulo;
+    const v = document.createElement("b");
+    v.textContent = plata(valor);
+    c.append(r, v);
+    return c;
+  }
 
-  fila.appendChild(pre);
+  const hayVarios = it.m != null || it.c != null;
+
+  if(it.p == null){
+    // p:null = falta confirmar el precio del mostrador (ver CLAUDE.md).
+    const pre = document.createElement("span");
+    pre.className = "precio a-confirmar";
+    pre.textContent = "Consultar en el local";
+    fila.appendChild(pre);
+  } else if(hayVarios){
+    fila.appendChild(precio("Entera", it.p, true));
+    if(it.m != null) fila.appendChild(precio("Media", it.m, false));
+    if(it.c != null) fila.appendChild(precio("Porción", it.c, false));
+  } else {
+    const pre = document.createElement("span");
+    pre.className = "precio";
+    pre.textContent = plata(it.p);
+    fila.appendChild(pre);
+  }
+
   card.appendChild(fila);
   return card;
 }

@@ -125,6 +125,51 @@ foto en la misma grilla — no dejar huecos ni placeholders grises.
 Campo previsto en `CARTA`: `f:"muzzarella.webp"`, opcional. Sin `f`, la
 tarjeta se dibuja como hasta ahora.
 
+## La carta sale del rollo del sistema (16/09/2026)
+
+Mateo trajo **la impresión del listado de precios del sistema del local**, por
+rubros. El dueño dijo que **eso es lo correcto**: ante cualquier diferencia,
+manda el rollo, no el pizarrón ni Pedidos Ya.
+
+La lectura se verificó de tres formas independientes y **cerró en las tres**:
+
+1. Los **44 precios de pizza** que ya teníamos (leídos del pizarrón y de los
+   televisores del salón) coinciden uno por uno con el rollo.
+2. En el rubro pizzas, **cada media es la mitad exacta de la entera y cada
+   porción es un octavo exacto**, en las 92 líneas. Sin un solo redondeo raro.
+3. El **"Total del Rubro"** impreso al pie de cada rubro coincide con la
+   cantidad de líneas transcriptas: 92, 22, 24, 14, 18 y 5. Eso descarta que se
+   haya salteado o duplicado una línea.
+
+**Ojo al leer las fotos del rollo**: por el ángulo de la cámara, el par
+`Cod. PV` de cada renglón queda impreso **una línea más arriba** que su
+descripción. Si se lee "en la misma línea" sale todo corrido en uno, y las
+cuentas de la mitad y el octavo dejan de cerrar. Esa es la forma de verificar
+que se está leyendo bien.
+
+### Lo que cambió en la carta
+
+- **Una tarjeta por producto con hasta tres precios** (entera, media y porción),
+  en vez de repetir la misma pizza en dos grupos. `tarjeta()` lee `p` (entera),
+  `m` (media) y `c` (porción); si no hay `m` ni `c`, dibuja el precio solo como
+  antes. Bajó de 44 tarjetas a 30 en pizzas y de paso son 30 fotos y no 44.
+- **Dos pestañas nuevas**: `Tartas saladas` y `Cafetería`. Son siete pestañas,
+  la barra ya scrollea sola en el celular.
+- Los `data-tab` del pie apuntan a los índices nuevos. Si se agrega o se saca
+  una pestaña, **hay que revisarlos**: son índices, no nombres.
+- Se sumó una pregunta al FAQ sobre el desayuno, y la descripción para Google
+  y el `servesCuisine` ahora nombran la cafetería y las tartas.
+
+### Productos que NO se cargaron, a propósito
+
+- **`POLBLAPROVO` $33.600** (media $16.800, porción $4.200). Es la única pizza
+  con precio distinto al resto. No se carga hasta saber cómo se llama: poner
+  "POLBLAPROVO" en una carta para clientes es peor que no ponerla.
+- **`ROSCA PASCUA` $27.000**: es de temporada, no va en septiembre.
+- **`PORCION TORTA` $8.000 y `PORC TORTA ESP` $8.500** son códigos genéricos del
+  sistema, no productos: son el precio con el que se cobran las tortas que en la
+  carta tienen nombre propio (María Renée, pistacho Dubai y las demás).
+
 ## PENDIENTE — lo que falta para terminar
 
 0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,
