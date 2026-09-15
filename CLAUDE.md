@@ -289,6 +289,37 @@ salen acostadas en la web y no se nota hasta que alguien las mira en el celular.
   porque nadie le maneja el foco, pero si alguna vez se le maneja, es el
   mismo problema.
 
+### Las fotos de Drive (16/09/2026)
+
+Mateo subió **149 fotos** a la carpeta "La nieve" de su Drive, todas HEIC del
+iPhone con nombre `IMG_XXXX`, sin ninguna pista de qué producto es cada una.
+
+**Cómo se bajaron.** La red del entorno **bloquea `drive.google.com` y
+`googleapis.com`**, así que no sirve `curl`: la única vía es la herramienta de
+Drive, de a un archivo. Devuelve el contenido en base64 (2,6 a 4,3 MB de texto
+por foto), que no entra en la conversación: el runtime lo guarda solo en un
+archivo de `tool-results/` y de ahí lo levanta `procesar.py`, que lo convierte
+a JPG y **borra el volcado**. Se pueden pedir 12 a 16 en paralelo.
+
+**Ojo con el paralelismo**: el nombre del archivo de volcado lleva un
+timestamp en milisegundos, y con 12 pedidos a la vez **dos pueden caer en el
+mismo milisegundo y uno pisa al otro**. Por eso está `faltan.sh`, que compara
+`ids.txt` contra lo convertido y lista lo que hay que volver a pedir.
+
+**Cómo se identifican.** De a una es carísimo. `hoja.py` arma **hojas de
+contacto** de 24 fotos numeradas: se miran 6 hojas en vez de 149 imágenes.
+
+**La carpeta tiene muchísimas repeticiones**: hasta cinco tomas del mismo
+producto (las fainás, por ejemplo). De 149 fotos salen unos 40 productos.
+
+**Lo que se puede identificar mirando y lo que no.** Sale solo: fainá común vs
+con verdeo, zepelín (se ve el relleno en el corte), pizza especial (jamón,
+morrón, huevo y aceitunas), calabresa (la longaniza), flan, mousse, pasta
+frola (el enrejado), tarta de frutilla, cheese cake. **No sale**: distinguir
+fugazzetta especial de fugazzetta super, María Renée de torta especial, o una
+pascualina de una tarta de cebolla y queso vistas desde arriba. Esas hay que
+preguntarlas, no adivinarlas.
+
 ## PENDIENTE — lo que falta para terminar
 
 0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,
