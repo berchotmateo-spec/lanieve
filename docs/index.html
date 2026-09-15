@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
 
-<!-- Ficha para Google: dirección, horario y teléfono en formato que entiende el buscador -->
+<!-- Ficha para Google: dirección, horario y redes en formato que entiende el buscador -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -41,6 +41,10 @@
   "logo": "https://berchotmateo-spec.github.io/lanieve/icono.png",
   "foundingDate": "1949",
   "servesCuisine": ["Pizza al molde", "Empanadas", "Fainá"],
+  "sameAs": [
+    "https://www.instagram.com/lanieve_oficial/",
+    "https://www.facebook.com/pages/La-Nieve/159752137433973"
+  ],
   "paymentAccepted": "Efectivo, tarjeta de débito, Mercado Pago y pagos con QR",
   "hasMenu": "https://berchotmateo-spec.github.io/lanieve/#carta",
   "potentialAction": {
@@ -167,6 +171,34 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .btn-lin:hover{background:#fff;border-color:var(--rojo);color:var(--rojo)}
 .btn-sm{height:44px;padding:0 20px;font-size:14.5px}
 .acciones{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------------- redes sociales ---------------- */
+.redes{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.redes-tit{
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--tinta-2);margin-right:2px;
+}
+.red{
+  display:inline-flex;align-items:center;gap:9px;
+  height:46px;padding:0 18px;border-radius:999px;
+  border:1px solid var(--linea-2);background:#fff;color:var(--tinta);
+  font-size:14.5px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;
+  transition:background .18s, border-color .18s, color .18s, transform .18s;
+}
+.red:hover{transform:translateY(-1px)}
+.red-ig:hover{border-color:#C13584;color:#C13584}
+.red-fb:hover{border-color:#1877F2;color:#1877F2}
+/* los mismos botones sobre el fondo rojo del contacto */
+.sobre-rojo .redes-tit{color:rgba(255,255,255,.55)}
+.sobre-rojo .red{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+.sobre-rojo .red:hover{background:#fff;border-color:#fff;color:var(--rojo)}
+/* en el pie van sin texto, solo el icono */
+.pie .redes{margin-top:22px}
+.pie .red{
+  width:42px;height:42px;padding:0;justify-content:center;
+  background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.8);
+}
+.pie .red:hover{background:var(--amarillo);border-color:var(--amarillo);color:var(--noche)}
 
 /* ---------------- aviso de vista previa ---------------- */
 .aviso{
@@ -644,6 +676,7 @@ body{padding-bottom:112px}
   .combos{grid-template-columns:1fr}
   .combo.destacado{order:-1}
   .dos,.faq-grid,.contacto-grid{grid-template-columns:1fr}
+  .redes-tit{flex-basis:100%}   /* el rotulo en su propia linea, para que los dos botones entren juntos */
   .pie-grid{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
   .ham{display:grid}
@@ -987,6 +1020,11 @@ body{padding-bottom:112px}
             </a>
             <a class="btn btn-lin" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.35)" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+La+Nieve+Rivadavia+3002+Mar+del+Plata">Cómo llegar</a>
           </div>
+          <div class="redes sobre-rojo" style="margin-top:20px">
+            <span class="redes-tit">Seguínos</span>
+            <a class="red red-ig" data-red="instagram" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4"/><line x1="17.4" y1="6.6" x2="17.41" y2="6.6"/></svg> Instagram</a>
+            <a class="red red-fb" data-red="facebook" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 2.5h-2.6a4.4 4.4 0 0 0-4.4 4.4v3.1H7.5v4h3v7.5h4v-7.5h3l.9-4h-3.9V7.4a1 1 0 0 1 1-1h2.5z"/></svg> Facebook</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1000,6 +1038,10 @@ body{padding-bottom:112px}
       <div>
         <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="204" height="192">LA <span>NIEVE</span></a>
         <p class="pie-txt">Pizza al molde en la esquina de Rivadavia y La Rioja, Mar del Plata. Desde 1949.</p>
+        <div class="redes">
+          <a class="red" data-red="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram de La Nieve" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4"/><line x1="17.4" y1="6.6" x2="17.41" y2="6.6"/></svg></a>
+          <a class="red" data-red="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook de La Nieve" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 2.5h-2.6a4.4 4.4 0 0 0-4.4 4.4v3.1H7.5v4h3v7.5h4v-7.5h3l.9-4h-3.9V7.4a1 1 0 0 1 1-1h2.5z"/></svg></a>
+        </div>
       </div>
       <div>
         <h5>Carta</h5>
@@ -1060,12 +1102,20 @@ body{padding-bottom:112px}
 /* ════════════════════════════════════════════════════════════
    PARA ACTUALIZAR LA PÁGINA, TOCAR SOLO ESTAS TRES COSAS:
    1) PEDIDOS_YA → el link del local en Pedidos Ya
-   2) CARTA      → los productos y precios reales del local
-   3) RESENAS    → las claves de Supabase, donde se guardan las reseñas
+   2) REDES      → Instagram y Facebook del local
+   3) CARTA      → los productos y precios reales del local
+   4) RESENAS    → las claves de Supabase, donde se guardan las reseñas
    ════════════════════════════════════════════════════════════ */
 
 // El local no tiene delivery propio ni WhatsApp: los pedidos van por Pedidos Ya.
 const PEDIDOS_YA = "https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu";
+
+/* Las redes del local. Si alguna no existe o el duenio no la usa mas, dejarla
+   vacia ("") y el boton desaparece solo de la pagina, sin tocar nada mas. */
+const REDES = {
+  instagram: "https://www.instagram.com/lanieve_oficial/",
+  facebook:  "https://www.facebook.com/pages/La-Nieve/159752137433973"
+};
 
 /* Dónde se guardan las reseñas.
    El sitio es estático: GitHub Pages sirve archivos, no guarda nada. Para que
@@ -1255,6 +1305,14 @@ const SVG_TICK = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" st
 
 /* ---------- todos los botones de pedido apuntan a Pedidos Ya ---------- */
 $$("[data-py]").forEach(a => { a.href = PEDIDOS_YA; });
+
+/* ---------- botones de redes ----------
+   Cada boton lee su link de REDES. Si esta vacio, el boton se saca del HTML:
+   asi no queda nunca un enlace que no lleva a ningun lado. */
+$$("[data-red]").forEach(a => {
+  const url = REDES[a.dataset.red];
+  if(url) a.href = url; else a.remove();
+});
 
 /* ---------- ¿está abierto ahora? ----------
    Horario confirmado por el dueño el 11/09/2026: todos los días de 08:00 a

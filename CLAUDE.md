@@ -49,6 +49,8 @@ pizarrón de promos, las dos vitrinas y la fachada):
 | Servicios | Salón (mostrador y mesas), take away, delivery **por Pedidos Ya** |
 | Pago | Efectivo, tarjeta de **débito**, Mercado Pago y QR. **Crédito no** (dueño, 11/09/2026) |
 | Pedidos online | https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu |
+| Instagram | https://www.instagram.com/lanieve_oficial/ — @lanieve_oficial, ~4.800 seguidores, activo |
+| Facebook | https://www.facebook.com/pages/La-Nieve/159752137433973 — ⚠️ falta que el dueño confirme que es de ellos |
 
 **El local no tiene delivery propio ni WhatsApp.** Todo lo que sea pedido a domicilio
 pasa por Pedidos Ya (dato de Mateo, 03/09/2026). Por eso el sitio no arma pedidos:
@@ -61,6 +63,38 @@ página). Quedan **dos canales**: Pedidos Ya y el mostrador. Ojo al escribir
 textos nuevos: las respuestas del FAQ sobre retiro, pedidos grandes y dudas
 **decían "llamanos"** y hubo que reescribirlas. No volver a ofrecer el teléfono
 como canal sin que el dueño lo pida.
+
+### Redes sociales (agregadas el 15/09/2026)
+
+Los botones salen de la constante **`REDES`**, arriba de todo en el `<script>`,
+al lado de `PEDIDOS_YA`. Aparecen en dos lugares: **Contacto** (botón con
+nombre, bajo "Seguínos") y el **pie** (solo el ícono, en la columna de la
+marca). El JSON-LD suma un **`sameAs`** con las dos direcciones: es lo que le
+dice a Google que esas cuentas son del mismo local.
+
+Para sacar una red basta con dejarla en `""`: el `forEach` de `[data-red]`
+borra el botón del HTML. Nunca queda un enlace apuntando a `#`.
+
+**El Instagram está verificado** (@lanieve_oficial, sale en la búsqueda de
+Google del local y lo pasó Mateo). **El Facebook no**: la página existe con el
+id `159752137433973` y coincide con la búsqueda, pero nadie del local confirmó
+todavía que sea la oficial ni si la siguen usando. Si el dueño dice que no,
+vaciar `REDES.facebook` y sacar la línea del `sameAs` en
+`publicar-cabecera.html`.
+
+**No hay TikTok ni X.** Se buscó y no aparecieron. Si algún día abren una,
+agregarla a `REDES`, al `sameAs`, y copiar el bloque de botón con un
+`data-red="tiktok"`.
+
+### El botón "Sitio web" de Google
+
+El enlace que Google muestra en la ficha del local **no sale de esta página**:
+sale del **perfil de Google Business** del local, que se administra en
+business.google.com con la cuenta del dueño. Nosotros no lo podemos cambiar
+desde acá, por más que el sitio esté perfecto. El dueño (o quien tenga el
+perfil reclamado) tiene que entrar y poner la URL a mano. El `sameAs` y el
+`canonical` ayudan a que Google entienda que el sitio es del local, pero **no
+reemplazan ese paso**.
 
 ## PENDIENTE — lo que falta para terminar
 

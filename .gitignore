@@ -1,2 +1,6 @@
 # preview temporal del servidor local
 _preview.html
+
+# capturas de prueba del navegador
+*.png
+!docs/*.png
