@@ -235,9 +235,22 @@ navegador reservaba mal el lugar: la página saltaba sola al terminar de cargar.
 
 ## Fotos de producto — el mecanismo ya está, faltan las fotos
 
-Un producto de la `CARTA` lleva **`f:"archivo.webp"`** y la tarjeta le dibuja la
-foto arriba, a sangre, en 4:3. **Sin `f` la tarjeta se dibuja igual**, sin hueco
-ni placeholder gris: la carta funciona con fotos parciales.
+Un producto de la `CARTA` lleva **`f:"archivo.webp"`** y la tarjeta le dibuja
+la foto **al costado**, como miniatura cuadrada de 76 a 104 px. **Sin `f` la
+tarjeta se dibuja igual**, sin hueco ni placeholder gris.
+
+**La primera versión ponía la foto arriba, a lo ancho de la tarjeta, y estaba
+mal.** Lo cazó Mateo mirándolo en el celular: la tarjeta pasaba de 140 px a
+más de 400, o sea **un producto por pantalla en vez de cuatro**. Una carta se
+recorre, no se contempla: la foto acompaña al nombre, no lo reemplaza. Con la
+miniatura al costado la tarjeta pasa de 140 a 162 px y entran los cuatro.
+
+De paso eso resolvió solo el problema de las fotos parciales: como con foto y
+sin foto miden casi lo mismo, ya **no hace falta completar grupo por grupo**.
+
+**Al tocar la miniatura se abre la foto grande** (`#visor`), con el nombre y la
+descripción abajo. Cierra con Escape, con el botón o tocando afuera, y le
+devuelve el foco a la miniatura que lo abrió.
 
 **Las fotos NO van embebidas como data URI.** Van sueltas en `fotos/`, y
 `hacer-publicar.ps1` las copia a `docs/fotos/`. Sesenta fotos embebidas dejarían
@@ -263,10 +276,18 @@ salen acostadas en la web y no se nota hasta que alguien las mira en el celular.
   `files` (`{"fotos/x.webp": "fotos/x.webp", ...}`). El Artifact es una página
   suelta: si no van, se ven los alt y nada más. En GitHub Pages esto no pasa,
   ahí las copia el script.
-- **Conviene completar por grupo, no de a una.** Cuando un grupo tiene fotos,
-  las tarjetas pasan a medir lo que necesitan (`\.prods:has(.foto-prod)`), así
-  que una sola con foto entre diez sin foto queda desprolija. Mejor terminar
-  todas las pizzas, después todas las tortas.
+- **La miniatura es un `<button>`, no un `<div>`.** Se puede tocar, así que
+  tiene que llegarle el foco y el teclado, y anunciarse al lector de pantalla.
+
+- **Cuidado con `visibility` en transición.** El visor abría con
+  `transition:visibility .22s` y el foco no le llegaba al botón de cerrar:
+  `visibility` no se desvanece, cambia de golpe y **por omisión a la mitad de
+  la transición**, así que durante 110 ms el visor seguía invisible, y un
+  elemento invisible ignora `focus()` sin dar ningún error. Se arregla con
+  `visibility 0s` al abrir y `visibility 0s linear .22s` al cerrar. El
+  `.overlay` del menú del celular tiene el mismo patrón viejo; hoy no molesta
+  porque nadie le maneja el foco, pero si alguna vez se le maneja, es el
+  mismo problema.
 
 ## PENDIENTE — lo que falta para terminar
 

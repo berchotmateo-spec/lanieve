@@ -416,20 +416,22 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .grupo-tit .cuenta{font-size:12.5px;color:var(--tinta-3);font-weight:600;white-space:nowrap}
 
 .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-/* Sin fotos, las tarjetas de una fila miden todas lo mismo y los precios
-   quedan alineados. Con fotos eso deja huecos enormes en las que no tienen,
-   así que ahí cada tarjeta mide lo que necesita. */
-.prods:has(.foto-prod){align-items:start}
-.prod .foto-prod{
-  margin:-20px -20px 16px;
-  aspect-ratio:4/3;overflow:hidden;
+/* La foto va al costado, no arriba: la tarjeta con foto y la tarjeta sin foto
+   miden casi lo mismo y la carta se sigue leyendo de un vistazo. */
+.prod-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.foto-prod{
+  flex-shrink:0;padding:0;border:0;cursor:zoom-in;
+  width:clamp(76px,21vw,104px);aspect-ratio:1;
+  border-radius:14px;overflow:hidden;
   background:var(--superficie);
-  border-radius:var(--r-lg) var(--r-lg) 0 0;
+  transition:transform .18s, box-shadow .18s;
 }
-.prod .foto-prod img{display:block;width:100%;height:100%;object-fit:cover}
+.foto-prod img{display:block;width:100%;height:100%;object-fit:cover}
+.foto-prod:hover{transform:scale(1.04);box-shadow:var(--s2)}
+.foto-prod:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
 .prod{
   background:#fff;border:1px solid var(--linea);border-radius:var(--r-lg);
-  padding:20px 20px 16px;display:flex;flex-direction:column;
+  padding:20px 20px 16px;display:flex;gap:14px;align-items:flex-start;
   transition:transform .18s, box-shadow .18s, border-color .18s;
 }
 .prod:hover{transform:translateY(-2px);box-shadow:var(--s2);border-color:var(--amarillo)}
@@ -619,6 +621,44 @@ section{padding:clamp(62px,8.5vw,110px) 0}
   border:1px dashed var(--linea-2);border-radius:var(--r-lg);background:#fff;margin-bottom:20px;
 }
 .sin-resenas b{display:block;color:var(--tinta);font-size:18px;margin-bottom:6px}
+
+/* ---------------- foto grande ---------------- */
+/* Al tocar la miniatura la foto se abre entera. La carta se mira casi siempre
+   en el celular, donde una miniatura no alcanza para decidir. */
+.visor{
+  position:fixed;inset:0;z-index:100;
+  display:grid;place-items:center;
+  padding:clamp(16px,5vw,40px);
+  background:rgba(20,10,8,.88);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;
+  /* `visibility` no se desvanece: cambia de golpe, y por omisión a la MITAD
+     de la transición. O sea que al abrir el visor seguía invisible 110 ms, y
+     un elemento invisible no acepta el foco. Al abrir tiene que cambiar ya
+     (0s) y al cerrar recién cuando terminó de desaparecer (0s con retardo). */
+  transition:opacity .22s, visibility 0s linear .22s;
+}
+.visor.abierto{opacity:1;visibility:visible;transition:opacity .22s, visibility 0s}
+.visor figure{margin:0;max-width:min(880px,100%);width:100%}
+.visor img{
+  display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;
+  border-radius:var(--r-lg);background:var(--noche);
+}
+.visor figcaption{margin-top:16px;color:#fff;text-align:center}
+.visor figcaption b{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.visor figcaption span{display:block;margin-top:5px;font-size:14.5px;color:rgba(255,255,255,.7);max-width:52ch;margin-inline:auto}
+.visor .cerrar{
+  position:absolute;top:max(16px,env(safe-area-inset-top, 0px));right:16px;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:0;color:#fff;
+  font-size:26px;line-height:1;cursor:pointer;
+}
+.visor .cerrar:hover{background:rgba(255,255,255,.26)}
+.visor .cerrar:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  .visor{transition:none}
+  .foto-prod{transition:none}
+}
 
 /* ---------------- contacto ---------------- */
 .contacto-card{
@@ -1102,6 +1142,18 @@ body{padding-bottom:112px}
   </div>
 </footer>
 
+<!-- ══════════════════ FOTO GRANDE ══════════════════ -->
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-labelledby="visor-tit">
+  <button class="cerrar" id="visor-cerrar" type="button" aria-label="Cerrar la foto">&times;</button>
+  <figure>
+    <img id="visor-img" src="" alt="">
+    <figcaption>
+      <b id="visor-tit"></b>
+      <span id="visor-det"></span>
+    </figcaption>
+  </figure>
+</div>
+
 <!-- ══════════════════ NEVADA ══════════════════ -->
 <canvas id="nieve" aria-hidden="true"></canvas>
 
@@ -1452,35 +1504,61 @@ CARTA.forEach((seccion, i) => {
   tabsEl.appendChild(b);
 });
 
+/* ---------- la foto grande ----------
+   Se abre al tocar la miniatura. Guarda quién la abrió para devolverle el
+   foco al cerrar: si no, el teclado vuelve al principio de la página. */
+const visor = $("#visor");
+let volverA = null;
+
+function abrirFoto(src, nombre, detalle){
+  $("#visor-img").src = src;
+  $("#visor-img").alt = nombre;
+  $("#visor-tit").textContent = nombre;
+  $("#visor-det").textContent = detalle || "";
+  volverA = document.activeElement;
+  visor.classList.add("abierto");
+  document.body.style.overflow = "hidden";
+  /* El visor arranca con visibility:hidden y un elemento invisible NO acepta
+     el foco: focus() no falla, simplemente no hace nada. Hay que esperar a
+     que el navegador pinte el cuadro en el que ya es visible, y para eso un
+     solo requestAnimationFrame no alcanza. */
+  requestAnimationFrame(() => requestAnimationFrame(() => $("#visor-cerrar").focus()));
+}
+
+function cerrarFoto(){
+  if(!visor.classList.contains("abierto")) return;
+  visor.classList.remove("abierto");
+  document.body.style.overflow = "";
+  if(volverA) volverA.focus();
+  volverA = null;
+}
+
+visor.addEventListener("click", e => {
+  if(e.target === visor || e.target.closest(".cerrar")) cerrarFoto();
+});
+addEventListener("keydown", e => { if(e.key === "Escape") cerrarFoto(); });
+
 function tarjeta(it){
   const card = document.createElement("article");
   card.className = "prod";
 
-  /* Foto del producto, opcional. Va en `f` con el nombre del archivo dentro
-     de fotos/ (ver "Fotos de producto" en CLAUDE.md). Los que todavía no
-     tienen foto se dibujan igual, sin hueco ni placeholder gris. */
-  if(it.f){
-    const caja = document.createElement("div");
-    caja.className = "foto-prod";
-    const img = document.createElement("img");
-    img.src = "fotos/" + it.f;
-    img.alt = it.n;
-    img.loading = "lazy";
-    img.decoding = "async";
-    img.width = 900; img.height = 675;
-    caja.appendChild(img);
-    card.appendChild(caja);
-  }
+  /* El texto va en su propia columna para que la foto pueda ir al costado.
+     Con la foto arriba, a lo ancho de la tarjeta, en el celular entraba UN
+     producto por pantalla; al costado entran tres o cuatro, que es como se
+     lee una carta. */
+  const txt = document.createElement("div");
+  txt.className = "prod-txt";
+  card.appendChild(txt);
 
   const h = document.createElement("h4");
   h.textContent = it.n;
-  card.appendChild(h);
+  txt.appendChild(h);
 
   if(it.d){
     const d = document.createElement("p");
     d.className = "det";
     d.textContent = it.d;
-    card.appendChild(d);
+    txt.appendChild(d);
   }
 
   /* El local vende muchas pizzas y tartas de tres formas: entera, media y por
@@ -1520,7 +1598,29 @@ function tarjeta(it){
     fila.appendChild(pre);
   }
 
-  card.appendChild(fila);
+  txt.appendChild(fila);
+
+  /* Foto del producto, opcional. Va en `f` con el nombre del archivo dentro
+     de fotos/ (ver "Fotos de producto" en CLAUDE.md). Los que todavía no
+     tienen foto se dibujan igual, sin hueco ni placeholder gris.
+     Es un <button> y no un <div> porque se puede tocar: abre la foto grande,
+     y así anda también con el teclado y con lector de pantalla. */
+  if(it.f){
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "foto-prod";
+    boton.setAttribute("aria-label", "Ver la foto de " + it.n + " en grande");
+    const img = document.createElement("img");
+    img.src = "fotos/" + it.f;
+    img.alt = it.n;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.width = 900; img.height = 675;
+    boton.appendChild(img);
+    boton.addEventListener("click", () => abrirFoto(img.src, it.n, it.d));
+    card.appendChild(boton);
+  }
+
   return card;
 }
 
