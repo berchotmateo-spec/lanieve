@@ -204,10 +204,25 @@ el link, que también tenía el muñeco del Mundial abajo a la izquierda).
 `hacer-og.ps1` lee `docs/logo.png`, así que si el logo vuelve a cambiar,
 alcanza con reemplazar ese archivo y correrlo.
 
-**El logotipo completo** —el muñeco con el óvalo rojo al lado— está en
-`docs/logotipo.png` (750×420) y **va solo en la portada**, con la clase
-`.logotipo`. En la barra y en el pie sigue el muñeco suelto: a 34 px el óvalo
-con "La Nieve" adentro no se lee y lo único que hace es ensuciar.
+Hay **tres piezas de marca**, cada una para su tamaño:
+
+| Archivo | Dónde | Tamaño en pantalla |
+|---|---|---|
+| `logotipo.png` (750×420) | portada, clase `.logotipo` | 104 a 142 px de alto |
+| `logo.png` (244×300) | barra y pie, el muñeco solo | 34 y 40 px |
+| `ovalo.png` (510×200) | barra y pie, al lado del muñeco | 26 y 30 px |
+
+**El nombre ya no se escribe con texto en la barra ni en el pie**: era "LA
+NIEVE" en la tipografía de la página y ahora es el óvalo rojo del cartel. Se
+probó primero el logotipo entero ahí y no sirve: a 42 px de alto, "La Nieve"
+adentro del óvalo queda en 5 px y no se lee. Separado en dos piezas —el muñeco
+a 34 px y el óvalo a 26— se lee bien, y encima la marca ocupa **menos** ancho
+que el texto que había (103 px contra 122), que en el celular es lo que
+importa.
+
+El `alt` del óvalo dice "La Nieve": el nombre del local tiene que seguir
+estando para un lector de pantalla y para Google, aunque a la vista sea una
+imagen.
 
 `hacer-publicar.ps1` lo saca a archivo suelto igual que el logo, así que si se
 agrega otra imagen embebida **hay que sumarla al `$mapa`**, si no queda un data

@@ -28,6 +28,7 @@ function Get-Uri([string]$archivo, [string]$tipo) {
 $mapa = @(
   @{ uri = (Get-Uri "logo.png"     "png");  archivo = "logo.png" },
   @{ uri = (Get-Uri "logotipo.png" "png");  archivo = "logotipo.png" },
+  @{ uri = (Get-Uri "ovalo.png"    "png");  archivo = "ovalo.png" },
   @{ uri = (Get-Uri "fachada.jpg" "jpeg"); archivo = "fachada.jpg" },
   @{ uri = (Get-Uri "vitrina.jpg" "jpeg"); archivo = "vitrina.jpg" }
 )
