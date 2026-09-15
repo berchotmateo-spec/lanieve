@@ -1,0 +1,589 @@
+<title>Lo que falta de La Nieve</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+
+<style>
+/* Toma la paleta y las tipografías del sitio de La Nieve, para que esto se
+   sienta parte del mismo trabajo y no una herramienta prestada. */
+:root{
+  --rojo:#D4202A;
+  --rojo-600:#A8151E;
+  --rojo-50:#FDF0EE;
+  --amarillo:#FFC72C;
+  --amarillo-50:#FFF4D4;
+  --amarillo-900:#4A2A00;
+  --verde:#0E8A4F;
+  --verde-50:#E8F7EF;
+
+  --tinta:#1A100C;
+  --tinta-2:#6B564D;
+  --tinta-3:#937A6E;
+  --fondo:#FFFDF9;
+  --superficie:#FFF7EC;
+  --tarjeta:#FFFFFF;
+  --linea:#F0E2D4;
+  --linea-2:#E0CCBB;
+
+  --r:14px;
+  --r-lg:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --rojo:#FF5A5F;
+    --rojo-600:#FF8286;
+    --rojo-50:#33191A;
+    --amarillo:#FFC72C;
+    --amarillo-50:#3A2E12;
+    --amarillo-900:#FFE3A0;
+    --verde:#3FCB88;
+    --verde-50:#14301F;
+
+    --tinta:#F6EDE5;
+    --tinta-2:#C0ADA1;
+    --tinta-3:#938075;
+    --fondo:#16100D;
+    --superficie:#1F1613;
+    --tarjeta:#231A16;
+    --linea:#332621;
+    --linea-2:#443229;
+  }
+}
+:root[data-theme="dark"]{
+  --rojo:#FF5A5F;
+  --rojo-600:#FF8286;
+  --rojo-50:#33191A;
+  --amarillo:#FFC72C;
+  --amarillo-50:#3A2E12;
+  --amarillo-900:#FFE3A0;
+  --verde:#3FCB88;
+  --verde-50:#14301F;
+
+  --tinta:#F6EDE5;
+  --tinta-2:#C0ADA1;
+  --tinta-3:#938075;
+  --fondo:#16100D;
+  --superficie:#1F1613;
+  --tarjeta:#231A16;
+  --linea:#332621;
+  --linea-2:#443229;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--tinta);
+  font-family:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.env{width:min(760px,100%);margin-inline:auto;padding-inline:18px}
+.mono{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(27px,6.4vw,38px)}
+h2{font-size:clamp(20px,3.4vw,24px);letter-spacing:-.025em}
+p{margin:0}
+a{color:var(--rojo);text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- encabezado ---------- */
+.tapa{
+  background:var(--superficie);
+  border-bottom:1px solid var(--linea);
+  padding-block:26px 22px;
+}
+.sello{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:"DM Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amarillo-900);background:var(--amarillo-50);
+  border:1px solid var(--amarillo);
+  border-radius:999px;padding:6px 12px;
+}
+.tapa h1{margin-top:14px}
+.tapa .sub{margin-top:10px;color:var(--tinta-2);font-size:15.5px;max-width:58ch}
+
+/* ---------- barra de avance, pegada arriba ---------- */
+.avance{
+  position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
+  background:color-mix(in srgb, var(--fondo) 92%, transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);
+}
+.avance-in{display:flex;align-items:center;gap:14px;padding-block:11px}
+.avance b{font-size:15px;white-space:nowrap}
+.avance .riel{
+  flex:1;height:7px;border-radius:999px;background:var(--linea);overflow:hidden;min-width:60px;
+}
+.avance .riel i{
+  display:block;height:100%;width:0%;border-radius:999px;
+  background:var(--verde);transition:width .35s cubic-bezier(.2,.8,.3,1);
+}
+.avance.completo .riel i{background:var(--verde)}
+
+/* ---------- bloques ---------- */
+.bloque{padding-block:34px 8px}
+.bloque-tapa{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.cuenta{
+  font-family:"DM Mono",ui-monospace,monospace;font-size:12.5px;font-weight:500;
+  color:var(--tinta-3);white-space:nowrap;
+}
+.bloque > .porque{color:var(--tinta-2);font-size:15px;margin-bottom:18px;max-width:62ch}
+
+/* ---------- filas de tarea ---------- */
+.filas{display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none}
+.fila{
+  display:grid;gap:4px 12px;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  background:var(--tarjeta);
+  border:1px solid var(--linea);
+  border-radius:var(--r);
+  padding:13px 15px;
+  transition:border-color .18s, background .18s;
+}
+.fila.listo{border-color:var(--verde);background:var(--verde-50)}
+.fila .que{font-weight:700;letter-spacing:-.015em;min-width:0;overflow-wrap:anywhere}
+.fila .donde{
+  grid-column:1/-1;order:3;
+  font-size:13px;color:var(--tinta-2);line-height:1.45;
+}
+.fila.listo .donde{color:var(--tinta-2)}
+
+/* precio */
+.precio-campo{display:flex;align-items:center;gap:6px;justify-self:end}
+.precio-campo .signo{color:var(--tinta-3);font-weight:700}
+.precio-campo input{
+  width:104px;height:42px;text-align:right;
+  border:1px solid var(--linea-2);border-radius:10px;
+  background:var(--fondo);color:var(--tinta);
+  font-family:"DM Mono",ui-monospace,monospace;font-size:16px;font-variant-numeric:tabular-nums;
+  padding:0 10px;
+}
+.precio-campo input::placeholder{color:var(--tinta-3);font-size:14px}
+.precio-campo input:focus{outline:2px solid var(--rojo);outline-offset:1px;border-color:var(--rojo)}
+
+/* opciones */
+.opciones{display:flex;gap:7px;flex-wrap:wrap;justify-self:end}
+.op{
+  border:1px solid var(--linea-2);background:var(--fondo);color:var(--tinta-2);
+  border-radius:999px;padding:8px 14px;
+  font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  transition:background .16s, color .16s, border-color .16s;
+}
+.op:hover{border-color:var(--rojo);color:var(--rojo)}
+.op[aria-pressed="true"]{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.op:focus-visible{outline:2px solid var(--rojo);outline-offset:2px}
+
+/* tilde simple */
+.tilde{
+  width:30px;height:30px;flex-shrink:0;justify-self:end;
+  border:1.8px solid var(--linea-2);border-radius:9px;
+  background:var(--fondo);cursor:pointer;
+  display:grid;place-items:center;padding:0;
+  transition:background .16s, border-color .16s;
+}
+.tilde svg{width:17px;height:17px;opacity:0;transition:opacity .16s;color:#fff}
+.tilde[aria-pressed="true"]{background:var(--verde);border-color:var(--verde)}
+.tilde[aria-pressed="true"] svg{opacity:1}
+.tilde:focus-visible{outline:2px solid var(--rojo);outline-offset:2px}
+
+/* ---------- fotos ---------- */
+.aviso-fotos{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--amarillo-50);border:1px solid var(--amarillo);
+  border-radius:var(--r);padding:14px 16px;margin-bottom:20px;
+  font-size:14.5px;line-height:1.5;color:var(--amarillo-900);
+}
+.aviso-fotos svg{flex-shrink:0;margin-top:3px}
+.aviso-fotos b{font-weight:800}
+
+.tabla-fotos{width:100%;border-collapse:collapse;font-size:15px}
+.tabla-fotos th{
+  text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-3);font-weight:600;padding:0 0 9px;border-bottom:1px solid var(--linea-2);
+}
+.tabla-fotos th:last-child,.tabla-fotos td:last-child{text-align:right}
+.tabla-fotos td{padding:11px 0;border-bottom:1px solid var(--linea);vertical-align:top}
+.tabla-fotos tr:last-child td{border-bottom:0}
+.tabla-fotos .grupo{font-weight:700;letter-spacing:-.015em}
+.tabla-fotos .nota{display:block;font-size:13px;color:var(--tinta-2);font-weight:400;margin-top:2px}
+.tabla-fotos .n{font-family:"DM Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+.tabla-fotos tfoot td{border-top:2px solid var(--linea-2);border-bottom:0;padding-top:12px;font-weight:800}
+
+.como{display:flex;flex-direction:column;gap:11px;margin:22px 0 0;padding:0;list-style:none}
+.como li{
+  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
+  font-size:15px;line-height:1.5;color:var(--tinta-2);
+}
+.como .mk{
+  width:26px;height:26px;border-radius:8px;flex-shrink:0;
+  background:var(--rojo-50);color:var(--rojo);
+  display:grid;place-items:center;
+  font-family:"DM Mono",ui-monospace,monospace;font-size:13px;font-weight:500;
+}
+.como b{color:var(--tinta);font-weight:700}
+
+/* ---------- cierre ---------- */
+.cierre{
+  margin:38px 0 0;padding:22px 20px;
+  background:var(--superficie);border:1px solid var(--linea-2);border-radius:var(--r-lg);
+}
+.cierre h3{font-size:18px;margin-bottom:6px}
+.cierre p{color:var(--tinta-2);font-size:14.5px;max-width:56ch}
+.botonera{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:48px;padding:0 22px;border-radius:999px;border:1px solid transparent;
+  background:var(--rojo);color:#fff;
+  font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+  transition:background .18s, transform .18s;
+}
+.btn:hover{background:var(--rojo-600);transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn-lin{background:transparent;color:var(--tinta);border-color:var(--linea-2)}
+.btn-lin:hover{background:var(--tarjeta);border-color:var(--rojo);color:var(--rojo)}
+.btn:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
+.copiado{font-size:14px;color:var(--verde);font-weight:700;align-self:center}
+
+.pie{
+  padding-block:30px 40px;margin-top:26px;border-top:1px solid var(--linea);
+  color:var(--tinta-3);font-size:13.5px;line-height:1.5;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+@media (max-width:430px){
+  .fila{grid-template-columns:1fr}
+  .precio-campo,.opciones,.tilde{justify-self:start}
+  .fila .que{margin-bottom:2px}
+}
+</style>
+
+<div class="tapa">
+  <div class="env">
+    <span class="sello">La Nieve · reunión de hoy</span>
+    <h1>Lo que falta de la carta</h1>
+    <p class="sub">Todo lo que quedó sin confirmar del sitio, en el orden en que conviene preguntarlo. Cargá acá lo que te vaya diciendo y al final copiás todo de una.</p>
+  </div>
+</div>
+
+<div class="avance" id="avance">
+  <div class="env avance-in">
+    <b class="mono" id="avance-txt">0 / 22</b>
+    <span class="riel"><i id="avance-riel"></i></span>
+  </div>
+</div>
+
+<main class="env">
+
+  <!-- ════════ PRECIOS ════════ -->
+  <section class="bloque">
+    <div class="bloque-tapa">
+      <h2>Precios que faltan</h2>
+      <span class="cuenta">13 productos</span>
+    </div>
+    <p class="porque">Estos trece salieron de la carta de Pedidos Ya, así que tenemos el nombre pero no el precio de mostrador. Hoy se muestran como “Consultar en el local”. Importante: <b>pedile el precio del mostrador</b>, no el de la app — la app le suma su comisión encima.</p>
+    <ul class="filas" id="lista-precios"></ul>
+  </section>
+
+  <!-- ════════ DUDAS ════════ -->
+  <section class="bloque">
+    <div class="bloque-tapa">
+      <h2>Dudas para cerrar</h2>
+      <span class="cuenta">9 preguntas</span>
+    </div>
+    <p class="porque">Cosas que están cargadas pero con una sombra de duda: carteles que salieron con reflejo, precios que no cierran contra el resto, o datos que en Pedidos Ya figuran de dos formas distintas.</p>
+    <ul class="filas" id="lista-dudas"></ul>
+  </section>
+
+  <!-- ════════ FOTOS ════════ -->
+  <section class="bloque">
+    <div class="bloque-tapa">
+      <h2>Las fotos</h2>
+      <span class="cuenta">63 tomas, no 85</span>
+    </div>
+    <p class="porque">La carta tiene 85 productos, pero no hacen falta 85 fotos.</p>
+
+    <div class="aviso-fotos">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+      <div><b>Las 22 pizzas están dos veces en la carta</b>, una como pizza entera y otra como porción. Una sola foto de la porción sirve para las dos filas: son 22 fotos que cubren 44 productos.</div>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="tabla-fotos">
+        <thead>
+          <tr><th>Qué fotografiar</th><th>Fotos</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="grupo">Pizzas</span><span class="nota">Una porción de cada variedad: muzzarella, fugazza, fugazzetta, napolitana, calabresa, roquefort, caprese, rúcula y crudo, arrollada, rellena y las demás.</span></td>
+            <td class="n">22</td>
+          </tr>
+          <tr>
+            <td><span class="grupo">Empanadas</span><span class="nota">Carne, jamón y queso, verdura, cebolla. Abierta al medio se vende mucho mejor que cerrada.</span></td>
+            <td class="n">4</td>
+          </tr>
+          <tr>
+            <td><span class="grupo">Fainá</span><span class="nota">Común, verdeo, cebolla y muzzarella, rellena de jamón y queso, roquefort, especial.</span></td>
+            <td class="n">6</td>
+          </tr>
+          <tr>
+            <td><span class="grupo">Del mostrador</span><span class="nota">Los tres calentitos, fugazzín, zepelín super, medialuna gigante, fatay y tarteleta.</span></td>
+            <td class="n">8</td>
+          </tr>
+          <tr>
+            <td><span class="grupo">Postres</span><span class="nota">Las 12 tortas por porción y los 4 de la heladera. Son los que mejor entran por los ojos: vale la pena tomarse el tiempo acá.</span></td>
+            <td class="n">16</td>
+          </tr>
+          <tr>
+            <td><span class="grupo">Bebidas</span><span class="nota">Las de menor prioridad. Una lata es una lata; si el tiempo aprieta, estas se dejan para otro día.</span></td>
+            <td class="n">7</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Total</td><td class="n">63</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <ul class="como">
+      <li><span class="mk">1</span><div><b>Todas con la misma luz y el mismo fondo.</b> Elegí un lugar cerca de la ventana, apoyá siempre en la misma bandeja o tabla, y no te muevas de ahí. Lo que hace que una carta con fotos se vea profesional no es la foto suelta: es que las 63 se parezcan entre sí.</div></li>
+      <li><span class="mk">2</span><div><b>Sin flash.</b> El flash del celular aplasta la comida y le pone ese brillo amarillo. Si está oscuro, acercate a la ventana o pedí que prendan todas las luces del salón.</div></li>
+      <li><span class="mk">3</span><div><b>Desde arriba, casi a pique</b>, y con el producto llenando el cuadro. Dejá un poco de aire alrededor: en la web van recortadas en cuadrado y si está muy justo se corta el borde.</div></li>
+      <li><span class="mk">4</span><div><b>Cuadrado.</b> Poné la cámara en 1:1 antes de empezar. Te ahorra recortar 63 fotos después.</div></li>
+      <li><span class="mk">5</span><div><b>Sacá dos o tres de cada una.</b> Estás ahí una sola vez; volver por una foto movida es un viaje al pedo.</div></li>
+      <li><span class="mk">6</span><div><b>Si el tiempo no da, priorizá.</b> Las pizzas más pedidas y las tortas primero. Es mejor tener 20 productos con foto buena que 63 con foto apurada — la carta banca perfectamente que algunos tengan foto y otros no.</div></li>
+      <li><span class="mk">7</span><div><b>Mandámelas como vengan.</b> Del yo me ocupo: pesan como 4 MB cada una y así no pueden ir a la web. Hay que achicarlas y convertirlas, y eso lo hago yo. Vos no toques nada.</div></li>
+    </ul>
+  </section>
+
+  <div class="cierre">
+    <h3>Cuando termines</h3>
+    <p>Tocá el botón y pegámelo en el chat. Con eso cargo los precios, cierro las dudas y dejo la carta lista para las fotos.</p>
+    <div class="botonera">
+      <button class="btn" id="copiar" type="button">Copiar todo para pasarme</button>
+      <button class="btn btn-lin" id="limpiar" type="button">Borrar y empezar de nuevo</button>
+      <span class="copiado" id="copiado" hidden>Copiado</span>
+    </div>
+  </div>
+
+  <div class="pie">
+    Lo que cargues acá queda guardado en este navegador nomás, para que no se pierda si cerrás la pestaña. No se manda a ningún lado hasta que vos lo copies y me lo pases.
+  </div>
+</main>
+
+<script>
+"use strict";
+
+/* Los trece productos sin precio, tal como están cargados en la carta del sitio. */
+const PRECIOS = [
+  { id:"faina-comun",     n:"Fainá común",                       d:"Empanadas y fainá · por porción" },
+  { id:"faina-verdeo",    n:"Fainá con verdeo",                  d:"Empanadas y fainá · por porción" },
+  { id:"faina-cebmuzza",  n:"Fainá con cebolla y muzzarella",    d:"Empanadas y fainá · por porción" },
+  { id:"faina-jyq",       n:"Fainá rellena de jamón y queso",    d:"Empanadas y fainá · por porción" },
+  { id:"torta-ricota",    n:"Torta de ricota",                   d:"Postres · tortas por porción" },
+  { id:"pasta-frola",     n:"Pasta frola",                       d:"Postres · tortas por porción" },
+  { id:"pepsi-lata",      n:"Pepsi lata 350 cc",                 d:"Bebidas · gaseosas" },
+  { id:"7up-lata",        n:"7up lata 350 cc",                   d:"Bebidas · gaseosas" },
+  { id:"pepsi-15",        n:"Pepsi 1,5 litros",                  d:"Bebidas · gaseosas" },
+  { id:"7up-15",          n:"7up 1,5 litros",                    d:"Bebidas · gaseosas" },
+  { id:"cerveza-500",     n:"Cerveza 500 cc",                    d:"Bebidas · cerveza y agua" },
+  { id:"stella",          n:"Cerveza Stella Artois",             d:"Bebidas · cerveza y agua" },
+  { id:"agua-500",        n:"Agua mineral 500 cc",               d:"Bebidas · cerveza y agua" }
+];
+
+/* Las dudas. Las que tienen `ops` son de elegir una; el resto se tildan. */
+const DUDAS = [
+  { id:"fugazzin",  n:"El fugazzín, ¿sale $2.200?",
+    d:"Lo leí del cartel escrito a mano. Queda raro al lado del calentito, que sale $5.200." },
+  { id:"tarteleta", n:"La tarteleta, ¿$4.200? ¿Y qué lleva?",
+    d:"El cartel tenía reflejo del vidrio justo en la descripción." },
+  { id:"empanadas", n:"Empanada de carne y de jamón y queso, ¿$2.700?",
+    d:"Las puse por analogía con las de verdura y cebolla, que sí se leían. Nunca las confirmó nadie." },
+  { id:"muzza",     n:"La muzzarella, ¿lleva aceitunas u orégano?",
+    d:"En los televisores del salón dice aceitunas, en Pedidos Ya dice orégano.",
+    ops:["Aceitunas","Orégano","Las dos"] },
+  { id:"stella-ml", n:"La Stella, ¿473 ml o 500 cc?",
+    d:"En la app el título dice una cosa y la descripción dice otra.",
+    ops:["473 ml","500 cc"] },
+  { id:"faltantes", n:"Fatay picante, pizza de pollo, fugazzetta roquefort y fugazzetta pepperoni",
+    d:"Están en Pedidos Ya pero no en nuestra carta. ¿Se venden también por mostrador? ¿A cuánto?" },
+  { id:"tartas",    n:"Tartas saladas enteras y sándwiches, ¿se venden en el mostrador?",
+    d:"En Pedidos Ya hay dos categorías enteras que nuestra carta no tiene.",
+    ops:["Sí, van","No, solo app"] },
+  { id:"promo1",    n:"La Promo 1 (tres muzzarellas), ¿cuánto sale?",
+    d:"En el pizarrón leí $44.000 y en la app está $49.900. El resto de las promos tiene 6 a 8 % de diferencia, esta tiene 13,4 %. Además en la app aparece cargada dos veces." },
+  { id:"ficha-py",  n:"En Pedidos Ya hay dos fichas de La Nieve, ¿cuál es la que atiende?",
+    d:"Una está como Mar del Plata centro y otra bajo la zona Santa Celina. Los botones del sitio apuntan a la primera.",
+    ops:["La del centro","La de Santa Celina"] }
+];
+
+const LLAVE = "lanieve-reunion-v1";
+const $ = s => document.querySelector(s);
+
+/* localStorage puede fallar (ventana privada, cookies bloqueadas). Si falla, la
+   página funciona igual, solo que no recuerda nada. */
+function leer(){
+  try{ return JSON.parse(localStorage.getItem(LLAVE)) || {}; }
+  catch(e){ return {}; }
+}
+function guardar(){
+  try{ localStorage.setItem(LLAVE, JSON.stringify(estado)); }
+  catch(e){ /* sin memoria, pero se sigue pudiendo usar */ }
+}
+let estado = leer();
+
+const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+
+/* ---------- precios ---------- */
+const listaPrecios = $("#lista-precios");
+PRECIOS.forEach(it => {
+  const li = document.createElement("li");
+  li.className = "fila";
+  li.id = "fila-" + it.id;
+
+  const que = document.createElement("span");
+  que.className = "que";
+  que.textContent = it.n;
+
+  const donde = document.createElement("span");
+  donde.className = "donde";
+  donde.textContent = it.d;
+
+  const campo = document.createElement("span");
+  campo.className = "precio-campo";
+  const signo = document.createElement("span");
+  signo.className = "signo mono";
+  signo.textContent = "$";
+  const input = document.createElement("input");
+  input.type = "text";
+  input.inputMode = "numeric";
+  input.id = "precio-" + it.id;
+  input.placeholder = "0.000";
+  input.setAttribute("aria-label", "Precio de " + it.n);
+  input.value = estado[it.id] || "";
+  input.addEventListener("input", () => {
+    estado[it.id] = input.value.trim();
+    if(!estado[it.id]) delete estado[it.id];
+    guardar(); pintar();
+  });
+  campo.append(signo, input);
+
+  li.append(que, campo, donde);
+  listaPrecios.append(li);
+});
+
+/* ---------- dudas ---------- */
+const listaDudas = $("#lista-dudas");
+DUDAS.forEach(it => {
+  const li = document.createElement("li");
+  li.className = "fila";
+  li.id = "fila-" + it.id;
+
+  const que = document.createElement("span");
+  que.className = "que";
+  que.textContent = it.n;
+
+  const donde = document.createElement("span");
+  donde.className = "donde";
+  donde.textContent = it.d;
+
+  let control;
+  if(it.ops){
+    control = document.createElement("span");
+    control.className = "opciones";
+    it.ops.forEach(texto => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "op";
+      b.textContent = texto;
+      b.setAttribute("aria-pressed", estado[it.id] === texto ? "true" : "false");
+      b.addEventListener("click", () => {
+        estado[it.id] = estado[it.id] === texto ? undefined : texto;
+        if(!estado[it.id]) delete estado[it.id];
+        control.querySelectorAll(".op").forEach(o =>
+          o.setAttribute("aria-pressed", o.textContent === estado[it.id] ? "true" : "false"));
+        guardar(); pintar();
+      });
+      control.append(b);
+    });
+  } else {
+    control = document.createElement("button");
+    control.type = "button";
+    control.className = "tilde";
+    control.innerHTML = TICK;
+    control.setAttribute("aria-label", "Marcar como preguntado: " + it.n);
+    control.setAttribute("aria-pressed", estado[it.id] ? "true" : "false");
+    control.addEventListener("click", () => {
+      estado[it.id] = estado[it.id] ? undefined : "preguntado";
+      if(!estado[it.id]) delete estado[it.id];
+      control.setAttribute("aria-pressed", estado[it.id] ? "true" : "false");
+      guardar(); pintar();
+    });
+  }
+
+  li.append(que, control, donde);
+  listaDudas.append(li);
+});
+
+/* ---------- avance ---------- */
+const TOTAL = PRECIOS.length + DUDAS.length;
+function pintar(){
+  let hechos = 0;
+  [...PRECIOS, ...DUDAS].forEach(it => {
+    const ok = Boolean(estado[it.id]);
+    if(ok) hechos++;
+    const fila = document.getElementById("fila-" + it.id);
+    if(fila) fila.classList.toggle("listo", ok);
+  });
+  $("#avance-txt").textContent = hechos + " / " + TOTAL;
+  $("#avance-riel").style.width = (hechos / TOTAL * 100) + "%";
+  $("#avance").classList.toggle("completo", hechos === TOTAL);
+}
+pintar();
+
+/* ---------- copiar ---------- */
+$("#copiar").addEventListener("click", async () => {
+  const lineas = ["Datos de La Nieve — reunión del " +
+    new Date().toLocaleDateString("es-AR", { day:"numeric", month:"long", year:"numeric" }), ""];
+
+  lineas.push("PRECIOS DE MOSTRADOR");
+  PRECIOS.forEach(it => {
+    lineas.push("- " + it.n + ": " + (estado[it.id] ? "$" + estado[it.id] : "(sin dato)"));
+  });
+
+  lineas.push("", "DUDAS");
+  DUDAS.forEach(it => {
+    let r = "(sin responder)";
+    if(estado[it.id] === "preguntado") r = "preguntado, ver nota aparte";
+    else if(estado[it.id]) r = estado[it.id];
+    lineas.push("- " + it.n + " → " + r);
+  });
+
+  const texto = lineas.join("\n");
+  try{
+    await navigator.clipboard.writeText(texto);
+    const aviso = $("#copiado");
+    aviso.hidden = false;
+    setTimeout(() => { aviso.hidden = true; }, 2200);
+  }catch(e){
+    window.prompt("Copiá este texto a mano:", texto);
+  }
+});
+
+$("#limpiar").addEventListener("click", () => {
+  if(!window.confirm("¿Borrar todo lo cargado?")) return;
+  estado = {};
+  guardar();
+  PRECIOS.forEach(it => {
+    const i = document.getElementById("precio-" + it.id);
+    if(i) i.value = "";
+  });
+  document.querySelectorAll(".op, .tilde").forEach(b => b.setAttribute("aria-pressed", "false"));
+  pintar();
+});
+</script>

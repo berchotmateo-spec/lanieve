@@ -96,6 +96,29 @@ perfil reclamado) tiene que entrar y poner la URL a mano. El `sameAs` y el
 `canonical` ayudan a que Google entienda que el sitio es del local, pero **no
 reemplazan ese paso**.
 
+### Fotos de producto — decidido el 15/09/2026, pendiente de ejecutar
+
+El dueño quiere **una foto por producto en la carta**. Mateo las saca en el
+local junto con la lista definitiva de precios.
+
+**Son 63 fotos, no 85.** La carta tiene 85 productos, pero las **22 pizzas
+están cargadas dos veces** (entera y por porción, nombres distintos, mismo
+producto). Una foto de la porción sirve para las dos filas. El resto: 4
+empanadas, 6 fainás, 8 del mostrador, 16 postres, 7 bebidas.
+
+**Las fotos NO van como data URI.** El `index.html` ya pesa 734 KB con solo
+tres imágenes embebidas. Sesenta y tres más lo harían inusable. Van como
+archivos sueltos en `docs/`, en WebP, redimensionadas a ~800 px de lado y con
+`loading="lazy"`. En el Artifact se publican con el parámetro `files`, que
+acepta archivos al lado de la página.
+
+**La carta tiene que soportar fotos parciales.** Es muy probable que vuelva
+con 20 y no con 63. El diseño de `tarjeta()` debe verse bien con foto y sin
+foto en la misma grilla — no dejar huecos ni placeholders grises.
+
+Campo previsto en `CARTA`: `f:"muzzarella.webp"`, opcional. Sin `f`, la
+tarjeta se dibuja como hasta ahora.
+
 ## PENDIENTE — lo que falta para terminar
 
 0. ~~Horario~~ **RESUELTO el 11/09/2026**: el dueño confirmó **08:00 a 00:00,
