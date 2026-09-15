@@ -50,7 +50,7 @@ pizarrón de promos, las dos vitrinas y la fachada):
 | Pago | Efectivo, tarjeta de **débito**, Mercado Pago y QR. **Crédito no** (dueño, 11/09/2026) |
 | Pedidos online | https://www.pedidosya.com.ar/restaurantes/mar-del-plata/la-nieve-pizzeria-menu |
 | Instagram | https://www.instagram.com/lanieve_oficial/ — @lanieve_oficial, ~4.800 seguidores, activo |
-| Facebook | https://www.facebook.com/pages/La-Nieve/159752137433973 — ⚠️ falta que el dueño confirme que es de ellos |
+| Facebook | https://www.facebook.com/pages/La-Nieve/159752137433973 — ⚠️ **NO va en el sitio**, el dueño pidió sacarlo el 15/09/2026 |
 
 **El local no tiene delivery propio ni WhatsApp.** Todo lo que sea pedido a domicilio
 pasa por Pedidos Ya (dato de Mateo, 03/09/2026). Por eso el sitio no arma pedidos:
@@ -75,12 +75,18 @@ dice a Google que esas cuentas son del mismo local.
 Para sacar una red basta con dejarla en `""`: el `forEach` de `[data-red]`
 borra el botón del HTML. Nunca queda un enlace apuntando a `#`.
 
+Los botones vienen con el atributo `hidden` puesto en el HTML y el JS los
+muestra solo si tienen link. Es a propósito: sin eso, en un celular lento se
+alcanza a ver el botón de una red que un instante después desaparece.
+
 **El Instagram está verificado** (@lanieve_oficial, sale en la búsqueda de
-Google del local y lo pasó Mateo). **El Facebook no**: la página existe con el
-id `159752137433973` y coincide con la búsqueda, pero nadie del local confirmó
-todavía que sea la oficial ni si la siguen usando. Si el dueño dice que no,
-vaciar `REDES.facebook` y sacar la línea del `sameAs` en
-`publicar-cabecera.html`.
+Google del local y lo pasó Mateo).
+
+**El Facebook se sacó el 15/09/2026**, por pedido del dueño. `REDES.facebook`
+quedó en `""` y la línea salió del `sameAs` de `publicar-cabecera.html`. El
+HTML del botón sigue ahí, oculto: si algún día lo quieren de vuelta, alcanza
+con volver a poner el link en `REDES`. **No reponerlo sin que lo pida el
+dueño.**
 
 **No hay TikTok ni X.** Se buscó y no aparecieron. Si algún día abren una,
 agregarla a `REDES`, al `sameAs`, y copiar el bloque de botón con un
