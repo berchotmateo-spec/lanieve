@@ -552,8 +552,16 @@ foto sola las dos parecen lo mismo; con el nombre al lado, no.
 3b. **Lo que el rollo trae y NO se cargó, esperando al dueño:**
 
    - **`POLBLAPROVO` $33.600** (media $16.800, porción $4.200). Falta el nombre.
-   - **`CALENTITO SAB` $5.900** y **`SANDWICH M Y Q` $6.500**: las abreviaturas
-     no se pueden desarmar sin adivinar.
+   - ~~**`SANDWICH M Y Q` $6.500**~~ **RESUELTO el 16/09/2026**: es
+     **milanesa y queso**. Mateo confirmó que el local hace sándwich de
+     milanesa, y en la carpeta de Drive hay cuatro fotos (IMG_8572 a 8575) de
+     pan casero con milanesa, jamón, tomate y queso. Eso también explica por
+     qué había dos sándwiches a precios distintos: el de jamón y queso a
+     $6.000 y este a $6.500. Cargado con el precio del rollo. **Falta que el
+     dueño confirme cómo lo llama**, porque el nombre lo armé yo a partir de
+     la abreviatura.
+   - **`CALENTITO SAB` $5.900**: la abreviatura no se puede desarmar sin
+     adivinar. `SAB` podría ser "sabroso", pero es una suposición.
    - **`CERVEZ STOUT/BO` $7.500**: no se sabe si es botella o qué formato. Sí se
      cargó la `LATA STOUT 500CC` a $5.500, que no tiene ambigüedad.
    - **Rubro 15, seis helados** a $2.400, $3.000, $3.100, $4.200, $4.500 y
