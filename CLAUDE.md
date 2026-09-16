@@ -328,13 +328,44 @@ contacto** de 24 fotos numeradas: se miran 6 hojas en vez de 149 imágenes.
 **La carpeta tiene muchísimas repeticiones**: hasta cinco tomas del mismo
 producto (las fainás, por ejemplo). De 149 fotos salen unos 40 productos.
 
-**Lo que se puede identificar mirando y lo que no.** Sale solo: fainá común vs
-con verdeo, zepelín (se ve el relleno en el corte), pizza especial (jamón,
-morrón, huevo y aceitunas), calabresa (la longaniza), flan, mousse, pasta
-frola (el enrejado), tarta de frutilla, cheese cake. **No sale**: distinguir
-fugazzetta especial de fugazzetta super, María Renée de torta especial, o una
-pascualina de una tarta de cebolla y queso vistas desde arriba. Esas hay que
-preguntarlas, no adivinarlas.
+**Lo que se puede identificar mirando y lo que no.** Sale solo: zepelín (se ve
+el relleno en el corte), pizza especial (jamón, morrón, huevo y aceitunas),
+calabresa (la longaniza), flan, mousse, pasta frola (el enrejado), tarta de
+frutilla, cheese cake. **No sale**: distinguir fugazzetta especial de
+fugazzetta super, María Renée de torta especial, una pascualina de una tarta
+de cebolla y queso vistas desde arriba, ni una fugazza (sin queso) de una
+fugazzetta (con queso adentro) sin ver el corte. Esas hay que preguntarlas,
+no adivinarlas.
+
+### Las dos fuentes que dan el nombre junto a la foto
+
+Mirar la foto sola lleva a equivocarse. Hay dos fuentes donde el producto
+**viene con su nombre al lado**, y conviene consultarlas antes de asignar:
+
+1. **Las capturas de Pedidos Ya** que mandó Mateo el 03/09/2026. Son fotos
+   reales del local, cada una con su nombre, su descripción y su precio.
+   Cubren pizzas, tartas, fainá, postres y promos. **No cubren** empanadas ni
+   panes rellenos: esas solapas no se capturaron.
+2. **La foto de la vitrina dulce** del 05/09/2026: cada torta tiene su cartel
+   escrito a mano con el nombre y los ingredientes.
+
+Las imágenes que manda Mateo no siempre quedan como archivo: las viejas están
+**adentro del registro de la conversación**, en base64. Para sacarlas:
+
+```bash
+python3 fotos-del-chat.py            # lista qué imágenes hay, con su línea y su texto
+python3 fotos-del-chat.py 716 873    # saca las de esas líneas a fotos-del-chat/
+```
+
+Las capturas de Pedidos Ya están en las **líneas 716 y 873**; la vitrina
+dulce, en la **954**. Ojo: el script apunta al registro de *esta* sesión; si
+cambia, hay que corregir la constante `REGISTRO` de arriba de todo.
+
+**Un error que ya cometí (16/09/2026).** Tenía puesta como *fainá común* una
+foto de fainá **con muzzarella y orégano por encima** (IMG_8598). La captura
+de Pedidos Ya lo dejó claro de una: la fainá común es lisa, dorada, sin nada
+arriba (IMG_8607), tal como dice su propia descripción, "sin relleno". Con la
+foto sola las dos parecen lo mismo; con el nombre al lado, no.
 
 ## PENDIENTE — lo que falta para terminar
 
