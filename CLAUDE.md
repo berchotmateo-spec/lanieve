@@ -439,6 +439,19 @@ Si algún día quieren la foto grande en otra solapa, se agrega el nombre de esa
 solapa a la condición y listo. La regla de no recortar sigue valiendo: en
 Postres una foto vertical hace la tarjeta más alta, y está bien.
 
+### En Postres todas las fotos van en un cuadro 3:4
+
+Las fotos del celular son casi todas verticales, pero algunas salieron
+horizontales, y con la foto grande eso hacía tarjetas de alturas distintas:
+la del cheese cake medía 413 y sus vecinas 608, con el hueco a la vista.
+
+En Postres la foto va dentro de un cuadro fijo de **3:4** —la proporción de
+una vertical de celular— con `object-fit:contain`. **Contain, no cover**: la
+foto entra entera, no se recorta. Una horizontal deja aire arriba y abajo, y
+ese aire lleva el color de la tarjeta, así que se lee como margen.
+
+`cover` llenaría el cuadro sin bordes, pero recortando: está prohibido.
+
 ### En Postres, lo que no tiene foto va al final del grupo
 
 Con la foto grande, una tarjeta sin foto mide 130 px y una con foto 600. Si
