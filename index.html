@@ -354,14 +354,18 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 /* La foto va al costado, no arriba: la tarjeta con foto y la tarjeta sin foto
    miden casi lo mismo y la carta se sigue leyendo de un vistazo. */
 .prod-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+/* La miniatura NO recorta: se queda con la proporción de la foto. Le fijamos
+   el ancho y el alto sale solo, así una vertical se ve entera aunque quede
+   más alta que una horizontal. Es la regla del dueño: la comida no puede
+   quedar cortada, ni en la carta ni en el visor. */
 .foto-prod{
   flex-shrink:0;padding:0;border:0;cursor:zoom-in;
-  width:clamp(76px,21vw,104px);aspect-ratio:1;
+  width:clamp(76px,21vw,104px);
   border-radius:14px;overflow:hidden;
   background:var(--superficie);
   transition:transform .18s, box-shadow .18s;
 }
-.foto-prod img{display:block;width:100%;height:100%;object-fit:cover}
+.foto-prod img{display:block;width:100%;height:auto}
 .foto-prod:hover{transform:scale(1.04);box-shadow:var(--s2)}
 .foto-prod:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
 .prod{
@@ -1473,6 +1477,33 @@ visor.addEventListener("click", e => {
 });
 addEventListener("keydown", e => { if(e.key === "Escape") cerrarFoto(); });
 
+/* Medidas reales de cada foto, en píxeles. Las escribe hacer-fotos.py: no
+   editarlas a mano. Sirven para que el navegador le reserve a cada imagen el
+   lugar exacto ANTES de bajarla; si no, la carta pega un salto cada vez que
+   una foto termina de cargar y el dedo toca el producto equivocado.
+   Las fotos no se recortan (regla del dueño: la comida no puede quedar
+   cortada), así que cada una tiene su propia forma y hay que saberla. */
+const MEDIDAS = {
+  /* MEDIDAS-EMPIEZA */
+    "cafe-medialunas.webp": [675, 900],
+    "cafe-ricota.webp": [730, 900],
+    "calabresa.webp": [900, 675],
+    "cheese-cake.webp": [900, 631],
+    "empanadas.webp": [900, 675],
+    "faina-cebolla-muzza.webp": [675, 900],
+    "faina-comun.webp": [675, 900],
+    "faina-verdeo.webp": [675, 900],
+    "flan.webp": [675, 900],
+    "mousse-chocolate.webp": [675, 900],
+    "muzzarella.webp": [675, 900],
+    "pasta-frola.webp": [675, 900],
+    "pizza-especial.webp": [675, 900],
+    "tarta-frutilla.webp": [675, 900],
+    "torta-mousse-limon.webp": [675, 900],
+    "zepelin.webp": [675, 900],
+  /* MEDIDAS-TERMINA */
+};
+
 function tarjeta(it){
   const card = document.createElement("article");
   card.className = "prod";
@@ -1550,7 +1581,8 @@ function tarjeta(it){
     img.alt = it.n;
     img.loading = "lazy";
     img.decoding = "async";
-    img.width = 900; img.height = 675;
+    const medida = MEDIDAS[it.f] || [900, 675];
+    img.width = medida[0]; img.height = medida[1];
     boton.appendChild(img);
     boton.addEventListener("click", () => abrirFoto(img.src, it.n, it.d));
     card.appendChild(boton);

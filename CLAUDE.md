@@ -361,6 +361,35 @@ Las capturas de Pedidos Ya están en las **líneas 716 y 873**; la vitrina
 dulce, en la **954**. Ojo: el script apunta al registro de *esta* sesión; si
 cambia, hay que corregir la constante `REGISTRO` de arriba de todo.
 
+### REGLA DEL DUEÑO: la comida no se recorta nunca
+
+Mateo lo pidió el 16/09/2026 y vale para siempre: **ninguna foto de producto
+puede quedar cortada**, ni la miniatura de la carta ni la del visor grande.
+
+Hasta ese día se recortaba **dos veces**, y ninguna de las dos se veía en el
+código a simple vista:
+
+1. `hacer-fotos.py` hacía `ImageOps.fit` a 4:3. Como **casi todas las fotos
+   del celular son verticales**, eso les comía cerca de la mitad.
+2. La miniatura era un cuadrado (`aspect-ratio:1` + `object-fit:cover`), así
+   que volvía a recortar lo que quedaba.
+
+Ahora:
+
+- `hacer-fotos.py` usa `thumbnail((900,900))`, que **achica y mantiene la
+  proporción**. Nunca agranda y nunca corta. Cada foto queda con su forma:
+  675x900 si es vertical, 900x675 si es horizontal.
+- La miniatura lleva el ancho fijo y `height:auto`, así que se adapta.
+- Como cada foto tiene su forma, el navegador ya no puede dar por hecho el
+  alto. Por eso existe el bloque **`MEDIDAS`** de `index.html`, que
+  `hacer-fotos.py` escribe solo entre `MEDIDAS-EMPIEZA` y `MEDIDAS-TERMINA`.
+  **No editarlo a mano.** Si falta la medida de una foto, la tarjeta pega un
+  salto cuando la imagen termina de cargar y el dedo toca el producto de al
+  lado.
+
+Si alguna vez hay que uniformar las miniaturas, la salida **no** es recortar:
+es pedirle al dueño fotos con la misma orientación.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
