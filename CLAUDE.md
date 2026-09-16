@@ -439,6 +439,26 @@ Si algún día quieren la foto grande en otra solapa, se agrega el nombre de esa
 solapa a la condición y listo. La regla de no recortar sigue valiendo: en
 Postres una foto vertical hace la tarjeta más alta, y está bien.
 
+### En Postres, lo que no tiene foto va al final del grupo
+
+Con la foto grande, una tarjeta sin foto mide 130 px y una con foto 600. Si
+quedan mezcladas en la grilla de tres columnas, la chica deja **medio metro de
+hueco** debajo. Por eso `pintarCarta()` reordena: en Postres primero los que
+tienen `f`, después los que no. Solo en esa solapa, y solo para mirar — no
+cambia ningún precio ni ningún nombre.
+
+Cuando estén todas las fotos el reordenamiento no hace nada, porque no va a
+quedar ninguna sin foto.
+
+### Ojo con el budín de pan y el flan
+
+Son parecidos de arriba: los dos salen del mismo molde con agujero, los dos
+vienen nadando en caramelo oscuro. Puse una foto de budín en el **flan casero**
+y Mateo lo cazó (16/09/2026).
+
+Se distinguen **en el corte**: el budín tiene miga y **pasas de uva** adentro;
+el flan es liso. La que era IMG_8697 de Drive tiene pasas: era budín.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el

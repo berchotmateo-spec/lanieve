@@ -1405,7 +1405,7 @@ const CARTA = [
         { n:"Torta especial entera", d:"", p:76500 },
       ]},
       { nombre: "De la heladera", items: [
-        { n:"Flan casero", d:"Con huevo y caramelo.", p:3700, f:"flan.webp" },
+        { n:"Flan casero", d:"Con huevo y caramelo.", p:3700 },
         { n:"Mousse de chocolate", d:"", p:3700, f:"mousse-chocolate.webp" },
         { n:"Tiramisú con dulce de leche", d:"Crema italiana casera, vainilla y dulce de leche.", p:4300 },
         { n:"Budín de pan", d:"Con caramelo.", p:4300, f:"budin-de-pan.webp" },
@@ -1572,7 +1572,6 @@ const MEDIDAS = {
     "faina-cebolla-muzza.webp": [675, 900],
     "faina-comun.webp": [675, 900],
     "faina-verdeo.webp": [675, 900],
-    "flan.webp": [675, 900],
     "medialuna-gigante.webp": [675, 900],
     "mousse-chocolate.webp": [675, 900],
     "muzzarella.webp": [675, 900],
@@ -1710,13 +1709,22 @@ function pintarCarta(){
       cuenta.textContent = items.length === 1 ? "1 producto" : items.length + " productos";
       tit.append(h, raya, cuenta);
 
+      /* En Postres los que todavía no tienen foto van al final del grupo. Si
+         quedan mezclados, una tarjeta de tres renglones cae al lado de una
+         con foto grande y deja medio metro de hueco debajo. Cuando estén
+         todas las fotos esto no cambia nada, porque no va a quedar ninguna
+         sin foto. */
+      const enOrden = seccion.tab === "Postres"
+        ? [...items.filter(it => it.f), ...items.filter(it => !it.f)]
+        : items;
+
       const grid = document.createElement("div");
       /* En Postres la foto va grande y arriba, no de miniatura al costado:
          lo pidió el dueño. Una torta se elige mirándola, no leyendo el
          nombre, así que ahí la foto es el producto. En el resto de la carta
          sigue al costado, que es como se lee un mostrador. */
       grid.className = seccion.tab === "Postres" ? "prods fotos-grandes" : "prods";
-      items.forEach(it => grid.appendChild(tarjeta(it)));
+      enOrden.forEach(it => grid.appendChild(tarjeta(it)));
 
       wrap.append(tit, grid);
       contEl.appendChild(wrap);
