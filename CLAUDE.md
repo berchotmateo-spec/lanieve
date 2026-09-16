@@ -272,10 +272,26 @@ salen acostadas en la web y no se nota hasta que alguien las mira en el celular.
 
 ### Dos cosas para no olvidar
 
-- **Al publicar el Artifact hay que mandar también las fotos**, con el parámetro
-  `files` (`{"fotos/x.webp": "fotos/x.webp", ...}`). El Artifact es una página
-  suelta: si no van, se ven los alt y nada más. En GitHub Pages esto no pasa,
-  ahí las copia el script.
+- **Al publicar el Artifact hay que mandar TODOS los archivos de `docs/`**, con el
+  parámetro `files`: no solo `fotos/`, también `logo.png`, `logotipo.png`,
+  `ovalo.png`, `icono.png`, `og.jpg`, `fachada.jpg` y `vitrina.jpg`. El Artifact
+  es una página suelta: lo que no se manda, no existe. En GitHub Pages esto no
+  pasa, ahí los copia el script.
+
+  Ya me equivoqué una vez (16/09/2026, v29): publiqué el `docs/index.html` y solo
+  las fotos de producto, y Mateo vio la portada llena de cuadraditos rotos. El
+  motivo es fácil de pasar por alto: el `index.html` **de origen** lleva el logo y
+  las fotos de fondo incrustadas dentro del HTML, así que se publica solo y
+  funciona; el de `docs/` las tiene afuera, como archivos aparte, porque el script
+  de publicar justamente las saca del HTML para que la página pese menos. Al
+  cambiar de uno a otro hay que acordarse de llevar los archivos.
+
+  La forma segura de armar la lista, sin ir a mano:
+
+  ```bash
+  cp -r docs/. <carpeta-de-publicar>/          # todo junto, tal cual sube a Pages
+  find <carpeta-de-publicar> -type f           # y de ahí sale el mapa de files
+  ```
 - **La miniatura es un `<button>`, no un `<div>`.** Se puede tocar, así que
   tiene que llegarle el foco y el teclado, y anunciarse al lector de pantalla.
 
