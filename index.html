@@ -374,6 +374,18 @@ section{padding:clamp(62px,8.5vw,110px) 0}
   transition:transform .18s, box-shadow .18s, border-color .18s;
 }
 .prod:hover{transform:translateY(-2px);box-shadow:var(--s2);border-color:var(--amarillo)}
+/* Postres: la foto arriba y a todo el ancho de la tarjeta. Sigue sin
+   recortarse, así que una foto vertical hace la tarjeta más alta; en Postres
+   eso está bien, porque es la sección que se mira despacio. */
+/* Sin esto, en una fila de tres, la tarjeta sin foto se estira hasta el alto
+   de la que sí tiene y queda un hueco enorme entre el nombre y el precio.
+   Cada tarjeta mide lo suyo. */
+.fotos-grandes{align-items:start}
+.fotos-grandes .prod{flex-direction:column;gap:16px;padding:16px 16px 18px}
+.fotos-grandes .prod-txt{width:100%;flex:0 0 auto}
+.fotos-grandes .foto-prod{order:-1;width:100%;border-radius:16px}
+.fotos-grandes .foto-prod:hover{transform:none;box-shadow:none}
+.fotos-grandes .prod .precios{margin-top:0;padding-top:14px}
 .prod h4{margin-bottom:6px}
 .prod .det{font-size:14.5px;color:var(--tinta-2);line-height:1.5}
 .prod .fila{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
@@ -1631,7 +1643,11 @@ function pintarCarta(){
       tit.append(h, raya, cuenta);
 
       const grid = document.createElement("div");
-      grid.className = "prods";
+      /* En Postres la foto va grande y arriba, no de miniatura al costado:
+         lo pidió el dueño. Una torta se elige mirándola, no leyendo el
+         nombre, así que ahí la foto es el producto. En el resto de la carta
+         sigue al costado, que es como se lee un mostrador. */
+      grid.className = seccion.tab === "Postres" ? "prods fotos-grandes" : "prods";
       items.forEach(it => grid.appendChild(tarjeta(it)));
 
       wrap.append(tit, grid);

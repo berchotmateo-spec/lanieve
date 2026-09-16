@@ -410,6 +410,35 @@ Lo que **sigue sin resolverse** mirando: la pascualina contra la pascualina
 especial, que sólo se diferencian en que la especial lleva ricota. Eso hay
 que preguntarlo.
 
+### Postres lleva la foto grande, el resto no
+
+Lo pidió el dueño el 16/09/2026 y vale solo para esa solapa: en **Postres** la
+foto va **arriba y a todo el ancho** de la tarjeta; en el resto de la carta
+sigue de miniatura al costado.
+
+No es una inconsistencia, es la diferencia entre las dos secciones. Una carta
+de pizzas se **recorre**: el cliente ya sabe lo que es una muzzarella y lo que
+busca es el precio, así que la miniatura al costado deja entrar tres o cuatro
+productos por pantalla. Una vitrina de tortas se **mira**: nadie elige un
+rogel por el nombre. Ahí la foto es el producto.
+
+Cómo está hecho: `pintarCarta()` le pone la clase `fotos-grandes` a la grilla
+cuando `seccion.tab === "Postres"`, y el CSS da vuelta la tarjeta a columna con
+`order:-1` en la foto. **No hay que tocar `tarjeta()`**: arma siempre lo mismo
+y el orden lo decide el CSS.
+
+Dos detalles que costaron:
+
+- La grilla lleva `align-items:start`. Sin eso, en una fila de tres, la
+  tarjeta **sin** foto se estira hasta el alto de la que sí tiene y queda un
+  hueco enorme entre el nombre y el precio.
+- Por lo mismo, ahí `.precios` pierde el `margin-top:auto`, que es el que
+  empuja el precio al fondo de la tarjeta.
+
+Si algún día quieren la foto grande en otra solapa, se agrega el nombre de esa
+solapa a la condición y listo. La regla de no recortar sigue valiendo: en
+Postres una foto vertical hace la tarjeta más alta, y está bien.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
