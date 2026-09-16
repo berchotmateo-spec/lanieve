@@ -472,6 +472,27 @@ y Mateo lo cazó (16/09/2026).
 Se distinguen **en el corte**: el budín tiene miga y **pasas de uva** adentro;
 el flan es liso. La que era IMG_8697 de Drive tiene pasas: era budín.
 
+### Todo lo que dice "Pedir" tiene que ir a Pedidos Ya
+
+El botón **"Pedir ahora"** de la barra de arriba era el único que no lo hacía:
+bajaba a la carta, como el de la portada. Decía una cosa y hacía otra, y Mateo
+lo reportó como roto el 16/09/2026. Ahora lleva `data-py`, igual que los otros
+catorce.
+
+La regla, para no volver a mezclarlos:
+
+- **Dice "Pedir"** → `data-py href="#" target="_blank" rel="noopener"`. El link
+  real lo pone `$$("[data-py]")` desde la constante `PEDIDOS_YA`, así que el
+  día que cambie el link se toca en **un solo lugar**.
+- **Dice "Ver la carta"** → ancla común a `#carta`. Ese es el de la portada y
+  está bien así.
+
+En el celular el de la barra sigue oculto a propósito (`.nav-fin > .btn
+{display:none}`): abajo está la barra fija de Pedidos Ya, siempre a la vista.
+
+Para comprobarlo de una: buscar en el navegador todos los `<a>` cuyo texto diga
+"pedir" y ver que el href tenga `pedidosya`. Son quince.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
