@@ -361,6 +361,21 @@ Las capturas de Pedidos Ya están en las **líneas 716 y 873**; la vitrina
 dulce, en la **954**. Ojo: el script apunta al registro de *esta* sesión; si
 cambia, hay que corregir la constante `REGISTRO` de arriba de todo.
 
+### Una foto puede ir en varios productos
+
+No hace falta una foto por producto. Cuando por fuera son todos iguales, el
+dueño usa una sola y se repite. Ya pasa en dos grupos, los dos por pedido de
+Mateo:
+
+- **`zepelin.webp`** en el súper, el variado y el de pollo. Es una bandeja con
+  varios tipos mezclados, que es como salen.
+- **`empanadas.webp`** en las **doce** empanadas (las ocho por unidad y las
+  cuatro por docena). Cerradas y sin hornear del todo, el relleno no se ve:
+  una foto sirve para todas.
+
+En la carta no molesta porque la miniatura va al costado, chica. Si alguna vez
+el dueño saca una foto propia de un producto, se le pone la suya y listo.
+
 **Un error que ya cometí (16/09/2026).** Tenía puesta como *fainá común* una
 foto de fainá **con muzzarella y orégano por encima** (IMG_8598). La captura
 de Pedidos Ya lo dejó claro de una: la fainá común es lisa, dorada, sin nada
