@@ -390,6 +390,26 @@ Ahora:
 Si alguna vez hay que uniformar las miniaturas, la salida **no** es recortar:
 es pedirle al dueño fotos con la misma orientación.
 
+### Cómo se distingue una tarta de una pizza rellena
+
+Lo pregunté el 16/09/2026 y Mateo lo confirmó en el local: en La Nieve las
+**tartas saladas van en molde de pizza negro, cerradas, con el borde plegado
+a mano** en pliegues gruesos alrededor de todo el canto. Vistas de arriba
+parecen una pizza cerrada, y ese fue justamente el error que cometí antes de
+preguntar: puse tartas donde iban pizzas.
+
+La diferencia no está en el molde ni en la forma. Está en **el repulgue
+plegado del borde** y en el corte: la tarta tiene tapa de masa fina arriba y
+abajo, con el relleno entre las dos.
+
+Con eso quedaron resueltas la pascualina (acelga con huevo entero a la
+vista), la de pollo (pollo y cebolla, sin nada verde) y la de humita (los
+granos de choclo se ven amarillos en el corte).
+
+Lo que **sigue sin resolverse** mirando: la pascualina contra la pascualina
+especial, que sólo se diferencian en que la especial lleva ricota. Eso hay
+que preguntarlo.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
