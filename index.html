@@ -1319,7 +1319,7 @@ const CARTA = [
     tab: "Postres",
     grupos: [
       { nombre: "Tortas, por porción", items: [
-        { n:"Rogel", d:"Capas de hojaldre rellenas con dulce de leche.", p:8000 },
+        { n:"Rogel", d:"Capas de hojaldre rellenas con dulce de leche.", p:8000, f:"rogel.webp" },
         { n:"Lemon pie", d:"Mousse de limón y merengue italiano.", p:8000 },
         { n:"Tarta de frutilla", d:"Crema chantilly, frutillas y gelatina.", p:8000, f:"tarta-frutilla.webp" },
         { n:"Cuatro chocolates", d:"Mousse de chocolate, de dulce de leche, de chocolate blanco y crema.", p:8500 },
@@ -1330,11 +1330,11 @@ const CARTA = [
         { n:"Torta mousse de limón", d:"Mousse de limón, brownie y dulce de leche.", p:8500, f:"torta-mousse-limon.webp" },
         { n:"Cheese cake", d:"Torta de queso crema, base de bizcochuelo y jalea de frutilla.", p:8500, f:"cheese-cake.webp" },
         { n:"Selva negra", d:"", p:8500 },
-        { n:"Torta de ricota", d:"Rellena de ricota.", p:3700 },
+        { n:"Torta de ricota", d:"Rellena de ricota.", p:3700, f:"torta-ricota.webp" },
         { n:"Pasta frola", d:"De membrillo.", p:2600, f:"pasta-frola.webp" },
       ]},
       { nombre: "Tortas enteras, por encargue", items: [
-        { n:"Torta de ricota entera", d:"", p:35000 },
+        { n:"Torta de ricota entera", d:"", p:35000, f:"torta-ricota.webp" },
         { n:"Pasta frola entera", d:"", p:20000, f:"pasta-frola.webp" },
         { n:"Tarta grande", d:"", p:72000 },
         { n:"Torta especial entera", d:"", p:76500 },
@@ -1343,7 +1343,7 @@ const CARTA = [
         { n:"Flan casero", d:"Con huevo y caramelo.", p:3700, f:"flan.webp" },
         { n:"Mousse de chocolate", d:"", p:3700, f:"mousse-chocolate.webp" },
         { n:"Tiramisú con dulce de leche", d:"Crema italiana casera, vainilla y dulce de leche.", p:4300 },
-        { n:"Budín de pan", d:"Con caramelo.", p:4300 },
+        { n:"Budín de pan", d:"Con caramelo.", p:4300, f:"budin-de-pan.webp" },
         { n:"Adicional de dulce de leche o crema", d:"", p:1300 },
       ]},
     ]
@@ -1497,6 +1497,7 @@ addEventListener("keydown", e => { if(e.key === "Escape") cerrarFoto(); });
    cortada), así que cada una tiene su propia forma y hay que saberla. */
 const MEDIDAS = {
   /* MEDIDAS-EMPIEZA */
+    "budin-de-pan.webp": [675, 900],
     "cafe-con-leche.webp": [675, 900],
     "cafe-medialunas.webp": [675, 900],
     "cafe-ricota.webp": [730, 900],
@@ -1514,11 +1515,13 @@ const MEDIDAS = {
     "pascualina.webp": [675, 900],
     "pasta-frola.webp": [675, 900],
     "pizza-especial.webp": [675, 900],
+    "rogel.webp": [675, 900],
     "submarino.webp": [675, 900],
     "tarta-frutilla.webp": [675, 900],
     "tarta-humita.webp": [675, 900],
     "tarta-pollo.webp": [675, 900],
     "torta-mousse-limon.webp": [675, 900],
+    "torta-ricota.webp": [675, 900],
     "zepelin.webp": [675, 900],
   /* MEDIDAS-TERMINA */
 };
