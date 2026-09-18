@@ -493,6 +493,34 @@ En el celular el de la barra sigue oculto a propósito (`.nav-fin > .btn
 Para comprobarlo de una: buscar en el navegador todos los `<a>` cuyo texto diga
 "pedir" y ver que el href tenga `pedidosya`. Son quince.
 
+### El dominio propio: cómo está armado
+
+**pizzerialanieve.com.ar**, en vivo desde el 18/09/2026. La cadena tiene tres
+eslabones y conviene saber cuál toca cada uno:
+
+1. **NIC.ar** — ahí se compró. NIC **no** guarda registros A: lo único que se
+   configura es la **delegación**, o sea a qué servidores DNS responde el
+   dominio. Apunta a los de Cloudflare.
+2. **Cloudflare** — sirve el DNS, gratis. Tiene cargados los **cuatro
+   registros A** del apex hacia `185.199.108.153`, `.109.153`, `.110.153` y
+   `.111.153` (las IP de GitHub Pages), más un **CNAME `www` →
+   `berchotmateo-spec.github.io`**.
+3. **GitHub Pages** — publica desde `main` / `docs`, y lee `docs/CNAME` para
+   saber qué dominio servir.
+
+**Los registros van en "DNS only" (nube gris), nunca proxiados.** No es
+estética: GitHub **renueva el certificado solo cada tres meses** y para eso
+necesita alcanzar el dominio directo. Con el proxy de Cloudflare en el medio
+esa validación puede fallar, y el síntoma aparece meses después, cuando el
+certificado vence y el navegador muestra la pantalla de "sitio no seguro". A
+cambio no se gana nada: GitHub ya da HTTPS y CDN. Si algún día se prende igual,
+antes hay que pasar SSL/TLS de **Full** a **Full (strict)**.
+
+**Si la web deja de responder en el dominio**, mirar en este orden: que
+`docs/CNAME` siga existiendo (lo borra cualquiera que edite `docs/` a mano),
+que los cuatro registros A sigan en gris, y que en Settings → Pages el dominio
+siga escrito.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
