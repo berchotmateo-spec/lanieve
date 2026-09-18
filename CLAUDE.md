@@ -521,6 +521,34 @@ antes hay que pasar SSL/TLS de **Full** a **Full (strict)**.
 que los cuatro registros A sigan en gris, y que en Settings → Pages el dominio
 siga escrito.
 
+### Google: qué está hecho y qué falta
+
+**Hecho el 18/09/2026, por Mateo:**
+
+- **Search Console verificado** sobre `pizzerialanieve.com.ar`, como **propiedad
+  de dominio** (no de prefijo de URL). Google lo verificó **solo**, por su
+  integración con Cloudflare: no hubo código que copiar, agregó él mismo el
+  registro TXT `google-site-verification=…`.
+- **Sitemap enviado** y **indexación solicitada** para la portada.
+
+**Dos cosas para no romper sin querer:**
+
+1. **El TXT de verificación no se borra nunca.** Google lo revisa cada tanto,
+   no solo la primera vez. Si desaparece, se pierde el acceso al panel.
+   Borrar una propiedad en Search Console **no** toca el DNS, así que se puede
+   limpiar el panel sin miedo.
+2. **En una propiedad de dominio el sitemap se manda con la dirección
+   completa**, `https://pizzerialanieve.com.ar/sitemap.xml`. Poner solo
+   `sitemap.xml` da "Dirección de sitemap no válida": como la propiedad cubre
+   todos los subdominios y los dos protocolos, Google no puede adivinar el
+   prefijo.
+
+**Lo que falta, y es del dueño, no nuestro:** el **Perfil de Empresa de
+Google**. Para las búsquedas que de verdad traen gente a una pizzería —"la
+nieve mar del plata"— lo que aparece primero es la ficha con el mapa, no la
+web. Reclamarla, poner el sitio, las fotos y el horario vale más que cualquier
+cosa que podamos tocar en el HTML.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
