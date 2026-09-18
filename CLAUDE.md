@@ -564,6 +564,25 @@ La regla, entonces: **si el producto está cerrado y el relleno no se ve, una
 toma cualquiera del mismo producto sirve**. Si algún día el dueño quiere que
 se distingan, hace falta una foto abierta o cortada de cada uno.
 
+### PROVISORIO: la foto de la pizza rellena
+
+`pizza-rellena.webp` es **la única foto de la carta que no está confirmada por
+el dueño.** Salió de una deducción mía que Mateo aceptó el 18/09/2026 con un
+"de última lo modificamos si está mal".
+
+Qué se sabe con certeza: **no es la pascualina** (no hay nada verde en el
+corte), y **no es de la familia de las tartas** (va en bandeja de aluminio y
+masa lisa, no en molde negro con el borde plegado a mano). En el corte hay
+jamón, queso y una línea anaranjada que parece tomate, y el único producto de
+la carta que encaja con eso es la pizza rellena.
+
+**Si aparece alguien que sepa, preguntar por esta primero.** Son tres fotos del
+mismo producto: la que mandó Mateo y las IMG_8628 e IMG_8630 del Drive, que
+estaban sin nombre desde el principio.
+
+**El antecedente que obliga a la cautela**: en este mismo proyecto ya puse
+tartas donde iban pizzas, justamente por confiar en cómo se veían de arriba.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
