@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://berchotmateo-spec.github.io/lanieve/sitemap.xml
+Sitemap: https://pizzerialanieve.com.ar/sitemap.xml

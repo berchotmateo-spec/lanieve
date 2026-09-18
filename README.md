@@ -6,7 +6,7 @@ Mar del Plata. Pizza al molde desde 1949.
 La carta y las promos son las reales del local, relevadas en persona el 26/08/2026
 de los televisores del salón, el pizarrón de la vereda y las vitrinas del mostrador.
 
-**En vivo:** https://berchotmateo-spec.github.io/lanieve/
+**En vivo:** https://pizzerialanieve.com.ar/
 
 > Se publica con GitHub Pages desde la carpeta `docs/` de la rama `main`
 > (*Settings → Pages → Source: Deploy from a branch → main / docs*).

@@ -945,7 +945,7 @@ y solo agrega demoras.
   404. Con relativas el sitio anda igual en la raíz que en una subcarpeta.
 - Las de `og:image`, `canonical`, el sitemap y la ficha JSON-LD **tienen que ser
   absolutas**, porque WhatsApp y Google no resuelven relativas. Están cableadas
-  como `https://berchotmateo-spec.github.io/lanieve` en `publicar-cabecera.html` y
+  como `https://pizzerialanieve.com.ar` en `publicar-cabecera.html` y
   en `hacer-publicar.ps1` (variable `$sitio`). **Si cambia el dominio, cambiarlas en
   los dos lados.**
 

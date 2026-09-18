@@ -14,7 +14,7 @@
 
 $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
 $dest = Join-Path $raiz "docs"
-$sitio = "https://berchotmateo-spec.github.io/lanieve"
+$sitio = "https://pizzerialanieve.com.ar"
 
 $html = [System.IO.File]::ReadAllText((Join-Path $raiz "index.html"), [System.Text.Encoding]::UTF8)
 
@@ -54,6 +54,12 @@ $utf8 = New-Object System.Text.UTF8Encoding($false)
 
 $robots = "User-agent: *`nAllow: /`n`nSitemap: $sitio/sitemap.xml`n"
 [System.IO.File]::WriteAllText((Join-Path $dest "robots.txt"), $robots, $utf8)
+
+# GitHub Pages necesita este archivo para servir el dominio propio. Si falta,
+# pizzerialanieve.com.ar deja de funcionar y la web vuelve a la direccion vieja
+# de github.io. Lo escribe el script para que no se pierda nunca.
+$dominio = $sitio -replace "^https://", ""
+[System.IO.File]::WriteAllText((Join-Path $dest "CNAME"), "$dominio`n", $utf8)
 
 $hoy = (Get-Date).ToString("yyyy-MM-dd")
 $sitemap = @"
