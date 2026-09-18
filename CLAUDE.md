@@ -549,6 +549,21 @@ nieve mar del plata"— lo que aparece primero es la ficha con el mapa, no la
 web. Reclamarla, poner el sitio, las fotos y el horario vale más que cualquier
 cosa que podamos tocar en el HTML.
 
+### Un producto cerrado no afirma nada sobre su relleno
+
+Los calentitos de panceta y de carne salen del horno cerrados: en la foto no
+se ve qué tienen adentro. Mateo mandó dos tomas iguales y dijo que eligiera yo
+cuál iba en cuál.
+
+Se puede hacer, y no es inventar: la foto muestra **un calentito del local**,
+que es exactamente lo que es. Como el relleno no se ve, la imagen no le está
+diciendo al cliente nada que pueda ser falso. Distinto sería usar una foto
+donde se viera panceta para el de carne — eso sí sería mentir.
+
+La regla, entonces: **si el producto está cerrado y el relleno no se ve, una
+toma cualquiera del mismo producto sirve**. Si algún día el dueño quiere que
+se distingan, hace falta una foto abierta o cortada de cada uno.
+
 ### Una foto puede ir en varios productos
 
 No hace falta una foto por producto. Cuando por fuera son todos iguales, el
