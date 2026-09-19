@@ -681,7 +681,11 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .visor.abierto{opacity:1;visibility:visible;transition:opacity .22s, visibility 0s}
 .visor figure{margin:0;max-width:min(880px,100%);width:100%}
 .visor img{
-  display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;
+  /* width:auto en vez de 100%: así el marco mide lo mismo que la foto y no
+     quedan dos franjas oscuras al costado de una foto parada. Entra entera
+     igual, que es la regla, pero sin relleno alrededor. */
+  display:block;margin-inline:auto;
+  width:auto;max-width:100%;height:auto;max-height:70vh;
   border-radius:var(--r-lg);background:var(--noche);
 }
 .visor figcaption{margin-top:16px;color:#fff;text-align:center}
@@ -695,8 +699,40 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 }
 .visor .cerrar:hover{background:rgba(255,255,255,.26)}
 .visor .cerrar:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ---- pasar de una foto a otra sin salir del visor ---- */
+/* touch-action:none es lo que hace que el dedo llegue hasta acá. Sin eso el
+   navegador se queda el gesto creyendo que querés hacer scroll. Adentro del
+   visor no hay nada que scrollear, así que no se pierde nada. */
+.visor figure{touch-action:none;transition:transform .2s ease, opacity .2s ease}
+/* La manito sólo cuando hay varias: en la foto de un producto no se pasa a
+   ninguna parte, y un cursor de agarrar ahí prometería algo que no pasa. */
+.visor.album figure{cursor:grab}
+.visor figure.moviendo{cursor:grabbing;transition:none}
+.visor figure.moviendo *{user-select:none;-webkit-user-select:none}
+.visor img{-webkit-user-drag:none}
+.visor-cuenta{
+  display:block;margin-top:10px;
+  font-size:13px;letter-spacing:.06em;color:rgba(255,255,255,.55);
+}
+.visor-flecha{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:0;color:#fff;
+  display:grid;place-items:center;cursor:pointer;
+  transition:background .18s;
+}
+.visor-flecha.atras{left:max(10px,env(safe-area-inset-left, 0px))}
+.visor-flecha.adelante{right:max(10px,env(safe-area-inset-right, 0px))}
+.visor-flecha:hover{background:rgba(255,255,255,.26)}
+.visor-flecha:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.visor-flecha[hidden]{display:none}
+/* En el celular las flechas taparían la foto. Ahí se pasa con el dedo, que
+   es más cómodo, y el cartelito de abajo dice en cuál va. */
+@media (max-width:640px){ .visor-flecha{display:none} }
 @media (prefers-reduced-motion:reduce){
   .visor{transition:none}
+  .visor figure{transition:none}
   .foto-prod{transition:none}
 }
 
@@ -1212,11 +1248,18 @@ body{padding-bottom:112px}
 <!-- ══════════════════ FOTO GRANDE ══════════════════ -->
 <div class="visor" id="visor" role="dialog" aria-modal="true" aria-labelledby="visor-tit">
   <button class="cerrar" id="visor-cerrar" type="button" aria-label="Cerrar la foto">&times;</button>
-  <figure>
+  <button class="visor-flecha atras" id="visor-antes" type="button" aria-label="Ver la foto anterior" hidden>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <button class="visor-flecha adelante" id="visor-sig" type="button" aria-label="Ver la foto siguiente" hidden>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <figure id="visor-figura">
     <img id="visor-img" src="" alt="">
     <figcaption>
       <b id="visor-tit"></b>
       <span id="visor-det"></span>
+      <span class="visor-cuenta mono" id="visor-cuenta" aria-live="polite"></span>
     </figcaption>
   </figure>
 </div>
@@ -1578,11 +1621,21 @@ CARTA.forEach((seccion, i) => {
 const visor = $("#visor");
 let volverA = null;
 
+/* El visor muestra un ÁLBUM: una lista de fotos que se pueden pasar de
+   largo sin salir. Una foto de producto abre un álbum de una sola, y ahí no
+   aparece ninguna flecha ni cartelito; las del local abren el álbum entero
+   del carrusel, y se pasan con el dedo, con las flechas o con el teclado. */
+let ALBUM = [];
+let enAlbum = 0;
+
 function abrirFoto(src, nombre, detalle){
-  $("#visor-img").src = src;
-  $("#visor-img").alt = nombre;
-  $("#visor-tit").textContent = nombre;
-  $("#visor-det").textContent = detalle || "";
+  abrirAlbum([{ src, nombre, detalle }], 0);
+}
+
+function abrirAlbum(lista, desde){
+  ALBUM = lista;
+  enAlbum = desde || 0;
+  pintarVisor();
   volverA = document.activeElement;
   visor.classList.add("abierto");
   document.body.style.overflow = "hidden";
@@ -1592,6 +1645,79 @@ function abrirFoto(src, nombre, detalle){
      solo requestAnimationFrame no alcanza. */
   requestAnimationFrame(() => requestAnimationFrame(() => $("#visor-cerrar").focus()));
 }
+
+function pintarVisor(){
+  const f = ALBUM[enAlbum];
+  $("#visor-img").src = f.src;
+  $("#visor-img").alt = f.nombre || "";
+  $("#visor-tit").textContent = f.nombre || "";
+  $("#visor-det").textContent = f.detalle || "";
+
+  const hayVarias = ALBUM.length > 1;
+  $("#visor-cuenta").textContent = hayVarias ? (enAlbum + 1) + " / " + ALBUM.length : "";
+  $("#visor-antes").hidden = !hayVarias;
+  $("#visor-sig").hidden = !hayVarias;
+  visor.classList.toggle("album", hayVarias);
+
+  /* Se le pide al navegador la anterior y la siguiente mientras el visitante
+     mira ésta. Así al pasar de foto ya está bajada y aparece al toque, en vez
+     de quedar un cuadro en blanco. */
+  if(hayVarias){
+    [-1, 1].forEach(paso => {
+      const v = ALBUM[(enAlbum + paso + ALBUM.length) % ALBUM.length];
+      if(v) new Image().src = v.src;
+    });
+  }
+}
+
+function pasarFoto(paso){
+  if(ALBUM.length < 2) return;
+  /* Da la vuelta: de la última se pasa a la primera. En un álbum corto es lo
+     que uno espera, y evita el callejón sin salida de llegar al final. */
+  enAlbum = (enAlbum + paso + ALBUM.length) % ALBUM.length;
+  pintarVisor();
+}
+
+/* ---- pasar de foto con el dedo o con el mouse ----
+   Acá sí se maneja el dedo a mano, al revés que en la tira del carrusel: en
+   el carrusel hay un scroll de verdad que el navegador hace mejor, y acá no
+   hay nada que scrollear, sólo un gesto que significa "la que sigue". */
+const MINIMO_PASE = 55;   // píxeles; menos que esto es un temblor de pulso
+const figuraVisor = $("#visor-figura");
+let pasando = false, xPase = 0, corridoPase = 0;
+
+figuraVisor.addEventListener("pointerdown", e => {
+  if(ALBUM.length < 2 || e.button !== 0) return;
+  pasando = true;
+  xPase = e.clientX;
+  corridoPase = 0;
+  figuraVisor.classList.add("moviendo");
+  figuraVisor.setPointerCapture(e.pointerId);
+});
+
+figuraVisor.addEventListener("pointermove", e => {
+  if(!pasando) return;
+  corridoPase = e.clientX - xPase;
+  /* La foto acompaña al dedo y se va apagando: sin eso el gesto se siente
+     muerto y uno no sabe si lo tomó. */
+  figuraVisor.style.transform = "translateX(" + corridoPase + "px)";
+  figuraVisor.style.opacity = Math.max(.35, 1 - Math.abs(corridoPase) / 520);
+});
+
+function soltarPase(){
+  if(!pasando) return;
+  pasando = false;
+  figuraVisor.classList.remove("moviendo");
+  figuraVisor.style.transform = "";
+  figuraVisor.style.opacity = "";
+  if(Math.abs(corridoPase) > MINIMO_PASE) pasarFoto(corridoPase < 0 ? 1 : -1);
+  corridoPase = 0;
+}
+figuraVisor.addEventListener("pointerup", soltarPase);
+figuraVisor.addEventListener("pointercancel", soltarPase);
+
+$("#visor-antes").addEventListener("click", () => pasarFoto(-1));
+$("#visor-sig").addEventListener("click", () => pasarFoto(1));
 
 function cerrarFoto(){
   if(!visor.classList.contains("abierto")) return;
@@ -1604,7 +1730,12 @@ function cerrarFoto(){
 visor.addEventListener("click", e => {
   if(e.target === visor || e.target.closest(".cerrar")) cerrarFoto();
 });
-addEventListener("keydown", e => { if(e.key === "Escape") cerrarFoto(); });
+addEventListener("keydown", e => {
+  if(e.key === "Escape"){ cerrarFoto(); return; }
+  if(!visor.classList.contains("abierto")) return;
+  if(e.key === "ArrowRight"){ e.preventDefault(); pasarFoto(1); }
+  if(e.key === "ArrowLeft"){ e.preventDefault(); pasarFoto(-1); }
+});
 
 /* Medidas reales de cada foto, en píxeles. Las escribe hacer-fotos.py: no
    editarlas a mano. Sirven para que el navegador le reserve a cada imagen el
@@ -1702,6 +1833,16 @@ const GALERIA = [
     pie:"El cartel, sobre la esquina." },
 ];
 
+/* La lista que recibe el visor cuando se toca una foto del local: son las
+   mismas ocho, para poder pasarlas de largo sin volver a la página. */
+function albumGaleria(){
+  return GALERIA.map(f => ({
+    src: "fotos/" + f.f,
+    nombre: "Pizzería La Nieve",
+    detalle: f.pie || f.alt,
+  }));
+}
+
 function pintarGaleria(){
   if(!GALERIA.length) return;              /* sin fotos, sin sección */
 
@@ -1737,7 +1878,7 @@ function pintarGaleria(){
     img.draggable = false;
 
     marco.appendChild(img);
-    marco.addEventListener("click", () => abrirFoto(img.src, "Pizzería La Nieve", foto.pie || foto.alt));
+    marco.addEventListener("click", () => abrirAlbum(albumGaleria(), i));
     tira.appendChild(marco);
 
     const punto = document.createElement("button");

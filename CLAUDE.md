@@ -1239,3 +1239,39 @@ más cercana al centro de la pantalla puede ser la **segunda**, y el punto
 marcado quedaba en el 2 con la tira sin mover. Por eso `actual()` devuelve
 el primero o el último de una cuando la tira está en un extremo, en vez de
 medir distancias al centro.
+
+## El visor pasa fotos (el álbum)
+
+Lo pidió Mateo el 19/09/2026 mirando la web en el celular: una vez abierta la
+foto grande, quería poder deslizar ahí adentro para ir viendo las demás sin
+volver a la página.
+
+El visor ahora muestra un **álbum**: una lista de fotos. `abrirFoto(src,
+nombre, detalle)` sigue existiendo igual que antes y abre un álbum de una
+sola foto — por eso **las fotos de producto de la carta no cambiaron nada**:
+sin flechas, sin cartelito, exactamente como estaban. Las del local llaman a
+`abrirAlbum(albumGaleria(), i)` y traen las ocho.
+
+Se pasa de cuatro maneras: con el dedo, arrastrando con el mouse, con las
+flechas de los costados y con las teclas ← y →. Da la vuelta: de la última se
+pasa a la primera.
+
+**Acá el dedo SÍ se maneja a mano**, al revés que en la tira del carrusel. La
+diferencia: en la tira hay un scroll de verdad, que el navegador hace mejor
+que nosotros; en el visor no hay nada que scrollear, sólo un gesto que
+significa "la que sigue". Por eso el visor lleva `touch-action:none`, que es
+lo que hace que el gesto llegue al JavaScript en vez de que el navegador se
+lo quede creyendo que es un scroll.
+
+Detalles que importan:
+
+- **`width:auto` en la imagen del visor.** Con `width:100%` una foto parada
+  quedaba con dos franjas oscuras a los costados, porque el marco medía 880
+  px y la foto no. Ahora el marco mide lo mismo que la foto.
+- **Las flechas no se muestran en el celular** (`max-width:640px`): taparían
+  la foto. Ahí se pasa con el dedo y el "3 / 8" de abajo dice en cuál va.
+- **Se precargan la anterior y la siguiente** mientras el visitante mira la
+  actual, así al pasar no queda un cuadro en blanco.
+- Acá `setPointerCapture` **sí** va, al revés que en la tira: adentro del
+  visor no hay ningún clic que quede mal apuntado, y la captura hace que el
+  gesto siga si el dedo se va de la foto.
