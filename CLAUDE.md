@@ -1145,3 +1145,45 @@ Contacto → Pie.
 
 Arriba, barra flotante con estado del local y botón de pedido; en pantallas chicas
 se reemplaza por un menú de pantalla completa.
+
+## El carrusel de fotos del local
+
+Lo pidió Mateo el 19/09/2026: el dueño le pasó fotos que quiere en la web.
+Vive en la sección `#galeria`, entre "El local" y "Preguntas".
+
+**Cómo se agrega una foto**, los tres pasos:
+
+1. el archivo va a `fotos-originales/` con nombre `local-algo.jpg`
+2. `python3 hacer-fotos.py`
+3. una línea más en el array `GALERIA` de `index.html`
+
+Las fotos del carrusel viven en `fotos/` como las de producto, a propósito:
+los dos scripts de publicación ya copian esa carpeta entera, así que no hubo
+que tocarlos. Y `hacer-fotos.py` les escribe la medida en `MEDIDAS`, que el
+carrusel usa para reservar el lugar de cada una antes de bajarla.
+
+**La regla de no recortar, resuelta al revés.** En la carta se fija el ancho
+de la tarjeta y cada foto se lleva el alto que le pide su forma. En el
+carrusel es al revés: la tira tiene **alto fijo** y cada foto se lleva el
+**ancho** que le pide la suya. Una foto parada sale angosta, una acostada
+sale ancha, y las dos entran enteras. Por eso `.marco img` va con
+`height:100%;width:auto` y la tarjeta lleva el `aspect-ratio` puesto desde
+JS: sin eso la tira pega un salto cada vez que una foto termina de cargar.
+
+**Dos trampas que ya costaron una vuelta:**
+
+- `.galeria-pie` tiene `display:flex`, que le gana al `display:none` del
+  atributo `hidden`. Sin la regla `.galeria-pie[hidden]{display:none}` los
+  controles se esconden "a medias": siguen ocupando lugar y se ven igual.
+- El observador que marca el menú apagaba **todos** los enlaces al pasar por
+  una sección que no está en el menú. Ahora, si ninguna coincide, deja lo
+  último marcado.
+
+Si `GALERIA` queda vacía la sección entera no aparece, así que nunca hay un
+título con un hueco abajo. Y si entran todas las fotos de una en la pantalla,
+las flechas y los puntos se esconden solos: no controlarían nada.
+
+**PROVISORIO: las dos fotos que están ahora.** Son la fachada y la vitrina,
+que ya estaban en otras partes de la página. Están sólo para que el carrusel
+se pueda ver funcionando. Cuando lleguen las del dueño, se reemplazan las dos
+— no se suman.

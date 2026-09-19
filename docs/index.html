@@ -653,6 +653,76 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 }
 .sin-resenas b{display:block;color:var(--tinta);font-size:18px;margin-bottom:6px}
 
+/* ---------------- carrusel de fotos del local ---------------- */
+/* Es una tira que se corre de costado: con el dedo en el celular, con las
+   flechas o el trackpad en la compu.
+
+   La tira tiene alto fijo y cada foto se lleva el ancho que le pide SU
+   forma. Así entra entera, sin recortar: una foto parada sale angosta y
+   una acostada sale ancha, y las dos se ven completas. Es la misma regla
+   del dueño que vale para la carta, resuelta al revés: en la carta se fija
+   el ancho, acá se fija el alto. */
+.galeria{position:relative}
+.tira{
+  display:flex;gap:16px;align-items:stretch;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  /* el padding deja lugar para que la sombra de las tarjetas no quede
+     cortada por el borde del contenedor que hace el scroll */
+  padding:6px;margin:-6px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.tira::-webkit-scrollbar{display:none}
+.tira:focus-visible{outline:2px solid var(--rojo);outline-offset:3px;border-radius:var(--r-lg)}
+.marco{
+  flex:0 0 auto;scroll-snap-align:center;
+  height:clamp(230px,42vw,420px);
+  margin:0;padding:0;border:0;
+  background:var(--superficie);
+  border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--s2);
+  cursor:zoom-in;
+  transition:transform .18s, box-shadow .18s;
+}
+/* width:auto contra el height fijo: el ancho sale de la forma de la foto.
+   El alto y el ancho de la tarjeta ya quedaron reservados con aspect-ratio
+   antes de que la imagen baje, así que la tira no pega ningún salto. */
+.marco img{display:block;height:100%;width:auto;max-width:none}
+@media (hover:hover){
+  .marco:hover{transform:translateY(-3px);box-shadow:var(--s3)}
+}
+.marco:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
+
+.galeria-pie{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;margin-top:22px;
+}
+/* El atributo hidden pone display:none, pero la regla de arriba es más
+   específica y le gana: sin esto los controles se esconden "a medias",
+   siguen ocupando lugar y se ven igual. */
+.galeria-pie[hidden]{display:none}
+.puntos{display:flex;gap:7px;flex-wrap:wrap}
+.puntos button{
+  width:9px;height:9px;padding:0;border:0;border-radius:999px;
+  background:var(--linea-2);cursor:pointer;
+  transition:background .2s, width .2s;
+}
+.puntos button[aria-current="true"]{background:var(--rojo);width:24px}
+.puntos button:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
+.flechas{display:flex;gap:10px;flex:0 0 auto}
+.flecha{
+  width:46px;height:46px;border-radius:999px;
+  border:1px solid var(--linea-2);background:var(--blanco);color:var(--tinta);
+  display:grid;place-items:center;cursor:pointer;
+  transition:background .18s, border-color .18s, opacity .18s;
+}
+.flecha:hover:not(:disabled){background:var(--superficie);border-color:var(--rojo-100)}
+.flecha:disabled{opacity:.3;cursor:default}
+.flecha:focus-visible{outline:2px solid var(--rojo);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  .tira{scroll-behavior:auto}
+  .marco{transition:none}
+}
+
 /* ---------------- foto grande ---------------- */
 /* Al tocar la miniatura la foto se abre entera. La carta se mira casi siempre
    en el celular, donde una miniatura no alcanza para decidir. */
@@ -980,6 +1050,30 @@ body{padding-bottom:112px}
     <figure class="foto foto-fachada rv">
       <img src="fachada.jpg" alt="La esquina de Rivadavia y La Rioja: la fachada de La Nieve con el toldo que dice desde 1949" loading="lazy" width="820" height="1458">
     </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ FOTOS DEL LOCAL ══════════════════ -->
+<!-- Arranca escondida a propósito: si GALERIA está vacía, la sección no
+     aparece. Así nunca queda un título con un hueco abajo. -->
+<section id="galeria" hidden>
+  <div class="env">
+    <p class="eyebrow">Fotos</p>
+    <h2 style="margin-top:18px">Así se ve La Nieve</h2>
+    <div class="galeria rv" style="margin-top:36px">
+      <div class="tira" id="tira" tabindex="0" role="region" aria-label="Fotos del local. Se corren de costado con las flechas."></div>
+      <div class="galeria-pie">
+        <div class="puntos" id="galeria-puntos"></div>
+        <div class="flechas">
+          <button class="flecha" id="galeria-antes" type="button" aria-label="Ver la foto anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="flecha" id="galeria-sig" type="button" aria-label="Ver la foto siguiente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1599,6 +1693,8 @@ const MEDIDAS = {
     "fatay.webp": [675, 900],
     "flan.webp": [900, 831],
     "fugazzin.webp": [900, 841],
+    "local-fachada.webp": [506, 900],
+    "local-vitrina.webp": [900, 507],
     "medialuna-gigante.webp": [675, 900],
     "medialuna.webp": [675, 900],
     "mousse-chocolate.webp": [675, 900],
@@ -1622,6 +1718,121 @@ const MEDIDAS = {
     "zepelines-cortados.webp": [675, 900],
   /* MEDIDAS-TERMINA */
 };
+
+/* ---------- las fotos del local ----------
+   Las elige el dueño. Para sumar una:
+     1. poné el archivo en  fotos-originales/  con el nombre  local-algo.jpg
+     2. corré  python3 hacer-fotos.py
+     3. agregá una línea acá abajo
+
+   `alt` es lo que lee en voz alta un lector de pantalla y lo que Google usa
+   para entender la foto: describí lo que se ve, no repitas "foto de".
+   `pie` es opcional y se muestra debajo de la foto grande.
+
+   Si la lista queda vacía la sección entera no aparece. */
+const GALERIA = [
+  { f:"local-fachada.webp",
+    alt:"La esquina de Rivadavia y La Rioja: la fachada de La Nieve con el toldo que dice desde 1949",
+    pie:"Rivadavia 3002, esquina La Rioja." },
+  { f:"local-vitrina.webp",
+    alt:"La vitrina de tortas y postres del mostrador de La Nieve",
+    pie:"La vitrina dulce, sobre el mostrador." },
+];
+
+function pintarGaleria(){
+  if(!GALERIA.length) return;              /* sin fotos, sin sección */
+
+  const seccion = $("#galeria");
+  const tira    = $("#tira");
+  const puntos  = $("#galeria-puntos");
+  const antes   = $("#galeria-antes");
+  const sig     = $("#galeria-sig");
+
+  GALERIA.forEach((foto, i) => {
+    /* La medida sale de MEDIDAS, que escribe hacer-fotos.py. Con el alto
+       fijo de la tira y la proporción puesta de antemano, el navegador ya
+       sabe cuánto ancho ocupa cada foto antes de bajarla: la tira no se
+       mueve cuando cada una termina de cargar. */
+    const medida = MEDIDAS[foto.f] || [900, 675];
+
+    const marco = document.createElement("button");
+    marco.type = "button";
+    marco.className = "marco";
+    marco.style.aspectRatio = medida[0] + " / " + medida[1];
+    marco.setAttribute("aria-label", "Ampliar: " + foto.alt);
+
+    const img = document.createElement("img");
+    img.src = "fotos/" + foto.f;
+    img.alt = foto.alt;
+    /* La primera se baja enseguida; las demás recién cuando hagan falta. */
+    img.loading = i === 0 ? "eager" : "lazy";
+    img.decoding = "async";
+    img.width = medida[0];
+    img.height = medida[1];
+
+    marco.appendChild(img);
+    marco.addEventListener("click", () => abrirFoto(img.src, "Pizzería La Nieve", foto.pie || foto.alt));
+    tira.appendChild(marco);
+
+    const punto = document.createElement("button");
+    punto.type = "button";
+    punto.setAttribute("aria-label", "Ir a la foto " + (i + 1) + " de " + GALERIA.length);
+    punto.addEventListener("click", () => irA(i));
+    puntos.appendChild(punto);
+  });
+
+  const marcos = [...tira.children];
+
+  function irA(i){
+    const m = marcos[i];
+    /* scrollIntoView movería también la página entera hasta la galería.
+       Acá sólo tiene que correrse la tira, así que se calcula a mano. */
+    tira.scrollTo({ left: m.offsetLeft - (tira.clientWidth - m.offsetWidth) / 2, behavior: "smooth" });
+  }
+
+  function actual(){
+    const centro = tira.scrollLeft + tira.clientWidth / 2;
+    let cual = 0, mejor = Infinity;
+    marcos.forEach((m, i) => {
+      const d = Math.abs(m.offsetLeft + m.offsetWidth / 2 - centro);
+      if(d < mejor){ mejor = d; cual = i; }
+    });
+    return cual;
+  }
+
+  const pie = seccion.querySelector(".galeria-pie");
+
+  function refrescar(){
+    /* Si entran todas de una, los controles no controlan nada: en una
+       pantalla ancha con pocas fotos las flechas quedarían apagadas para
+       siempre y los puntos no llevarían a ningún lado. Ahí se esconden. */
+    const hayQueCorrer = tira.scrollWidth > tira.clientWidth + 2;
+    pie.hidden = !hayQueCorrer;
+    if(!hayQueCorrer) return;
+
+    const i = actual();
+    [...puntos.children].forEach((p, j) => p.setAttribute("aria-current", j === i ? "true" : "false"));
+    /* 2px de tolerancia: el scroll suave no siempre termina en un entero. */
+    antes.disabled = tira.scrollLeft <= 2;
+    sig.disabled   = tira.scrollLeft >= tira.scrollWidth - tira.clientWidth - 2;
+  }
+
+  antes.addEventListener("click", () => irA(Math.max(0, actual() - 1)));
+  sig.addEventListener("click", () => irA(Math.min(marcos.length - 1, actual() + 1)));
+
+  /* El scroll dispara decenas de veces por segundo; con rAF se refresca una
+     sola vez por cuadro pintado. */
+  let pedido = false;
+  tira.addEventListener("scroll", () => {
+    if(pedido) return;
+    pedido = true;
+    requestAnimationFrame(() => { pedido = false; refrescar(); });
+  }, { passive: true });
+  addEventListener("resize", refrescar);
+
+  seccion.hidden = false;
+  refrescar();
+}
 
 function tarjeta(it){
   const card = document.createElement("article");
@@ -2106,6 +2317,10 @@ if("IntersectionObserver" in window){
     entradas.forEach(en => {
       if(!en.isIntersecting) return;
       const id = "#" + en.target.id;
+      /* Hay secciones que no están en el menú, como las fotos del local. Al
+         pasar por ellas se deja marcado lo último que sí estaba: si no, el
+         menú se apaga entero en el medio de la página. */
+      if(!enlacesNav.some(a => a.getAttribute("href") === id)) return;
       enlacesNav.forEach(a => a.classList.toggle("act", a.getAttribute("href") === id));
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
@@ -2222,6 +2437,7 @@ const FUERZA_COPO = [.50, .40];   // opacidad: mínima y cuánto más puede suma
 estadoLocal();
 setInterval(estadoLocal, 60000);
 pintarCarta();
+pintarGaleria();
 cargarResenas();
 </script>
 
