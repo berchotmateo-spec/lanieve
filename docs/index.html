@@ -1325,7 +1325,9 @@ body{padding-bottom:112px}
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
   </button>
   <figure id="visor-figura">
-    <img id="visor-img" src="" alt="">
+    <!-- draggable="false" y no sólo el CSS: Firefox ignora -webkit-user-drag,
+         y el arrastre nativo de la imagen corta el gesto por la mitad. -->
+    <img id="visor-img" src="" alt="" draggable="false">
     <figcaption>
       <b id="visor-tit"></b>
       <span id="visor-det"></span>
@@ -1702,6 +1704,11 @@ function abrirFoto(src, nombre, detalle){
   abrirAlbum([{ src, nombre, detalle }], 0);
 }
 
+/* `alt` es lo que el lector de pantalla dice en voz alta. Si la foto trae una
+   descripción propia se usa ésa; si no, el nombre, que es lo que pasa con las
+   fotos de producto: ahí el nombre del plato ya describe la foto. */
+function altDe(f){ return f.alt || f.nombre || ""; }
+
 function abrirAlbum(lista, desde){
   ALBUM = lista;
   enAlbum = desde || 0;
@@ -1719,7 +1726,7 @@ function abrirAlbum(lista, desde){
 function pintarVisor(){
   const f = ALBUM[enAlbum];
   $("#visor-img").src = f.src;
-  $("#visor-img").alt = f.nombre || "";
+  $("#visor-img").alt = altDe(f);
   $("#visor-tit").textContent = f.nombre || "";
   $("#visor-det").textContent = f.detalle || "";
 
@@ -1910,6 +1917,7 @@ function albumGaleria(){
     src: "fotos/" + f.f,
     nombre: "Pizzería La Nieve",
     detalle: f.pie || f.alt,
+    alt: f.alt,
   }));
 }
 
@@ -2031,6 +2039,10 @@ function pintarGaleria(){
      va de la tira, que es lo que uno espera. */
   addEventListener("pointermove", e => {
     if(!agarrada) return;
+    /* Si soltaron el botón fuera de la ventana, el pointerup no llega nunca y
+       la tira se queda pegada al cursor. `buttons` en 0 dice que ya no hay
+       ningún botón apretado. */
+    if(e.buttons === 0){ soltar(); return; }
     const d = e.clientX - xInicial;
     corrio = Math.max(corrio, Math.abs(d));
     tira.scrollLeft = scrollInicial - d;
@@ -2048,9 +2060,15 @@ function pintarGaleria(){
   addEventListener("pointercancel", soltar);
 
   /* El clic llega DESPUÉS de soltar. Si lo que hubo fue un arrastre, se corta
-     acá antes de que llegue al botón de la foto. */
+     acá antes de que llegue al botón de la foto.
+
+     `detail` cuenta los clics del mouse: un Enter sobre el botón también
+     dispara un click, pero con detail 0. Sin ese filtro, después de arrastrar
+     una vez el teclado dejaba de abrir las fotos, porque el arrastre viejo
+     seguía tapando todos los clics que venían. */
   tira.addEventListener("click", e => {
-    if(corrio > MINIMO_ARRASTRE){ e.preventDefault(); e.stopPropagation(); }
+    if(e.detail !== 0 && corrio > MINIMO_ARRASTRE){ e.preventDefault(); e.stopPropagation(); }
+    corrio = 0;
   }, true);
 
   /* El scroll dispara decenas de veces por segundo; con rAF se refresca una

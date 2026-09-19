@@ -1275,3 +1275,32 @@ Detalles que importan:
 - Acá `setPointerCapture` **sí** va, al revés que en la tira: adentro del
   visor no hay ningún clic que quede mal apuntado, y la captura hace que el
   gesto siga si el dedo se va de la foto.
+
+## Tres trampas del arrastre, encontradas en un repaso
+
+Salieron de un `/code-review` del 19/09/2026, y las tres se verificaron en el
+navegador antes de tocar nada. Valen para cualquier carrusel, no sólo éste.
+
+1. **Cortar el clic del arrastre también corta el del teclado.** Para que
+   correr la tira no abra la foto que quedó abajo del cursor, el clic se corta
+   cuando el puntero se movió mucho. Pero un Enter sobre el botón **también
+   dispara un click**, y quedaba tapado por el arrastre anterior: después de
+   arrastrar una vez, el teclado dejaba de abrir fotos para siempre. Se
+   distingue con `e.detail`, que cuenta clics de mouse y vale 0 cuando el
+   click lo generó el teclado.
+2. **El `pointerup` puede no llegar nunca.** Si se suelta el botón fuera de la
+   ventana, la tira se queda pegada al cursor y sigue moviéndose sin nada
+   apretado. Se corta mirando `e.buttons === 0` en el `pointermove`.
+3. **`-webkit-user-drag` no alcanza.** Firefox lo ignora, así que hace falta el
+   atributo `draggable="false"` en la imagen. Si no, el navegador arranca su
+   propio arrastre y corta el gesto por la mitad. El carrusel ya lo tenía; al
+   visor le faltaba.
+
+Y una cuarta, de accesibilidad: el `alt` de la foto grande era **"Pizzería La
+Nieve" para las ocho**. La miniatura tenía la descripción buena y el visor la
+tiraba. Ahora cada foto del álbum lleva su `alt`.
+
+**Un hallazgo que NO era.** El repaso avisó que `offsetLeft` devolvía una
+coordenada corrida porque el `offsetParent` de las fotos es `.galeria` y no la
+tira. Se midió: `offsetLeft` da lo mismo con la tira quieta que con la tira
+corrida 744 px. No se tocó nada.
