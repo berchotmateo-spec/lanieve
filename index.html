@@ -1623,8 +1623,11 @@ const MEDIDAS = {
     "fatay.webp": [675, 900],
     "flan.webp": [900, 831],
     "fugazzin.webp": [900, 841],
-    "local-fachada.webp": [506, 900],
-    "local-vitrina.webp": [900, 507],
+    "local-cartel.webp": [600, 900],
+    "local-dia-esquina.webp": [757, 900],
+    "local-dia-frente.webp": [624, 900],
+    "local-noche-esquina.webp": [600, 900],
+    "local-noche-frente.webp": [600, 900],
     "medialuna-gigante.webp": [675, 900],
     "medialuna.webp": [675, 900],
     "mousse-chocolate.webp": [675, 900],
@@ -1661,12 +1664,21 @@ const MEDIDAS = {
 
    Si la lista queda vacía la sección entera no aparece. */
 const GALERIA = [
-  { f:"local-fachada.webp",
-    alt:"La esquina de Rivadavia y La Rioja: la fachada de La Nieve con el toldo que dice desde 1949",
+  { f:"local-noche-frente.webp",
+    alt:"El frente de La Nieve de noche: el cartel iluminado con el muñeco de nieve y las mesas de la vereda ocupadas",
+    pie:"El frente, de noche." },
+  { f:"local-noche-esquina.webp",
+    alt:"La esquina de noche, con la galería de mesas sobre la vereda y gente comiendo",
+    pie:"Las mesas de la vereda." },
+  { f:"local-dia-esquina.webp",
+    alt:"La esquina de Rivadavia y La Rioja de día, con gente cruzando y las mesas de la vereda",
     pie:"Rivadavia 3002, esquina La Rioja." },
-  { f:"local-vitrina.webp",
-    alt:"La vitrina de tortas y postres del mostrador de La Nieve",
-    pie:"La vitrina dulce, sobre el mostrador." },
+  { f:"local-dia-frente.webp",
+    alt:"El frente de La Nieve de día, visto desde la vereda de enfrente, con el toldo rojo y las mesas afuera",
+    pie:"El frente, de día." },
+  { f:"local-cartel.webp",
+    alt:"El cartel de La Nieve con el muñeco de nieve, junto a los carteles de las calles Rivadavia y La Rioja",
+    pie:"El cartel, sobre la esquina." },
 ];
 
 function pintarGaleria(){
@@ -1721,6 +1733,12 @@ function pintarGaleria(){
   }
 
   function actual(){
+    /* En los dos extremos manda el extremo, no la cuenta del centro: con la
+       tira al principio, la foto más cerca del medio puede ser la segunda, y
+       el punto marcado tiene que ser el primero igual. */
+    if(tira.scrollLeft <= 2) return 0;
+    if(tira.scrollLeft >= tira.scrollWidth - tira.clientWidth - 2) return marcos.length - 1;
+
     const centro = tira.scrollLeft + tira.clientWidth / 2;
     let cual = 0, mejor = Infinity;
     marcos.forEach((m, i) => {

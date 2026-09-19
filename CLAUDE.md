@@ -1183,7 +1183,18 @@ Si `GALERIA` queda vacía la sección entera no aparece, así que nunca hay un
 título con un hueco abajo. Y si entran todas las fotos de una en la pantalla,
 las flechas y los puntos se esconden solos: no controlarían nada.
 
-**PROVISORIO: las dos fotos que están ahora.** Son la fachada y la vitrina,
-que ya estaban en otras partes de la página. Están sólo para que el carrusel
-se pueda ver funcionando. Cuando lleguen las del dueño, se reemplazan las dos
-— no se suman.
+**Las fotos son las del dueño**, llegadas el 19/09/2026. Son cinco y todas
+del frente: el cartel iluminado de noche con las mesas ocupadas, la esquina
+de noche, la esquina de día, el frente de día y el cartel de cerca con los
+carteles de Rivadavia y La Rioja. Las dos provisorias (fachada y vitrina) se
+borraron al ponerlas, no se sumaron.
+
+Son las únicas fotos del local que no salieron del Drive de la visita de
+Mateo: las dos de noche parecen de un fotógrafo. Si alguna vez hay que
+recortarlas o retocarlas, preguntar antes.
+
+Un detalle del carrusel que costó verlo: al principio de la tira, la foto
+más cercana al centro de la pantalla puede ser la **segunda**, y el punto
+marcado quedaba en el 2 con la tira sin mover. Por eso `actual()` devuelve
+el primero o el último de una cuando la tira está en un extremo, en vez de
+medir distancias al centro.
