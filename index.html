@@ -603,6 +603,15 @@ section{padding:clamp(62px,8.5vw,110px) 0}
   scrollbar-width:none;-ms-overflow-style:none;
 }
 .tira::-webkit-scrollbar{display:none}
+/* Con el mouse la tira se agarra y se tira. En pantalla táctil no hace falta
+   (el dedo ya la corre solo) y el cursor no se ve, así que no molesta. */
+@media (hover:hover){ .tira{cursor:grab} }
+.tira.agarrando{cursor:grabbing;scroll-snap-type:none}
+.tira.agarrando .marco{cursor:grabbing}
+/* Al arrastrar, el navegador quiere seleccionar texto y llevarse la imagen.
+   Las dos cosas cortan el movimiento por la mitad. */
+.tira.agarrando,
+.tira.agarrando *{user-select:none;-webkit-user-select:none}
 .tira:focus-visible{outline:2px solid var(--rojo);outline-offset:3px;border-radius:var(--r-lg)}
 .marco{
   flex:0 0 auto;scroll-snap-align:center;
@@ -1723,6 +1732,9 @@ function pintarGaleria(){
     img.decoding = "async";
     img.width = medida[0];
     img.height = medida[1];
+    /* Sin esto, al tirar de la foto el navegador arranca su propio arrastre
+       de imagen y la tira se queda clavada. */
+    img.draggable = false;
 
     marco.appendChild(img);
     marco.addEventListener("click", () => abrirFoto(img.src, "Pizzería La Nieve", foto.pie || foto.alt));
@@ -1779,6 +1791,56 @@ function pintarGaleria(){
 
   antes.addEventListener("click", () => irA(Math.max(0, actual() - 1)));
   sig.addEventListener("click", () => irA(Math.min(marcos.length - 1, actual() + 1)));
+
+  /* ---- deslizar con el mouse ----
+     Con el dedo la tira ya se corre sola: eso lo hace el navegador y es mejor
+     que cualquier cosa que escribamos (tiene inercia, frena como corresponde).
+     Por eso el arrastre se engancha sólo cuando NO es un dedo.
+
+     Lo único delicado es distinguir un arrastre de un clic: si no, cada vez
+     que alguien corre la tira se le abre la foto que tenía abajo del cursor. */
+  const MINIMO_ARRASTRE = 6;   // píxeles; menos que esto es un clic con pulso
+  let agarrada = false, xInicial = 0, scrollInicial = 0, corrio = 0;
+
+  tira.addEventListener("pointerdown", e => {
+    if(e.pointerType === "touch" || e.button !== 0) return;
+    agarrada = true;
+    corrio = 0;
+    xInicial = e.clientX;
+    scrollInicial = tira.scrollLeft;
+    /* El scroll suave y el imán del snap pelean con el arrastre: mientras se
+       tira, la tira tiene que seguir al cursor exacto y sin demora. */
+    tira.style.scrollBehavior = "auto";
+    tira.classList.add("agarrando");
+  });
+
+  /* Van en window y NO con setPointerCapture. Con captura, el clic que sigue
+     al soltar se lo lleva la tira en vez de la foto, y tocar una foto dejaba
+     de abrirla. En window, además, el arrastre sigue andando si el cursor se
+     va de la tira, que es lo que uno espera. */
+  addEventListener("pointermove", e => {
+    if(!agarrada) return;
+    const d = e.clientX - xInicial;
+    corrio = Math.max(corrio, Math.abs(d));
+    tira.scrollLeft = scrollInicial - d;
+  });
+
+  function soltar(){
+    if(!agarrada) return;
+    agarrada = false;
+    tira.classList.remove("agarrando");
+    tira.style.scrollBehavior = "";
+    /* Al soltar, encaja en la foto más cercana. */
+    irA(actual());
+  }
+  addEventListener("pointerup", soltar);
+  addEventListener("pointercancel", soltar);
+
+  /* El clic llega DESPUÉS de soltar. Si lo que hubo fue un arrastre, se corta
+     acá antes de que llegue al botón de la foto. */
+  tira.addEventListener("click", e => {
+    if(corrio > MINIMO_ARRASTRE){ e.preventDefault(); e.stopPropagation(); }
+  }, true);
 
   /* El scroll dispara decenas de veces por segundo; con rAF se refresca una
      sola vez por cuadro pintado. */

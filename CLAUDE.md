@@ -1199,6 +1199,41 @@ Son las únicas fotos del local que no salieron del Drive de la visita de
 Mateo: las dos de noche parecen de un fotógrafo. Si alguna vez hay que
 recortarlas o retocarlas, preguntar antes.
 
+### Deslizar la tira
+
+Con el dedo la tira ya se corría sola desde el principio: eso lo hace el
+navegador con `overflow-x:auto`, y lo hace mejor que cualquier cosa escrita a
+mano — tiene inercia y frena como corresponde. **No hay que tocarlo.** Lo que
+faltaba, y Mateo pidió el 19/09/2026, era poder **agarrarla con el mouse** en
+la compu.
+
+El arrastre se engancha sólo cuando el puntero **no es un dedo**
+(`e.pointerType === "touch"` y se sale). Si no, pelearía con el scroll nativo
+del celular y lo empeoraría.
+
+Tres cosas que hubo que resolver, las tres reales:
+
+1. **`setPointerCapture` rompe el clic.** Parece lo correcto para un arrastre,
+   pero con la captura puesta el `click` que sigue al soltar le llega a la
+   tira en vez de a la foto: tocar una foto dejaba de abrirla. La solución es
+   no capturar y escuchar `pointermove`/`pointerup` en `window`, que además
+   hace que el arrastre siga andando si el cursor se va de la tira.
+2. **Distinguir arrastrar de clickear.** Si no, cada vez que alguien corre la
+   tira se le abre la foto que tenía abajo. Se mide cuánto se movió y, si pasó
+   de 6 px, un listener en fase de captura corta el clic antes de que llegue
+   al botón.
+3. **El navegador se lleva la imagen.** Al tirar de una foto arranca su propio
+   arrastre de imagen y la tira se queda clavada. Por eso `img.draggable =
+   false` y `user-select:none` mientras se arrastra.
+
+**Lo que no se pudo probar acá:** el deslizar con el dedo. En este entorno el
+navegador va sin pantalla y `Input.synthesizeScrollGesture` no mueve nada, ni
+siquiera la página para abajo, así que el gesto táctil no se puede simular. Lo
+que sí se verificó: que la tira llega al dedo con `touch-action:auto` y
+`overflow-x:auto`, que de siete `touchmove` **ninguno** queda bloqueado por la
+página, y que el código del arrastre no se activa con el dedo. O sea, nada de
+lo que agregamos lo estorba. La prueba final es un celular de verdad.
+
 Un detalle del carrusel que costó verlo: al principio de la tira, la foto
 más cercana al centro de la pantalla puede ser la **segunda**, y el punto
 marcado quedaba en el 2 con la tira sin mover. Por eso `actual()` devuelve
