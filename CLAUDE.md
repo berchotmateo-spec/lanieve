@@ -410,6 +410,29 @@ Lo que **sigue sin resolverse** mirando: la pascualina contra la pascualina
 especial, que sólo se diferencian en que la especial lleva ricota. Eso hay
 que preguntarlo.
 
+### La misma foto puede volver con otro nombre
+
+El 19/09/2026 Mateo mandó una foto rotulada "Tarta de albahaca". Era **la
+misma toma** que había mandado el día anterior como "Pollo especial", y que
+ya estaba cargada como `tarta-pollo-especial`: mismas manchas de horno,
+mismas dos porciones en el mismo ángulo, mismas motas del granito. Cambiaba
+sólo el encuadre, porque el chat la recomprime.
+
+Dos cosas que dejó esto:
+
+1. **Antes de asignar una foto nueva, compararla contra las que ya están.**
+   Las fotos del Drive son de una sola visita, así que hay varias tomas del
+   mismo producto y es fácil cargarlas dos veces con nombres distintos. Un
+   `md5sum` no alcanza — el chat las recomprime y el hash cambia —; hay que
+   mirarlas lado a lado.
+2. **Cuando el rótulo pelea con lo que se ve, gana lo que se ve.** Esa tarta
+   tiene el corte verde de hoja: no puede ser pollo especial. Y "Tarta de
+   albahaca" no existe en la carta. Se lo planteé a Mateo con las tres
+   salidas posibles y eligió la segunda: es la **Pascualina especial**, que
+   era justamente la que faltaba y también lleva verde. El archivo pasó a
+   llamarse `pascualina-especial` y **Tarta de pollo especial volvió a la
+   lista de pendientes**.
+
 ### Postres lleva la foto grande, el resto no
 
 Lo pidió el dueño el 16/09/2026 y vale solo para esa solapa: en **Postres** la
