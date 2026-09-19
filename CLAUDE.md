@@ -433,6 +433,31 @@ Dos cosas que dejó esto:
    llamarse `pascualina-especial` y **Tarta de pollo especial volvió a la
    lista de pendientes**.
 
+### El flan casero, resuelto
+
+El 19/09/2026 Mateo mandó la foto correcta: **nueve flanes individuales en
+tarteras de aluminio**, sobre la bandeja. Nada que ver con el budín, que es
+una pieza entera en molde savarín. Con eso queda cerrado el error del
+16/09/2026, y ahora los dos se ven uno al lado del otro en "De la heladera",
+bien distintos.
+
+### Recortar el fondo sí, la comida no
+
+La regla del dueño es que **la comida** no puede quedar cortada. Sacarle
+mesada vacía a los costados no la viola: la comida sigue entera y encima se
+ve más grande, que es justo lo que el dueño pidió para Postres.
+
+La del flan venía 4:3 con casi un cuarto de granito muerto a la derecha. Se
+recortó a 2009x1855 (de 2576x1932): entran los nueve flanes con margen, no
+se toca ninguno. En la caja 3:4 de Postres la foto pasó de 900x675 a
+900x831, así que llena bastante más.
+
+Cuándo hacerlo: sólo si sobra fondo y **después de verificar el recorte
+mirándolo**, con el rectángulo dibujado encima antes de aplicarlo. Nunca
+automático, nunca para forzar una proporción. Si para llegar al 3:4 hay que
+comerse un pedazo de comida, no se recorta y la foto queda con franjas: la
+franja es el precio de la regla, y está bien pagarlo.
+
 ### Postres lleva la foto grande, el resto no
 
 Lo pidió el dueño el 16/09/2026 y vale solo para esa solapa: en **Postres** la
