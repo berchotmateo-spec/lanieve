@@ -1183,11 +1183,17 @@ Si `GALERIA` queda vacía la sección entera no aparece, así que nunca hay un
 título con un hueco abajo. Y si entran todas las fotos de una en la pantalla,
 las flechas y los puntos se esconden solos: no controlarían nada.
 
-**Las fotos son las del dueño**, llegadas el 19/09/2026. Son cinco y todas
-del frente: el cartel iluminado de noche con las mesas ocupadas, la esquina
-de noche, la esquina de día, el frente de día y el cartel de cerca con los
-carteles de Rivadavia y La Rioja. Las dos provisorias (fachada y vitrina) se
-borraron al ponerlas, no se sumaron.
+**Las fotos son las del dueño**, llegadas el 19/09/2026 en dos tandas. Son
+ocho y todas del frente: cinco de noche (el cartel iluminado con las mesas
+ocupadas, la cola en la puerta, la esquina llena, la galería techada con
+lluvia, la esquina) y tres de día (la esquina, el frente y el cartel de
+cerca). Van en ese orden a propósito: primero el bloque de noche, que es el
+más fuerte, y después el de día. Las dos provisorias (fachada y vitrina) se
+borraron al poner las primeras, no se sumaron.
+
+**Lo que falta ahí: una foto de adentro.** Las ocho son del frente. Una del
+mostrador, del horno o de la vitrina le daría variedad. Hay que pedírsela al
+dueño.
 
 Son las únicas fotos del local que no salieron del Drive de la visita de
 Mateo: las dos de noche parecen de un fotógrafo. Si alguna vez hay que
