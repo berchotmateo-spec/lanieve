@@ -1304,3 +1304,19 @@ tiraba. Ahora cada foto del álbum lleva su `alt`.
 coordenada corrida porque el `offsetParent` de las fotos es `.galeria` y no la
 tira. Se midió: `offsetLeft` da lo mismo con la tira quieta que con la tira
 corrida 744 px. No se tocó nada.
+
+## El crédito del pie de página
+
+Lo pidió Mateo el 21/09/2026: quiere que figure que la página la hizo él,
+al final de todo. Va en `.pie-credito`, la última línea del `<footer>`,
+después de `.pie-fin` (el copyright y el horario). Discreta a propósito
+(opacidad .28, 12px, centrada): no compite con la información del local,
+que es lo que tiene que leerse primero.
+
+Por ahora es sólo texto, sin link — Mateo no tiene todavía una web o
+Instagram propios donde mandar a alguien que quiera contactarlo. Si arma
+uno, esa línea pasa a ser un link ahí.
+
+Verificado que no queda tapada por la barra fija de "Pedir por Pedidos Ya":
+en escritorio y en celular, con la página scrolleada hasta el final, el
+crédito termina bastante antes de donde empieza la barra.
