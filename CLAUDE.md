@@ -637,8 +637,12 @@ No hace falta una foto por producto. Cuando por fuera son todos iguales, el
 dueño usa una sola y se repite. Ya pasa en dos grupos, los dos por pedido de
 Mateo:
 
-- **`zepelin.webp`** en el súper, el variado y el de pollo. Es una bandeja con
-  varios tipos mezclados, que es como salen.
+- **`arrolladas.webp`** en la de carne, la de pollo y la primavera, y
+  **`arrolladas-cortadas.webp`** en la de roquefort y la de longaniza. Es una
+  bandeja con varios tipos mezclados, que es como salen. **Antes se llamaban
+  `zepelin.webp` y `zepelines-cortados.webp` y estaban en los zepelines: era un
+  error, son arrolladas** (corregido el 28/09/2026). Los zepelines quedaron sin
+  foto hasta que haya una propia.
 - **`empanadas.webp`** en las **doce** empanadas (las ocho por unidad y las
   cuatro por docena). Cerradas y sin hornear del todo, el relleno no se ve:
   una foto sirve para todas.
