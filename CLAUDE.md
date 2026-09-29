@@ -1415,3 +1415,12 @@ $72.000 (por eso la "Tarta grande" de $72.000 sobraba en la carta: era esto).
 Se hace con el campo `e` (precio de la entera) en el producto. **No aplica a
 la torta de ricota ni a la pasta frola**, que tienen su propio precio de
 entera en "Tortas enteras, por encargue".
+
+## Tortas por encargue y sin vino (30/09/2026)
+
+- Los grupos de la carta aceptan un campo opcional `nota`, que se muestra
+  debajo del título del grupo. Lo usan las tortas: "Tortas, por porción" dice
+  "La torta entera es por encargue, con 24 hs de anticipación." y "Tortas
+  enteras, por encargue" dice "Con 24 hs de anticipación."
+- Sale el **Vino 3/4** de la carta, y el grupo de bebidas "Cerveza y vino"
+  pasa a llamarse "Cervezas". Quedan 128 productos.
