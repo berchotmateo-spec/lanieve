@@ -519,6 +519,8 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .combo.destacado .btn{background:#fff;color:var(--rojo);box-shadow:none}
 .combo.destacado .btn:hover{background:var(--amarillo-50);color:var(--rojo-600)}
 
+.grupo-promos{margin:0 0 20px;font-size:clamp(20px,2.2vw,24px)}
+.combos + .grupo-promos{margin-top:48px}
 .nota-combos{margin-top:26px;text-align:center;font-size:14.5px;color:var(--tinta-2)}
 
 /* ---------------- el local ---------------- */
@@ -931,7 +933,7 @@ body{padding-bottom:112px}
       <a class="marca" href="#top"><img class="logo-chico" src="logo.png" alt="" width="244" height="300"><img class="ovalo" src="ovalo.png" alt="La Nieve" width="510" height="200"></a>
       <nav class="nav-links" id="nav-links">
         <a href="#carta">Carta</a>
-        <a href="#combos">Combos</a>
+        <a href="#promos">Promos</a>
         <a href="#nosotros">El local</a>
         <a href="#preguntas">Preguntas</a>
         <a href="#resenas">Reseñas</a>
@@ -956,7 +958,7 @@ body{padding-bottom:112px}
   <button class="cerrar" id="cerrar" type="button" aria-label="Cerrar menú">×</button>
   <nav>
     <a href="#carta">Carta</a>
-    <a href="#combos">Combos</a>
+    <a href="#promos">Promos</a>
     <a href="#nosotros">El local</a>
     <a href="#preguntas">Preguntas</a>
     <a href="#resenas">Reseñas</a>
@@ -1017,7 +1019,7 @@ body{padding-bottom:112px}
       <article class="vent rv">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v8H3zM14 10h3.5l2.5 3v2H14z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
         <h4>Salón, take away y envío</h4>
-        <p>Comés en el local, retirás por Rivadavia al 3002 o te la llevan a casa con Pedidos Ya.</p>
+        <p>Comés o retirás por el local; si no, te lo llevan a casa por Pedidos Ya.</p>
       </article>
       <article class="vent rv">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div>
@@ -1058,15 +1060,15 @@ body{padding-bottom:112px}
   </div>
 </section>
 
-<!-- ══════════════════ COMBOS ══════════════════ -->
-<section id="combos">
+<!-- ══════════════════ PROMOS ══════════════════ -->
+<section id="promos">
   <div class="env">
     <div class="cab">
-      <p class="eyebrow">Para compartir</p>
-      <h2>Combos y pedidos grandes</h2>
+      <p class="eyebrow">Para vos o para compartir</p>
+      <h2>Promos</h2>
       <p>Las súper promos del pizarrón, para llevar. Encargalas con un rato de anticipación.</p>
     </div>
-    <div class="combos" id="combos-cont"></div>
+    <div id="combos-cont"></div>
     <p class="nota-combos">Las promos son para llevar. ¿Necesitás algo más grande? Pasá por el local y lo armamos a medida.</p>
   </div>
 </section>
@@ -1302,7 +1304,7 @@ body{padding-bottom:112px}
         <h5>El local</h5>
         <ul>
           <li><a href="#nosotros">Quiénes somos</a></li>
-          <li><a href="#combos">Combos</a></li>
+          <li><a href="#promos">Promos</a></li>
           <li><a href="#preguntas">Preguntas frecuentes</a></li>
         </ul>
       </div>
@@ -1610,24 +1612,27 @@ const CARTA = [
   },
 ];
 
+/* Cada promo va en uno de los dos grupos de la sección: `grupo:"individual"`
+   (Promos individuales) o `grupo:"familia"` (Promos en familia y amigos).
+   Un grupo sin promos no se muestra: ni el título ni el hueco. */
 const COMBOS = [
-  { etiqueta:"Promo 1", nombre:"Tres muzzarellas", precio:44000,
+  { grupo:"familia", etiqueta:"Promo 1", nombre:"Tres muzzarellas", precio:44000,
     incluye:["3 pizzas de muzzarella"] },
-  { etiqueta:"Promo 2", destacado:true, nombre:"Pizza y docena de empanadas", precio:45000,
+  { grupo:"familia", etiqueta:"Promo 2", destacado:true, nombre:"Pizza y docena de empanadas", precio:45000,
     incluye:["1 pizza de muzzarella","1 docena de empanadas a elección"] },
-  { etiqueta:"Promo 3", nombre:"Dos pizzas y media docena", precio:48000,
+  { grupo:"familia", etiqueta:"Promo 3", nombre:"Dos pizzas y media docena", precio:48000,
     incluye:["1 pizza de muzzarella","1 fugazzetta o napolitana","1/2 docena de empanadas a elección"] },
-  { etiqueta:"Promo 4", nombre:"Especial, muzzarella y empanadas", precio:54000,
+  { grupo:"familia", etiqueta:"Promo 4", nombre:"Especial, muzzarella y empanadas", precio:54000,
     incluye:["1 pizza especial","1 pizza de muzzarella","6 empanadas"] },
-  { etiqueta:"Promo 5", nombre:"Muzzarella, fainá y empanadas", precio:33000,
+  { grupo:"familia", etiqueta:"Promo 5", nombre:"Muzzarella, fainá y empanadas", precio:33000,
     incluye:["1 pizza de muzzarella","2 fainá","6 empanadas"] },
-  { etiqueta:"Promo 6", nombre:"Tres pizzas surtidas", precio:51000,
+  { grupo:"familia", etiqueta:"Promo 6", nombre:"Tres pizzas surtidas", precio:51000,
     incluye:["1 napolitana","1 fugazzetta","1 pizza de muzzarella"] },
-  { etiqueta:"Promo 7", nombre:"Calabresa y muzzarella", precio:33000,
+  { grupo:"familia", etiqueta:"Promo 7", nombre:"Calabresa y muzzarella", precio:33000,
     incluye:["1 pizza calabresa","1 pizza de muzzarella"] },
-  { etiqueta:"Promo 8", nombre:"Dos pizzas y cuatro fainá", precio:40100,
+  { grupo:"familia", etiqueta:"Promo 8", nombre:"Dos pizzas y cuatro fainá", precio:40100,
     incluye:["1 pizza de muzzarella","1 fugazzetta","4 fainá"] },
-  { etiqueta:"Promo 9", nombre:"Muzzarella y dos mitades", precio:36000,
+  { grupo:"familia", etiqueta:"Promo 9", nombre:"Muzzarella y dos mitades", precio:36000,
     incluye:["1 pizza de muzzarella","1/2 fugazzetta","1/2 especial"] }
 ];
 
@@ -2260,8 +2265,23 @@ $("#buscar").addEventListener("input", e => {
   pintarCarta();
 });
 
-/* ---------- combos ---------- */
+/* ---------- promos ---------- */
 const combosEl = $("#combos-cont");
+const GRUPOS_PROMOS = [
+  { id:"individual", titulo:"Promos individuales" },
+  { id:"familia",    titulo:"Promos en familia y amigos" },
+];
+const gridPromos = {};
+GRUPOS_PROMOS.forEach(g => {
+  if(!COMBOS.some(c => c.grupo === g.id)) return;
+  const t = document.createElement("h3");
+  t.className = "grupo-promos";
+  t.textContent = g.titulo;
+  const grid = document.createElement("div");
+  grid.className = "combos";
+  combosEl.append(t, grid);
+  gridPromos[g.id] = grid;
+});
 COMBOS.forEach(c => {
   const d = document.createElement("article");
   d.className = "combo" + (c.destacado ? " destacado" : "");
@@ -2296,7 +2316,7 @@ COMBOS.forEach(c => {
   b.textContent = "Pedir por Pedidos Ya";
 
   d.append(tag, p, h, ul, b);
-  combosEl.appendChild(d);
+  (gridPromos[c.grupo] || combosEl).appendChild(d);
 });
 
 /* ---------- reseñas ----------

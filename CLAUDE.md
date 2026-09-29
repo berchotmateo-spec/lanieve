@@ -1363,3 +1363,18 @@ la misma fainá sin cortar, y la rellena vista de arriba no muestra el relleno
   (`tarta-frutilla-ORIGINAL-con-gente.jpg`). En la esquina de arriba a la
   izquierda queda apenas un pedacito de pantalón oscuro de un cliente: sacarlo
   obligaba a cortar la tarta.
+
+## "Combos" pasa a llamarse "Promos" (30/09/2026)
+
+Pedido del dueño, vía Mateo:
+- Todo lo visible que decía "Combos" dice **"Promos"** (menú de arriba, menú
+  del celular, pie). El ancla también cambió: `#combos` → `#promos`. La
+  sección se titula "Promos", con el antetítulo "Para vos o para compartir".
+- La sección tiene **dos grupos**: **"Promos individuales"** y **"Promos en
+  familia y amigos"**. Cada promo de `COMBOS` lleva `grupo:"individual"` o
+  `grupo:"familia"`. Un grupo sin promos no se dibuja (ni título ni hueco).
+  Las nueve promos del pizarrón son todas para compartir y van en "familia".
+  **Las individuales todavía no están cargadas**: falta que el dueño diga
+  cuáles son y a qué precio. No inventarlas.
+- Recuadro "Salón, take away y envío": "Comés o retirás por el local; si no,
+  te lo llevan a casa por Pedidos Ya."
