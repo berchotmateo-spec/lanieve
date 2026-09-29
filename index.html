@@ -406,6 +406,7 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .prod .pr b{font-size:15.5px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
 .prod .pr.entera b{font-size:21px;letter-spacing:-.03em}
 .prod .precio{font-size:21px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.prod .precio .unidad{margin-left:6px;font-size:14px;font-weight:600;letter-spacing:0;color:var(--tinta-3)}
 /* Productos que salen de la carta de Pedidos Ya: el precio de mostrador
    todavía no está confirmado, así que se muestran sin número. */
 .prod .precio.a-confirmar{font-size:15px;font-weight:700;letter-spacing:0;color:var(--tinta-3)}
@@ -1475,8 +1476,8 @@ const CARTA = [
         { n:"Vaso de leche", d:"", p:2700 },
       ]},
       { nombre: "Para acompañar", items: [
-        { n:"Medialuna", d:"", p:1000, f:"medialuna.webp" },
-        { n:"Café con tres medialunas", d:"", p:6800, f:"cafe-medialunas.webp" },
+        { n:"Medialuna", d:"", p:1000, u:"c/u", f:"medialuna.webp" },
+        { n:"Café con tres medialunas chicas", d:"Café con leche y tres medialunas chicas de jamón y queso.", p:6800, f:"cafe-medialunas.webp" },
         { n:"Café con medialuna de jamón y queso", d:"", p:7500 },
         { n:"Café con porción de ricota", d:"", p:7300, f:"cafe-ricota.webp" },
         { n:"Submarino con porción de ricota", d:"", p:7500 },
@@ -1494,7 +1495,7 @@ const CARTA = [
         { n:"Cuatro chocolates", d:"Mousse de chocolate, de dulce de leche, de chocolate blanco y crema.", p:8500 },
         { n:"Torta pistacho Dubai", d:"Rellena con brownie, crema de chocolate, pistacho Dubai y mousse de pistacho.", p:8500 },
         { n:"María Renée", d:"Bizcochuelo de vainilla, merengue, dulce de leche y duraznos.", p:8500 },
-        { n:"Torta choco", d:"Bizcochuelo de chocolate con dulce de leche y mousse de cacao.", p:8500 },
+        { n:"Choco choco", d:"Bizcochuelo de chocolate con dulce de leche y mousse de cacao.", p:8500 },
         { n:"Torta Oreo", d:"Mousse de chocolate, mousse de dulce de leche y Oreo.", p:8500 },
         { n:"Torta mousse de limón", d:"Mousse de limón, brownie y dulce de leche.", p:8500, f:"torta-mousse-limon.webp" },
         { n:"Cheese cake", d:"Torta de queso crema, base de bizcochuelo y jalea de frutilla.", p:8500, f:"cheese-cake.webp" },
@@ -1505,7 +1506,6 @@ const CARTA = [
       { nombre: "Tortas enteras, por encargue", items: [
         { n:"Torta de ricota entera", d:"", p:35000, f:"torta-ricota.webp" },
         { n:"Pasta frola entera", d:"", p:20000, f:"pasta-frola.webp" },
-        { n:"Tarta grande", d:"", p:72000 },
         { n:"Torta especial entera", d:"", p:76500 },
       ]},
       { nombre: "De la heladera", items: [
@@ -1801,7 +1801,7 @@ const MEDIDAS = {
     "rogel.webp": [675, 900],
     "sandwich-milanesa.webp": [675, 900],
     "submarino.webp": [675, 900],
-    "tarta-frutilla.webp": [675, 900],
+    "tarta-frutilla.webp": [900, 849],
     "tarta-humita.webp": [675, 900],
     "tarta-jamon-queso.webp": [675, 900],
     "tarta-pollo.webp": [675, 900],
@@ -2080,6 +2080,15 @@ function tarjeta(it){
     const pre = document.createElement("span");
     pre.className = "precio";
     pre.textContent = plata(it.p);
+    /* `u` es opcional: aclara a qué corresponde el precio cuando la foto
+       puede confundir. La de la medialuna muestra tres, pero el precio es
+       de una sola, así que lleva "c/u". */
+    if(it.u){
+      const u = document.createElement("small");
+      u.className = "unidad";
+      u.textContent = it.u;
+      pre.appendChild(u);
+    }
     fila.appendChild(pre);
   }
 

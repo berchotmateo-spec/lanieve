@@ -1343,3 +1343,23 @@ Pedido de Mateo: la **Media fainá** y la **Fainá rellena de jamón y queso**
 usan la misma foto que la **Fainá común** (`faina-comun.webp`). La media es
 la misma fainá sin cortar, y la rellena vista de arriba no muestra el relleno
 ("un producto cerrado no dice nada de lo que tiene adentro").
+
+## Cambios pedidos por el dueño (30/09/2026)
+
+- **Medialuna**: el precio lleva **"c/u"**, porque la foto muestra tres y el
+  precio es de una. Se hace con el campo opcional `u` del producto
+  (`u:"c/u"`), que se dibuja chiquito al lado del precio. Sirve para
+  cualquier otro producto donde la foto pueda confundir la cantidad.
+- **"Café con tres medialunas"** pasa a **"Café con tres medialunas chicas"**,
+  con la descripción "Café con leche y tres medialunas chicas de jamón y
+  queso." (así lo describió Mateo). Es para que no se confunda con la
+  medialuna gigante.
+- **"Torta choco"** pasa a llamarse **"Choco choco"**.
+- **"Tarta grande"** ($72.000) **sale de la carta**. Quedan 129 productos.
+- **Foto de la tarta de frutilla**: se recortó todo lo de arriba de la tarta
+  (corte en y=410 del original de 1050x1400), porque atrás se veía un
+  empleado mirando el celular, más otros clientes. La tarta queda entera. El
+  original con la gente quedó guardado fuera del repo, en el scratchpad
+  (`tarta-frutilla-ORIGINAL-con-gente.jpg`). En la esquina de arriba a la
+  izquierda queda apenas un pedacito de pantalón oscuro de un cliente: sacarlo
+  obligaba a cortar la tarta.
