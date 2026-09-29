@@ -736,7 +736,7 @@ foto sola las dos parecen lo mismo; con el nombre al lado, no.
 4. **Más fotos.** Ya están embebidas el logo, la fachada y la vitrina de tortas
    (ver "Fotos"). Falta la **vitrina de salados** (fainá, calentitos, fatay) — la
    foto existe pero no quedó guardada en disco. Cuando aparezca, iría como segunda
-   imagen en "El local" o arriba de la pestaña "Del mostrador".
+   imagen en "El local" o arriba de la pestaña "Calentitos" (antes "Del mostrador").
 5. Zona de delivery y costo de envío: ya no los decide el local, los muestra Pedidos
    Ya al cargar la dirección. El FAQ lo dice así, sin inventar zonas.
 
@@ -1320,3 +1320,15 @@ uno, esa línea pasa a ser un link ahí.
 Verificado que no queda tapada por la barra fija de "Pedir por Pedidos Ya":
 en escritorio y en celular, con la página scrolleada hasta el final, el
 crédito termina bastante antes de donde empieza la barra.
+
+## Cambios de texto pedidos por el dueño (29/09/2026)
+
+- Botón de la portada: "Ver la carta y pedir" → **"Ver la carta"**.
+- Recuadro "Salón, take away y envío": ahora dice "Comés en el local,
+  retirás por Rivadavia al 3002 o te la llevan a casa con Pedidos Ya."
+- La pestaña de la carta "Del mostrador" pasó a llamarse **"Calentitos"**.
+  Adentro sigue todo igual: panes rellenos, zepelines, sándwiches y al paso.
+
+Quedan dos menciones a "el mostrador" que el dueño no pidió cambiar: en
+Contacto ("Por Pedidos Ya, o en el mostrador") y en una pregunta frecuente
+("encargalo directamente en el mostrador"). Se le avisó a Mateo.
