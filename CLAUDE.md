@@ -1378,3 +1378,6 @@ Pedido del dueño, vía Mateo:
   cuáles son y a qué precio. No inventarlas.
 - Recuadro "Salón, take away y envío": "Comés o retirás por el local; si no,
   te lo llevan a casa por Pedidos Ya."
+- Las tarjetas de promos **no llevan botón de Pedidos Ya** (pedido del dueño,
+  30/09/2026). El "Pedir ahora" de arriba y la barra "Pedí online" de abajo
+  siguen yendo a Pedidos Ya.

@@ -434,7 +434,7 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 }
 .combo .precio{font-size:clamp(34px,4vw,42px);font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
 .combo h3{margin-top:10px}
-.combo ul{margin:24px 0 28px;display:grid;gap:12px}
+.combo ul{margin:24px 0 0;display:grid;gap:12px}
 .combo li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--tinta-2);line-height:1.45}
 .combo li svg{flex-shrink:0;margin-top:3px;color:var(--rojo)}
 .combo .btn{width:100%;margin-top:auto}
@@ -2238,14 +2238,8 @@ COMBOS.forEach(c => {
     ul.appendChild(li);
   });
 
-  const b = document.createElement("a");
-  b.className = "btn";
-  b.href = PEDIDOS_YA;
-  b.target = "_blank";
-  b.rel = "noopener";
-  b.textContent = "Pedir por Pedidos Ya";
-
-  d.append(tag, p, h, ul, b);
+  /* Sin botón de Pedidos Ya: lo pidió el dueño el 30/09/2026. */
+  d.append(tag, p, h, ul);
   (gridPromos[c.grupo] || combosEl).appendChild(d);
 });
 
