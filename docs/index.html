@@ -507,6 +507,8 @@ section{padding:clamp(62px,8.5vw,110px) 0}
 .combo ul{margin:24px 0 0;display:grid;gap:12px}
 .combo li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--tinta-2);line-height:1.45}
 .combo li svg{flex-shrink:0;margin-top:3px;color:var(--rojo)}
+.combo .nota-promo{margin-top:20px;padding-top:16px;border-top:1px solid var(--linea);font-size:13.5px;line-height:1.5;color:var(--tinta-3)}
+.combo.destacado .nota-promo{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
 .combo .btn{width:100%;margin-top:auto}
 
 .combo.destacado{
@@ -1066,10 +1068,10 @@ body{padding-bottom:112px}
     <div class="cab">
       <p class="eyebrow">Para vos o para compartir</p>
       <h2>Promos</h2>
-      <p>Las súper promos del pizarrón, para llevar. Encargalas con un rato de anticipación.</p>
+      <p>Promos individuales con bebida, y promos para compartir en familia o con amigos.</p>
     </div>
     <div id="combos-cont"></div>
-    <p class="nota-combos">Las promos son para llevar. ¿Necesitás algo más grande? Pasá por el local y lo armamos a medida.</p>
+    <p class="nota-combos">Las súper promos del pizarrón son para llevar: encargalas con un rato de anticipación. ¿Necesitás algo más grande? Pasá por el local y lo armamos a medida.</p>
   </div>
 </section>
 
@@ -1616,23 +1618,55 @@ const CARTA = [
    (Promos individuales) o `grupo:"familia"` (Promos en familia y amigos).
    Un grupo sin promos no se muestra: ni el título ni el hueco. */
 const COMBOS = [
-  { grupo:"familia", etiqueta:"Promo 1", nombre:"Tres muzzarellas", precio:44000,
+  /* Promos individuales: cartel "PROMOS" del mostrador. Todas a $6.700 y
+     todas con una bebida. Foto del cartel del 30/09/2026. */
+  { grupo:"individual", etiqueta:"Individual", nombre:"Porción de pizza rellena", precio:6700,
+    incluye:["1 porción de pizza rellena","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+  { grupo:"individual", etiqueta:"Individual", nombre:"Dos porciones de pizza", precio:6700,
+    incluye:["2 porciones de muzzarella o fugazza","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+  { grupo:"individual", etiqueta:"Individual", nombre:"Dos porciones de tarta", precio:6700,
+    incluye:["2 porciones de tarta de jamón y queso o pascualina","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+  { grupo:"individual", etiqueta:"Individual", nombre:"Porción de pizza arrollada", precio:6700,
+    incluye:["1 porción de pizza arrollada","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+  { grupo:"individual", etiqueta:"Individual", nombre:"Dos empanadas", precio:6700,
+    incluye:["2 empanadas de carne o de jamón y queso","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+  { grupo:"individual", etiqueta:"Individual", nombre:"Calentito", precio:6700,
+    incluye:["1 calentito de jamón y queso","1 gaseosa de 350 cc o agua mineral de 500 cc"] },
+
+  /* Promos 1 a 6 con bebida: el cartel de seis cuadros del mostrador, foto
+     del 30/09/2026. Son el rubro 10 "PROMOCIONES" del sistema. */
+  { grupo:"familia", etiqueta:"Promo 1", nombre:"Muzzarella y gaseosas", precio:22000,
+    incluye:["1 pizza de muzzarella","2 gaseosas de 350 cc"], nota:"Opcional: cambiás las 2 gaseosas por 1 cerveza Cristal de litro." },
+  { grupo:"familia", etiqueta:"Promo 2", nombre:"Media muzzarella y media tarta", precio:22000,
+    incluye:["1/2 pizza de muzzarella","1/2 tarta de jamón y queso, pascualina o cebolla y queso","2 gaseosas de 350 cc"], nota:"Opcional: cambiás las 2 gaseosas por 1 cerveza Cristal de litro." },
+  { grupo:"familia", etiqueta:"Promo 3", nombre:"Media muzzarella y dos calentitos", precio:22000,
+    incluye:["1/2 pizza de muzzarella","2 calentitos","2 gaseosas de 350 cc"], nota:"Opcional: cambiás las 2 gaseosas por 1 cerveza Cristal de litro." },
+  { grupo:"familia", etiqueta:"Promo 4", nombre:"Muzzarella y cuatro empanadas", precio:30000,
+    incluye:["1 pizza de muzzarella","4 empanadas a elección","1 gaseosa de 1,5 litros"], nota:"Opcional: cambiás la gaseosa por 1 cerveza Cristal de litro." },
+  { grupo:"familia", etiqueta:"Promo 5", nombre:"Muzzarella y media fugazzetta", precio:30000,
+    incluye:["1 pizza de muzzarella","1/2 fugazzetta","1 gaseosa de 1,5 litros"],
+    nota:"Opcional: cambiás la gaseosa por 1 cerveza Cristal de litro, o la media fugazzetta por media napolitana." },
+  { grupo:"familia", etiqueta:"Promo 6", nombre:"Muzzarella, fugazzetta y tarta", precio:32000,
+    incluye:["1/2 pizza de muzzarella","1/2 fugazzetta","1/2 tarta de jamón y queso, pascualina o cebolla y queso","1 gaseosa de 1,5 litros"], nota:"Opcional: cambiás la gaseosa por 1 cerveza Cristal de litro." },
+
+  /* Súper promos del pizarrón de la vereda: para llevar, sin bebida. */
+  { grupo:"familia", etiqueta:"Súper promo 1", nombre:"Tres muzzarellas", precio:44000,
     incluye:["3 pizzas de muzzarella"] },
-  { grupo:"familia", etiqueta:"Promo 2", destacado:true, nombre:"Pizza y docena de empanadas", precio:45000,
+  { grupo:"familia", etiqueta:"Súper promo 2", destacado:true, nombre:"Pizza y docena de empanadas", precio:45000,
     incluye:["1 pizza de muzzarella","1 docena de empanadas a elección"] },
-  { grupo:"familia", etiqueta:"Promo 3", nombre:"Dos pizzas y media docena", precio:48000,
+  { grupo:"familia", etiqueta:"Súper promo 3", nombre:"Dos pizzas y media docena", precio:48000,
     incluye:["1 pizza de muzzarella","1 fugazzetta o napolitana","1/2 docena de empanadas a elección"] },
-  { grupo:"familia", etiqueta:"Promo 4", nombre:"Especial, muzzarella y empanadas", precio:54000,
+  { grupo:"familia", etiqueta:"Súper promo 4", nombre:"Especial, muzzarella y empanadas", precio:54000,
     incluye:["1 pizza especial","1 pizza de muzzarella","6 empanadas"] },
-  { grupo:"familia", etiqueta:"Promo 5", nombre:"Muzzarella, fainá y empanadas", precio:33000,
+  { grupo:"familia", etiqueta:"Súper promo 5", nombre:"Muzzarella, fainá y empanadas", precio:33000,
     incluye:["1 pizza de muzzarella","2 fainá","6 empanadas"] },
-  { grupo:"familia", etiqueta:"Promo 6", nombre:"Tres pizzas surtidas", precio:51000,
+  { grupo:"familia", etiqueta:"Súper promo 6", nombre:"Tres pizzas surtidas", precio:51000,
     incluye:["1 napolitana","1 fugazzetta","1 pizza de muzzarella"] },
-  { grupo:"familia", etiqueta:"Promo 7", nombre:"Calabresa y muzzarella", precio:33000,
+  { grupo:"familia", etiqueta:"Súper promo 7", nombre:"Calabresa y muzzarella", precio:33000,
     incluye:["1 pizza calabresa","1 pizza de muzzarella"] },
-  { grupo:"familia", etiqueta:"Promo 8", nombre:"Dos pizzas y cuatro fainá", precio:40100,
+  { grupo:"familia", etiqueta:"Súper promo 8", nombre:"Dos pizzas y cuatro fainá", precio:40100,
     incluye:["1 pizza de muzzarella","1 fugazzetta","4 fainá"] },
-  { grupo:"familia", etiqueta:"Promo 9", nombre:"Muzzarella y dos mitades", precio:36000,
+  { grupo:"familia", etiqueta:"Súper promo 9", nombre:"Muzzarella y dos mitades", precio:36000,
     incluye:["1 pizza de muzzarella","1/2 fugazzetta","1/2 especial"] }
 ];
 
@@ -2310,6 +2344,14 @@ COMBOS.forEach(c => {
 
   /* Sin botón de Pedidos Ya: lo pidió el dueño el 30/09/2026. */
   d.append(tag, p, h, ul);
+  /* `nota`, opcional: los cambios que permite la promo (ej. gaseosa por
+     cerveza). Va chica, abajo, porque es letra chica también en el cartel. */
+  if(c.nota){
+    const n = document.createElement("p");
+    n.className = "nota-promo";
+    n.textContent = c.nota;
+    d.appendChild(n);
+  }
   (gridPromos[c.grupo] || combosEl).appendChild(d);
 });
 

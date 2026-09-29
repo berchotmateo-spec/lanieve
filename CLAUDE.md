@@ -1381,3 +1381,27 @@ Pedido del dueño, vía Mateo:
 - Las tarjetas de promos **no llevan botón de Pedidos Ya** (pedido del dueño,
   30/09/2026). El "Pedir ahora" de arriba y la barra "Pedí online" de abajo
   siguen yendo a Pedidos Ya.
+
+## Las promos del cartel del mostrador (30/09/2026)
+
+Mateo mandó la foto del cartel de promos del mostrador. Son **el rubro 10
+"PROMOCIONES" del sistema** (el que la nota de más arriba decía "preguntar qué
+son antes de mostrarlas"). Se cargaron así:
+
+- **Promos individuales**: el cartel grande "PROMOS", $6.700 cada una, **todas
+  con 1 gaseosa de 350 cc o agua mineral de 500 cc**. Seis opciones, una
+  tarjeta cada una: porción de pizza rellena · 2 porciones de muzzarella o
+  fugazza · 2 porciones de tarta de jamón y queso o pascualina · porción de
+  pizza arrollada · 2 empanadas de carne o de jamón y queso · calentito de
+  jamón y queso. Etiqueta "Individual".
+- **Promos en familia y amigos**: el cartel de seis cuadros, "Promo 1" a
+  "Promo 6", de $22.000 a $32.000, todas con gaseosa. La letra chica
+  ("Opcional cambio ... por 1 Cerveza Cristal de litro", y en la 5 media
+  fugazzetta por media napolitana) va en el campo `nota` de la promo, que se
+  dibuja chico abajo de la tarjeta.
+- Las nueve del pizarrón de la vereda **siguen**, después de esas, y pasaron a
+  llamarse **"Súper promo 1" a "Súper promo 9"** para no repetir "Promo 1" con
+  las del cartel. El "para llevar" ahora se dice sólo de ellas.
+
+El sistema tenía **ocho** promos en el rubro 10 y el cartel muestra **seis**:
+faltan dos que no están en la foto.
