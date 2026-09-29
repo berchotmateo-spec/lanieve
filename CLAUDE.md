@@ -1405,3 +1405,13 @@ son antes de mostrarlas"). Se cargaron así:
 
 El sistema tenía **ocho** promos en el rubro 10 y el cartel muestra **seis**:
 faltan dos que no están en la foto.
+
+## Tortas por porción: precio de la entera (30/09/2026)
+
+Las tortas del grupo "Tortas, por porción" muestran **"Porción $X · Entera
+$72.000"**, con el mismo formato de chips que las pizzas. Lo pidió el dueño:
+que quede claro que el precio es de una porción y que la torta entera vale
+$72.000 (por eso la "Tarta grande" de $72.000 sobraba en la carta: era esto).
+Se hace con el campo `e` (precio de la entera) en el producto. **No aplica a
+la torta de ricota ni a la pasta frola**, que tienen su propio precio de
+entera en "Tortas enteras, por encargue".
