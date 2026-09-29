@@ -1336,3 +1336,10 @@ crédito termina bastante antes de donde empieza la barra.
 Quedan dos menciones a "el mostrador" que el dueño no pidió cambiar: en
 Contacto ("Por Pedidos Ya, o en el mostrador") y en una pregunta frecuente
 ("encargalo directamente en el mostrador"). Se le avisó a Mateo.
+
+## La fainá común presta su foto (29/09/2026)
+
+Pedido de Mateo: la **Media fainá** y la **Fainá rellena de jamón y queso**
+usan la misma foto que la **Fainá común** (`faina-comun.webp`). La media es
+la misma fainá sin cortar, y la rellena vista de arriba no muestra el relleno
+("un producto cerrado no dice nada de lo que tiene adentro").
