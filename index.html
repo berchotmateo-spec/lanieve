@@ -1526,12 +1526,12 @@ const CARTA = [
     tab: "Bebidas",
     grupos: [
       { nombre: "Gaseosas", items: [
-        { n:"Pepsi lata 350 cc", d:"", p:3400 },
-        { n:"7up lata 350 cc", d:"", p:3400 },
-        { n:"Pepsi 1,5 litros", d:"", p:6600 },
-        { n:"7up 1,5 litros", d:"", p:6600 },
+        { n:"Pepsi lata 350 cc", d:"", p:3400, f:"pepsi-lata.webp" },
+        { n:"7up lata 350 cc", d:"", p:3400, f:"7up-lata.webp" },
+        { n:"Pepsi 1,5 litros", d:"", p:6600, f:"pepsi-1-5.webp" },
+        { n:"7up 1,5 litros", d:"", p:6600, f:"7up-1-5.webp" },
         { n:"Agua mineral chica", d:"Eco de los Andes.", p:3400 },
-        { n:"Agua saborizada 500 cc", d:"", p:3400 },
+        { n:"Agua saborizada 500 cc", d:"", p:3400, f:"agua-saborizada.webp" },
       ]},
       { nombre: "Cervezas", items: [
         { n:"Cerveza lata 500 cc", d:"Quilmes o Brahma, a elección.", p:4000 },
@@ -1798,6 +1798,9 @@ addEventListener("keydown", e => {
    cortada), así que cada una tiene su propia forma y hay que saberla. */
 const MEDIDAS = {
   /* MEDIDAS-EMPIEZA */
+    "7up-1-5.webp": [624, 832],
+    "7up-lata.webp": [276, 369],
+    "agua-saborizada.webp": [900, 702],
     "arrolladas-cortadas.webp": [675, 900],
     "arrolladas.webp": [675, 900],
     "budin-de-pan.webp": [675, 900],
@@ -1835,6 +1838,8 @@ const MEDIDAS = {
     "pascualina-especial.webp": [675, 900],
     "pascualina.webp": [675, 900],
     "pasta-frola.webp": [675, 900],
+    "pepsi-1-5.webp": [605, 807],
+    "pepsi-lata.webp": [282, 377],
     "pizza-especial.webp": [675, 900],
     "pizza-rellena.webp": [675, 900],
     "rogel.webp": [675, 900],

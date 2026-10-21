@@ -1444,3 +1444,28 @@ sólo les faltaba la foto.
 - En la sesión remota no hay PowerShell: `docs/` se regeneró con un port a
   Python de `hacer-publicar.ps1`, que da el mismo `docs/index.html` byte a byte.
 
+
+## Bebidas con foto sobre fondo blanco (21/10/2026)
+
+El dueño mandó fotos de las bebidas en la mesada y Mateo pidió pasarlas a
+**fondo blanco** ("las que mandó son feas"). Se hizo con `rembg` (modelo
+`isnet-general-use`, se baja solo de GitHub, 179 MB) y a mano en tres pasos,
+porque en las botellas transparentes el modelo deja restos (vasos de atrás,
+el reflejo de la mesada, la sombra de la botella de al lado):
+
+1. De la silueta que da el modelo, quedarse sólo con la mancha más grande
+   dentro de la caja de cada producto, y **rellenar el interior** (la botella
+   es transparente y el modelo la deja a medias).
+2. **Cortar debajo de la base de cada botella**, medida a ojo sobre el
+   original con una regla dibujada: cada una apoya a una altura distinta.
+3. Pegar sobre blanco y agregar **margen blanco a los costados** hasta 3:4:
+   una botella de 1,5 L sin margen dejaba la tarjeta el doble de alta. Es
+   margen, no recorte: el producto queda entero.
+
+Con foto: Pepsi y 7up en lata y de 1,5 L, y el agua saborizada 500 cc (las
+cuatro H2OH! juntas: naranja, limoneto, pomelo y manzanella).
+
+**Llegaron fotos de bebidas que NO están en la carta** y no tienen precio:
+Mirinda (lata y 1,5 L), Pepsi Black 1,5 L, 7up Zero 1,5 L, Paso de los Toros
+en lata (amarilla y verde) y H2OH! de 1,5 L. No se cargaron: falta que el
+dueño pase los precios.
