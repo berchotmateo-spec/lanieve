@@ -110,6 +110,13 @@ def main():
               % (salida.name, forma, w, h, antes / 1e6, ahora / 1e3))
 
     print("\n%d fotos · %.1f MB → %.1f MB" % (len(medidas), pesaban / 1e6, pesan / 1e6))
+    # Las medidas se toman de TODO fotos/, no sólo de lo recién procesado:
+    # fotos-originales/ no está en el repo, así que en un clone nuevo sólo
+    # están las fotos que acaban de llegar, y el bloque perdería las demás.
+    for webp in DESTINO.glob("*.webp"):
+        if webp.name not in medidas:
+            with Image.open(webp) as img:
+                medidas[webp.name] = img.size
     escribir_medidas(medidas)
     print('Acordate de agregar  f:"<archivo>.webp"  al producto en la CARTA.')
 

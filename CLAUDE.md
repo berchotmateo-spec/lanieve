@@ -642,7 +642,7 @@ Mateo:
   bandeja con varios tipos mezclados, que es como salen. **Antes se llamaban
   `zepelin.webp` y `zepelines-cortados.webp` y estaban en los zepelines: era un
   error, son arrolladas** (corregido el 28/09/2026). Los zepelines quedaron sin
-  foto hasta que haya una propia.
+  foto hasta que haya una propia. **Llegaron el 21/10/2026** (ver abajo).
 - **`empanadas.webp`** en las **doce** empanadas (las ocho por unidad y las
   cuatro por docena). Cerradas y sin hornear del todo, el relleno no se ve:
   una foto sirve para todas.
@@ -1424,3 +1424,23 @@ entera en "Tortas enteras, por encargue".
   enteras, por encargue" dice "Con 24 hs de anticipación."
 - Sale el **Vino 3/4** de la carta, y el grupo de bebidas "Cerveza y vino"
   pasa a llamarse "Cervezas". Quedan 128 productos.
+
+## Zepelines y tarteleta de albahaca con foto (21/10/2026)
+
+Mateo mandó cinco fotos propias, del mostrador (plato blanco sobre la mesa
+roja), con los nombres en orden: longaniza, tarteleta de albahaca, pollo,
+panceta y roquefort. Él pensaba que no estaban en la carta, pero **ya
+estaban**, todos a $4.200 (lo mismo que el fatay, que es lo que él dijo):
+sólo les faltaba la foto.
+
+- `zepelin-longaniza.webp`, `zepelin-pollo.webp`, `zepelin-panceta.webp`,
+  `zepelin-roquefort.webp`, `tarteleta-albahaca.webp`. Comparadas antes con
+  las arrolladas, el fatay y los calentitos: ninguna repetida.
+- Siguen sin foto el **zepelín super** y el **zepelín variado**, y la
+  **tarteleta** común.
+- `hacer-fotos.py` ahora toma las medidas de **todo** `fotos/` y no sólo de lo
+  recién procesado: `fotos-originales/` no está en el repo, y en un clone nuevo
+  el bloque `MEDIDAS` se quedaba sólo con las fotos que acababan de llegar.
+- En la sesión remota no hay PowerShell: `docs/` se regeneró con un port a
+  Python de `hacer-publicar.ps1`, que da el mismo `docs/index.html` byte a byte.
+
