@@ -1465,7 +1465,21 @@ el reflejo de la mesada, la sombra de la botella de al lado):
 Con foto: Pepsi y 7up en lata y de 1,5 L, y el agua saborizada 500 cc (las
 cuatro H2OH! juntas: naranja, limoneto, pomelo y manzanella).
 
-**Llegaron fotos de bebidas que NO están en la carta** y no tienen precio:
-Mirinda (lata y 1,5 L), Pepsi Black 1,5 L, 7up Zero 1,5 L, Paso de los Toros
-en lata (amarilla y verde) y H2OH! de 1,5 L. No se cargaron: falta que el
-dueño pase los precios.
+**Ese mismo día el dueño pasó los precios** y se cargaron las que faltaban
+(Mirinda lata y 1,5 L, Paso de los Toros lata, Pepsi Black y 7up Zero 1,5 L,
+agua saborizada 1,5 L). La regla del dueño: **lata o botella de 500 cc,
+$3.400; gaseosa de 1,5 L, $6.600.** El grupo pasó a llamarse "Gaseosas y
+aguas". Cerveza en lata de 500 cc a $4.000 incluye **la sin alcohol**; el litro
+rubio $7.200 y el de Stella $10.800 (ya estaban así). Stella lata y negra lata
+no las mencionó: quedan como estaban ($6.000 y $5.500).
+
+Tres fotos necesitaron silueta a mano, medida sobre el original con grilla
+(`z-*.jpg` en el scratchpad de la sesión):
+- **Mirinda 1,5 L**: los vasos de atrás quedaban pegados al cuello
+  transparente; el cuello se dibujó como polígono.
+- **7up Zero 1,5 L**: líquido transparente sobre el acero, el modelo perdía la
+  mitad de abajo.
+- **Agua saborizada 1,5 L**: la de **limoneto quedó afuera de la foto** porque
+  en el original sale cortada por el borde de abajo (no se le ve la base). La
+  foto muestra manzanella, pomelo y naranja; la descripción nombra los cuatro
+  gustos. Si el dueño manda una toma con las cuatro enteras, reemplazarla.
