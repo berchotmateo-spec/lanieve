@@ -1470,8 +1470,9 @@ cuatro H2OH! juntas: naranja, limoneto, pomelo y manzanella).
 agua saborizada 1,5 L). La regla del dueño: **lata o botella de 500 cc,
 $3.400; gaseosa de 1,5 L, $6.600.** El grupo pasó a llamarse "Gaseosas y
 aguas". Cerveza en lata de 500 cc a $4.000 incluye **la sin alcohol**; el litro
-rubio $7.200 y el de Stella $10.800 (ya estaban así). Stella lata y negra lata
-no las mencionó: quedan como estaban ($6.000 y $5.500).
+rubio $7.200 y el de Stella $10.800 (ya estaban así). **Stella lata y negra
+lata pasaron a $4.000** (antes $6.000 y $5.500): Mateo confirmó que todas las
+latas de cerveza de 500 cc salen lo mismo.
 
 Tres fotos necesitaron silueta a mano, medida sobre el original con grilla
 (`z-*.jpg` en el scratchpad de la sesión):
