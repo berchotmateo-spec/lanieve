@@ -1484,3 +1484,7 @@ Tres fotos necesitaron silueta a mano, medida sobre el original con grilla
   en el original sale cortada por el borde de abajo (no se le ve la base). La
   foto muestra manzanella, pomelo y naranja; la descripción nombra los cuatro
   gustos. Si el dueño manda una toma con las cuatro enteras, reemplazarla.
+
+## Crédito del pie
+
+- 17/11/2026 — Crédito del pie pasado a "Diseñado por connectHUB" con botón al Instagram de la consultora (https://www.instagram.com/connect.hub.consultora/). Pedido de Mateo: vale para todas las webs.
